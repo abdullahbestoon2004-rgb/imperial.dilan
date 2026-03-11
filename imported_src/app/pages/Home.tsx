@@ -33,8 +33,8 @@ export default function Home() {
       id: 1,
       name: 'Classic Black Suit',
       price: 420,
-      image: 'https://dtcralphlauren.scene7.com/is/image/PoloGSI/s7-1199698_alternate10?$rl_4x5_pdp$',
-      imageHover: 'https://dtcralphlauren.scene7.com/is/image/PoloGSI/s7-1199698_lifestyle?$rl_4x5_zoom$'
+      image: 'https://dtcralphlauren.scene7.com/is/image/PoloGSI/s7-AI715A12700001_alternate10?$rl_4x5_pdp$$',
+      imageHover: 'https://dtcralphlauren.scene7.com/is/image/PoloGSI/s7-AI715A12700001_lifestyle?$rl_4x5_zoom$'
     },
     {
       id: 2,

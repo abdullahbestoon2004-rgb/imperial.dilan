@@ -15,96 +15,96 @@ export default function Suits() {
       name: 'Classic Black Suit',
       price: 420,
       color: 'black',
-      image: 'https://images.unsplash.com/photo-1763394857933-56b8a670996f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxibGFjayUyMHN1aXQlMjBmb3JtYWwlMjBtZW5zd2VhcnxlbnwxfHx8fDE3NzMxNDMyNDV8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
-      imageHover: 'https://images.unsplash.com/photo-1768696082783-4313d98341ae?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxsdXh1cnklMjBtZW5zd2VhciUyMGNoYXJjb2FsJTIwc3VpdHxlbnwxfHx8fDE3NzMxNDMyNDd8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral'
+      image: 'https://dtcralphlauren.scene7.com/is/image/PoloGSI/s7-1199699_alternate10?$rl_4x5_pdp$',
+      imageHover: 'https://dtcralphlauren.scene7.com/is/image/PoloGSI/s7-1199699_lifestyle?$rl_4x5_zoom$'
     },
     {
       id: 2,
       name: 'Navy Blue Suit',
       price: 450,
       color: 'blue',
-      image: 'https://images.unsplash.com/photo-1769876363241-d8efe9bdfd2c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxkYXJrJTIwYmx1ZSUyMHN1aXQlMjBmb3JtYWx8ZW58MXx8fHwxNzczMTQzNTAyfDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
-      imageHover: 'https://images.unsplash.com/photo-1697811599461-38124b3decc9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtb2Rlcm4lMjBzdWl0JTIwZ3JheSUyMGNvbnRlbXBvcmFyeXxlbnwxfHx8fDE3NzMxNDMyNDh8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral'
+      image: 'https://dtcralphlauren.scene7.com/is/image/PoloGSI/s7-AI715A12700001_alternate10?$rl_4x5_pdp$',
+      imageHover: 'https://dtcralphlauren.scene7.com/is/image/PoloGSI/s7-AI715A12700001_lifestyle?$rl_4x5_zoom$'
     },
     {
       id: 3,
-      name: 'Beige Linen Suit',
+      name: 'Kent Handmade Wool Gabardine Suit',
       price: 390,
       color: 'beige',
-      image: 'https://images.unsplash.com/photo-1766113494461-0e5b2a96c66f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwcmVtaXVtJTIwdGFpbG9yZWQlMjBzdWl0JTIwYmVpZ2V8ZW58MXx8fHwxNzczMTQzMjQ3fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
-      imageHover: 'https://images.unsplash.com/photo-1761522002071-67755dc6c820?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxlbGVnYW50JTIwbWFuJTIwc3VpdCUyMGx1eHVyeSUyMGZhc2hpb258ZW58MXx8fHwxNzczMTQzMjQ0fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral'
+      image: 'https://dtcralphlauren.scene7.com/is/image/PoloGSI/s7-AI798971254003_alternate10?$rl_4x5_pdp$',
+      imageHover: 'https://dtcralphlauren.scene7.com/is/image/PoloGSI/s7-AI798971254003_lifestyle?$rl_4x5_zoom$'
     },
     {
       id: 4,
-      name: 'Charcoal Gray Suit',
+      name: 'Gregory Hand-Tailored Birdseye Suit',
       price: 480,
       color: 'gray',
-      image: 'https://images.unsplash.com/photo-1768696082783-4313d98341ae?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxsdXh1cnklMjBtZW5zd2VhciUyMGNoYXJjb2FsJTIwc3VpdHxlbnwxfHx8fDE3NzMxNDMyNDd8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
-      imageHover: 'https://images.unsplash.com/photo-1763394857933-56b8a670996f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxibGFjayUyMHN1aXQlMjBmb3JtYWwlMjBtZW5zd2VhcnxlbnwxfHx8fDE3NzMxNDMyNDV8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral'
+      image: 'https://dtcralphlauren.scene7.com/is/image/PoloGSI/s7-AI798977343001_alternate10?$rl_4x5_pdp$',
+      imageHover: 'https://dtcralphlauren.scene7.com/is/image/PoloGSI/s7-AI798977343001_lifestyle?$rl_4x5_zoom$'
     },
     {
       id: 5,
-      name: 'Tan Brown Suit',
+      name: 'Kent Hand-Tailored Plaid Cashmere Suit',
       price: 410,
       color: 'brown',
-      image: 'https://images.unsplash.com/photo-1712773663204-9dce38ddae57?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx0YW4lMjBicm93biUyMHN1aXQlMjBtb2Rlcm58ZW58MXx8fHwxNzczMTQzNTAyfDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
-      imageHover: 'https://images.unsplash.com/photo-1750586403232-ddc60c0e34aa?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxuYXZ5JTIwYmxhemVyJTIwamFja2V0JTIwbWVufGVufDF8fHx8MTc3MzE0MzI0NXww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral'
+      image: 'https://dtcralphlauren.scene7.com/is/image/PoloGSI/s7-AI798963805001_alternate10?$rl_4x5_pdp$',
+      imageHover: 'https://dtcralphlauren.scene7.com/is/image/PoloGSI/s7-AI798963805001_lifestyle?$rl_4x5_zoom$'
     },
     {
       id: 6,
-      name: 'Pinstripe Suit',
+      name: 'Kent Hand-Tailored Glen Plaid Suit',
       price: 520,
       color: 'black',
-      image: 'https://images.unsplash.com/photo-1769107263443-ef16af85070a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwaW5zdHJpcGUlMjBzdWl0JTIwY2xhc3NpY3xlbnwxfHx8fDE3NzMxNDM1MDN8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
-      imageHover: 'https://images.unsplash.com/photo-1768696082783-4313d98341ae?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxsdXh1cnklMjBtZW5zd2VhciUyMGNoYXJjb2FsJTIwc3VpdHxlbnwxfHx8fDE3NzMxNDMyNDd8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral'
+      image: 'https://dtcralphlauren.scene7.com/is/image/PoloGSI/s7-AI798945028001_alternate10?$rl_4x5_pdp$',
+      imageHover: 'https://dtcralphlauren.scene7.com/is/image/PoloGSI/s7-AI798945028001_lifestyle?$rl_4x5_zoom$'
     },
     {
       id: 7,
       name: 'Light Gray Suit',
       price: 430,
       color: 'gray',
-      image: 'https://images.unsplash.com/photo-1636452147512-91a6cbcdb681?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxsaWdodCUyMGdyYXklMjBzdWl0JTIwY29udGVtcG9yYXJ5fGVufDF8fHx8MTc3MzE0MzUwM3ww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
-      imageHover: 'https://images.unsplash.com/photo-1697811599461-38124b3decc9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtb2Rlcm4lMjBzdWl0JTIwZ3JheSUyMGNvbnRlbXBvcmFyeXxlbnwxfHx8fDE3NzMxNDMyNDh8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral'
+      image: 'https://dtcralphlauren.scene7.com/is/image/PoloGSI/s7-AI798977343001_alternate10?$rl_4x5_pdp$',
+      imageHover: 'https://dtcralphlauren.scene7.com/is/image/PoloGSI/s7-AI798977343001_lifestyle?$rl_4x5_zoom$'
     },
     {
       id: 8,
-      name: 'Burgundy Suit',
+      name: 'Gregory Hand-Tailored Wool Peak Tuxedo',
       price: 490,
       color: 'red',
-      image: 'https://images.unsplash.com/photo-1770235623084-7fde436a781d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxidXJndW5keSUyMHN1aXQlMjBsdXh1cnl8ZW58MXx8fHwxNzczMTQzNTA0fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
-      imageHover: 'https://images.unsplash.com/photo-1763394857933-56b8a670996f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxibGFjayUyMHN1aXQlMjBmb3JtYWwlMjBtZW5zd2VhcnxlbnwxfHx8fDE3NzMxNDMyNDV8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral'
+      image: 'https://dtcralphlauren.scene7.com/is/image/PoloGSI/s7-1339428_alternate10?$rl_4x5_pdp$',
+      imageHover: 'https://dtcralphlauren.scene7.com/is/image/PoloGSI/s7-1339428_lifestyle?$rl_4x5_zoom$'
     },
     {
       id: 9,
-      name: 'Olive Green Suit',
+      name: 'Kent Hand-Tailored Glen Plaid Suit',
       price: 460,
       color: 'green',
-      image: 'https://images.unsplash.com/photo-1593032465175-481ac7f401a0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxvbGl2ZSUyMGdyZWVuJTIwc3VpdCUyMGVsZWdhbnR8ZW58MXx8fHwxNzczMTQzNTA0fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
-      imageHover: 'https://images.unsplash.com/photo-1768696082783-4313d98341ae?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxsdXh1cnklMjBtZW5zd2VhciUyMGNoYXJjb2FsJTIwc3VpdHxlbnwxfHx8fDE3NzMxNDMyNDd8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral'
+      image: 'https://dtcralphlauren.scene7.com/is/image/PoloGSI/s7-AI798P06907001_alternate10?$rl_4x5_zoom$',
+      imageHover: 'https://dtcralphlauren.scene7.com/is/image/PoloGSI/s7-AI798P06907001_lifestyle?$rl_4x5_zoom$'
     },
     {
       id: 10,
-      name: 'Cream Summer Suit',
+      name: 'Gregory Hand-Tailored Wool Serge Blazer',
       price: 380,
       color: 'beige',
-      image: 'https://images.unsplash.com/photo-1769162338038-3ca0f16d2d6d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjcmVhbSUyMHN1aXQlMjBzdW1tZXJ8ZW58MXx8fHwxNzczMTQzNTA0fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
-      imageHover: 'https://images.unsplash.com/photo-1766113494461-0e5b2a96c66f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwcmVtaXVtJTIwdGFpbG9yZWQlMjBzdWl0JTIwYmVpZ2V8ZW58MXx8fHwxNzczMTQzMjQ3fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral'
+      image: 'https://dtcralphlauren.scene7.com/is/image/PoloGSI/s7-1339457_alternate10?$rl_4x5_zoom$',
+      imageHover: 'https://dtcralphlauren.scene7.com/is/image/PoloGSI/s7-1339457_lifestyle?$rl_4x5_zoom$'
     },
     {
       id: 11,
-      name: 'Double-Breasted Navy',
+      name: 'Gregory Handmade Tailcoat Tuxedo',
       price: 550,
       color: 'blue',
-      image: 'https://images.unsplash.com/photo-1769876363241-d8efe9bdfd2c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxkYXJrJTIwYmx1ZSUyMHN1aXQlMjBmb3JtYWx8ZW58MXx8fHwxNzczMTQzNTAyfDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
-      imageHover: 'https://images.unsplash.com/photo-1750586403232-ddc60c0e34aa?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxuYXZ5JTIwYmxhemVyJTIwamFja2V0JTIwbWVufGVufDF8fHx8MTc3MzE0MzI0NXww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral'
+      image: 'https://dtcralphlauren.scene7.com/is/image/PoloGSI/s7-1375839_alternate10?$rl_4x5_pdp$',
+      imageHover: 'https://dtcralphlauren.scene7.com/is/image/PoloGSI/s7-1375839_lifestyle?$rl_4x5_zoom$'
     },
     {
       id: 12,
-      name: 'Midnight Black Tuxedo',
+      name: 'Kent Hand-Tailored Wool Flannel Jacket',
       price: 620,
       color: 'black',
-      image: 'https://images.unsplash.com/photo-1763394857933-56b8a670996f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxibGFjayUyMHN1aXQlMjBmb3JtYWwlMjBtZW5zd2VhcnxlbnwxfHx8fDE3NzMxNDMyNDV8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
-      imageHover: 'https://images.unsplash.com/photo-1769107263443-ef16af85070a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwaW5zdHJpcGUlMjBzdWl0JTIwY2xhc3NpY3xlbnwxfHx8fDE3NzMxNDM1MDN8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral'
+      image: 'https://dtcralphlauren.scene7.com/is/image/PoloGSI/s7-AI798P06876001_alternate10?$rl_4x5_zoom$',
+      imageHover: 'https://dtcralphlauren.scene7.com/is/image/PoloGSI/s7-AI798P06876001_lifestyle?$rl_4x5_zoom$'
     }
   ];
 
