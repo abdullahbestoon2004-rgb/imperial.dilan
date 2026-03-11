@@ -1,8 +1,8 @@
-import { motion } from 'motion/react';
+﻿import { motion } from 'motion/react';
 
 export function Newsletter() {
   return (
-    <section className="py-20 bg-[#1A1A1A]">
+    <section className="py-20 bg-[#2D332B]">
       <div className="container mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -22,11 +22,11 @@ export function Newsletter() {
             <input
               type="email"
               placeholder="Enter your email"
-              className="flex-1 px-6 py-4 bg-white text-[#0B0B0B] font-['Inter'] focus:outline-none focus:ring-2 focus:ring-[#C6A96B]"
+              className="flex-1 px-6 py-4 bg-white text-[#2A1D0C] font-['Inter'] focus:outline-none focus:ring-2 focus:ring-[#8C673D]"
             />
             <button
               type="submit"
-              className="px-8 py-4 bg-[#C6A96B] text-white font-['Inter'] font-medium hover:bg-[#B39860] transition-colors"
+              className="px-8 py-4 bg-[#8C673D] text-white font-['Inter'] font-medium hover:bg-[#5C452D] transition-colors"
             >
               Subscribe
             </button>
@@ -36,3 +36,5 @@ export function Newsletter() {
     </section>
   );
 }
+
+

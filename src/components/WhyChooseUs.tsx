@@ -1,4 +1,4 @@
-import { motion } from 'motion/react';
+﻿import { motion } from 'motion/react';
 import { Scissors, Package, RotateCcw, Award } from 'lucide-react';
 
 const features = [
@@ -26,14 +26,14 @@ const features = [
 
 export function WhyChooseUs() {
   return (
-    <section className="py-20 bg-[#FFFFFF]">
+    <section className="py-20 bg-[#7A6F63]">
       <div className="container mx-auto px-6">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-5xl font-['Playfair_Display'] text-center text-[#0B0B0B] mb-16"
+          className="text-5xl font-['Playfair_Display'] text-center text-[#2A1D0C] mb-16"
         >
           Why Choose Us
         </motion.h2>
@@ -50,13 +50,13 @@ export function WhyChooseUs() {
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 className="text-center"
               >
-                <div className="inline-flex items-center justify-center w-16 h-16 mb-4 border-2 border-[#C6A96B] rounded-full">
-                  <Icon className="w-8 h-8 text-[#C6A96B]" />
+                <div className="inline-flex items-center justify-center w-16 h-16 mb-4 border-2 border-[#8C673D] rounded-full">
+                  <Icon className="w-8 h-8 text-[#8C673D]" />
                 </div>
-                <h3 className="text-xl font-['Playfair_Display'] text-[#0B0B0B] mb-2">
+                <h3 className="text-xl font-['Playfair_Display'] text-[#2A1D0C] mb-2">
                   {feature.title}
                 </h3>
-                <p className="text-[#666] font-['Inter']">
+                <p className="text-[#5C452D] font-['Inter']">
                   {feature.description}
                 </p>
               </motion.div>
@@ -67,3 +67,5 @@ export function WhyChooseUs() {
     </section>
   );
 }
+
+

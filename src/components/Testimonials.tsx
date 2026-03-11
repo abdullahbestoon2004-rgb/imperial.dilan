@@ -1,4 +1,4 @@
-import { motion } from 'motion/react';
+﻿import { motion } from 'motion/react';
 import { Star } from 'lucide-react';
 
 const testimonials = [
@@ -24,14 +24,14 @@ const testimonials = [
 
 export function Testimonials() {
   return (
-    <section className="py-20 bg-[#F8F8F8]">
+    <section className="py-20 bg-[#7A6F63]">
       <div className="container mx-auto px-6">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-5xl font-['Playfair_Display'] text-center text-[#0B0B0B] mb-16"
+          className="text-5xl font-['Playfair_Display'] text-center text-[#2A1D0C] mb-16"
         >
           What Our Clients Say
         </motion.h2>
@@ -48,16 +48,16 @@ export function Testimonials() {
             >
               <div className="flex justify-center mb-4">
                 {[...Array(testimonial.rating)].map((_, i) => (
-                  <Star key={i} className="w-5 h-5 fill-[#C6A96B] text-[#C6A96B]" />
+                  <Star key={i} className="w-5 h-5 fill-[#8C673D] text-[#8C673D]" />
                 ))}
               </div>
-              <p className="text-[#0B0B0B] font-['Inter'] mb-6 italic">
+              <p className="text-[#2A1D0C] font-['Inter'] mb-6 italic">
                 "{testimonial.text}"
               </p>
-              <h4 className="font-['Playfair_Display'] text-[#0B0B0B] text-lg mb-1">
+              <h4 className="font-['Playfair_Display'] text-[#2A1D0C] text-lg mb-1">
                 {testimonial.name}
               </h4>
-              <p className="text-[#666] font-['Inter'] text-sm">
+              <p className="text-[#5C452D] font-['Inter'] text-sm">
                 {testimonial.role}
               </p>
             </motion.div>
@@ -67,3 +67,5 @@ export function Testimonials() {
     </section>
   );
 }
+
+

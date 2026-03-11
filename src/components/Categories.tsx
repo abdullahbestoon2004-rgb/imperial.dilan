@@ -1,4 +1,4 @@
-import { motion } from 'motion/react';
+﻿import { motion } from 'motion/react';
 import { ImageWithFallback } from './figma/ImageWithFallback';
 
 interface Category {
@@ -12,14 +12,14 @@ interface CategoriesProps {
 
 export function Categories({ categories }: CategoriesProps) {
   return (
-    <section className="py-20 bg-[#FFFFFF]">
+    <section className="py-20 bg-[#7A6F63]">
       <div className="container mx-auto px-6">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-5xl font-['Playfair_Display'] text-center text-[#0B0B0B] mb-16"
+          className="text-5xl font-['Playfair_Display'] text-center text-[#2A1D0C] mb-16"
         >
           Shop by Category
         </motion.h2>
@@ -54,3 +54,5 @@ export function Categories({ categories }: CategoriesProps) {
     </section>
   );
 }
+
+

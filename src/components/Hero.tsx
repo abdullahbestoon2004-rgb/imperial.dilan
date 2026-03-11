@@ -1,4 +1,4 @@
-import { motion } from 'motion/react';
+﻿import { motion } from 'motion/react';
 import { ImageWithFallback } from './figma/ImageWithFallback';
 
 interface HeroProps {
@@ -46,10 +46,10 @@ export function Hero({ heroImage }: HeroProps) {
             transition={{ duration: 0.8, delay: 0.4 }}
             className="flex flex-col sm:flex-row gap-4 justify-center"
           >
-            <button className="px-8 py-4 bg-white text-[#0B0B0B] font-['Inter'] font-medium hover:bg-[#C6A96B] hover:text-white transition-all duration-300">
+            <button className="px-8 py-4 bg-white text-[#2A1D0C] font-['Inter'] font-medium hover:bg-[#8C673D] hover:text-white transition-all duration-300">
               Shop Suits
             </button>
-            <button className="px-8 py-4 border-2 border-white text-white font-['Inter'] font-medium hover:bg-white hover:text-[#0B0B0B] transition-all duration-300">
+            <button className="px-8 py-4 border-2 border-white text-white font-['Inter'] font-medium hover:bg-white hover:text-[#2A1D0C] transition-all duration-300">
               Explore Collection
             </button>
           </motion.div>
@@ -58,3 +58,5 @@ export function Hero({ heroImage }: HeroProps) {
     </section>
   );
 }
+
+

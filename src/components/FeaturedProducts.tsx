@@ -34,14 +34,14 @@ export function FeaturedProducts({ products }: FeaturedProductsProps) {
   const [hoveredId, setHoveredId] = useState<number | null>(null);
 
   return (
-    <section className="py-20 bg-[#F8F8F8]">
+    <section className="py-20 bg-[#7A6F63]">
       <div className="max-w-[1700px] mx-auto px-4 md:px-6">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-5xl font-['Playfair_Display'] text-center text-[#0B0B0B] mb-4"
+          className="text-5xl font-['Playfair_Display'] text-center text-[#2A1D0C] mb-4"
         >
           Featured Collection
         </motion.h2>
@@ -50,7 +50,7 @@ export function FeaturedProducts({ products }: FeaturedProductsProps) {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="text-center text-[#666] font-['Inter'] mb-16"
+          className="text-center text-[#5C452D] font-['Inter'] mb-16"
         >
           Discover our best-selling suits
         </motion.p>
@@ -76,7 +76,7 @@ export function FeaturedProducts({ products }: FeaturedProductsProps) {
                 onMouseEnter={() => setHoveredId(product.id)}
                 onMouseLeave={() => setHoveredId(null)}
               >
-                <div className="relative aspect-[4/5] mb-5 overflow-hidden bg-[#E5E5E5]">
+                <div className="relative aspect-[4/5] mb-5 overflow-hidden bg-[#7A6F63]">
                   <ImageWithFallback
                     src={product.image}
                     alt={product.name}
@@ -102,12 +102,12 @@ export function FeaturedProducts({ products }: FeaturedProductsProps) {
                         {swatches.slice(0, 3).map((color, swatchIndex) => (
                           <span
                             key={`${product.id}-${color}-${swatchIndex}`}
-                            className="h-4 w-4 rounded-full border border-[#D4D4D8]"
+                            className="h-4 w-4 rounded-full border border-[#5C452D]"
                             style={{ backgroundColor: color }}
                           />
                         ))}
                       </div>
-                      <button className="rounded-full border border-[#0B0B0B] px-4 py-1.5 text-[10px] font-['Inter'] tracking-[0.2em] text-[#0B0B0B] transition-colors hover:bg-[#0B0B0B] hover:text-white">
+                      <button className="rounded-full border border-[#2A1D0C] px-4 py-1.5 text-[10px] font-['Inter'] tracking-[0.2em] text-[#2A1D0C] transition-colors hover:bg-[#2A1D0C] hover:text-white">
                         ADD TO CART
                       </button>
                     </div>
@@ -116,20 +116,20 @@ export function FeaturedProducts({ products }: FeaturedProductsProps) {
 
                 <div className="flex items-start justify-between gap-3 mb-3">
                   <div>
-                    <h3 className="text-xl font-['Playfair_Display'] text-[#0B0B0B] leading-tight">{product.name}</h3>
-                    <p className="text-sm text-[#0B0B0B]/80 font-['Inter'] mt-1">{product.brand ?? 'Polo Ralph Lauren'}</p>
+                    <h3 className="text-xl font-['Playfair_Display'] text-[#2A1D0C] leading-tight">{product.name}</h3>
+                    <p className="text-sm text-[#2A1D0C]/80 font-['Inter'] mt-1">{product.brand ?? 'Polo Ralph Lauren'}</p>
                   </div>
                   <button
                     type="button"
                     aria-label={`Add ${product.name} to favorites`}
-                    className="mt-1 shrink-0 text-[#0B0B0B] transition-colors hover:text-[#C6A96B]"
+                    className="mt-1 shrink-0 text-[#2A1D0C] transition-colors hover:text-[#8C673D]"
                   >
                     <Heart className="h-5 w-5" />
                   </button>
                 </div>
 
-                <p className="text-xl font-['Playfair_Display'] text-[#0B0B0B]">${product.price.toFixed(2)}</p>
-                <p className="text-sm text-[#0B0B0B] font-['Inter'] mt-2">{swatches.length} colors available</p>
+                <p className="text-xl font-['Playfair_Display'] text-[#2A1D0C]">${product.price.toFixed(2)}</p>
+                <p className="text-sm text-[#2A1D0C] font-['Inter'] mt-2">{swatches.length} colors available</p>
               </motion.div>
             );
           })}
@@ -138,3 +138,5 @@ export function FeaturedProducts({ products }: FeaturedProductsProps) {
     </section>
   );
 }
+
+

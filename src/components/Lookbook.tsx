@@ -1,4 +1,4 @@
-import { motion } from 'motion/react';
+﻿import { motion } from 'motion/react';
 import { ImageWithFallback } from './figma/ImageWithFallback';
 
 interface LookbookImage {
@@ -12,7 +12,7 @@ interface LookbookProps {
 
 export function Lookbook({ images }: LookbookProps) {
   return (
-    <section className="py-20 bg-[#0B0B0B]">
+    <section className="py-20 bg-[#2A1D0C]">
       <div className="container mx-auto px-6">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
@@ -67,7 +67,7 @@ export function Lookbook({ images }: LookbookProps) {
           transition={{ duration: 0.6 }}
           className="text-center"
         >
-          <button className="px-8 py-4 border-2 border-white text-white font-['Inter'] font-medium hover:bg-white hover:text-[#0B0B0B] transition-all duration-300">
+          <button className="px-8 py-4 border-2 border-white text-white font-['Inter'] font-medium hover:bg-white hover:text-[#2A1D0C] transition-all duration-300">
             View Lookbook
           </button>
         </motion.div>
@@ -75,3 +75,5 @@ export function Lookbook({ images }: LookbookProps) {
     </section>
   );
 }
+
+
