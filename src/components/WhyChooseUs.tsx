@@ -26,14 +26,14 @@ const features = [
 
 export function WhyChooseUs() {
   return (
-    <section className="py-20 bg-[#3A2418]">
+    <section className="py-20 bg-[#E8E1D8]">
       <div className="container mx-auto px-6">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-5xl font-['Playfair_Display'] text-center text-[#E7D7C4] mb-16"
+          className="text-5xl font-['Playfair_Display'] text-center text-[#2F2F2F] mb-16"
         >
           Why Choose Us
         </motion.h2>
@@ -50,13 +50,13 @@ export function WhyChooseUs() {
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 className="text-center"
               >
-                <div className="inline-flex items-center justify-center w-16 h-16 mb-4 border-2 border-[#D6A25B] rounded-full">
-                  <Icon className="w-8 h-8 text-[#D6A25B]" />
+                <div className="inline-flex items-center justify-center w-16 h-16 mb-4 border-2 border-[#7A8B55] rounded-full">
+                  <Icon className="w-8 h-8 text-[#7A8B55]" />
                 </div>
-                <h3 className="text-xl font-['Playfair_Display'] text-[#E7D7C4] mb-2">
+                <h3 className="text-xl font-['Playfair_Display'] text-[#2F2F2F] mb-2">
                   {feature.title}
                 </h3>
-                <p className="text-[#E7D7C4]/75 font-['Inter']">
+                <p className="text-[#7A8B55] font-['Inter']">
                   {feature.description}
                 </p>
               </motion.div>
@@ -67,5 +67,4 @@ export function WhyChooseUs() {
     </section>
   );
 }
-
 

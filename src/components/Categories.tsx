@@ -12,14 +12,14 @@ interface CategoriesProps {
 
 export function Categories({ categories }: CategoriesProps) {
   return (
-    <section className="py-20 bg-[#3A2418]">
+    <section className="py-20 bg-[#E8E1D8]">
       <div className="container mx-auto px-6">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-5xl font-['Playfair_Display'] text-center text-[#E7D7C4] mb-16"
+          className="text-5xl font-['Playfair_Display'] text-center text-[#2F2F2F] mb-16"
         >
           Shop by Category
         </motion.h2>
@@ -40,10 +40,10 @@ export function Categories({ categories }: CategoriesProps) {
                   alt={category.name}
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                 />
-                <div className="absolute inset-0 bg-[#0E0E0E]/20 group-hover:bg-[#0E0E0E]/40 transition-all duration-300"></div>
+                <div className="absolute inset-0 bg-[#2F2F2F]/20 group-hover:bg-[#2F2F2F]/40 transition-all duration-300"></div>
               </div>
               <div className="absolute inset-0 flex items-end justify-center pb-8">
-                <h3 className="text-3xl font-['Playfair_Display'] text-[#E7D7C4]">
+                <h3 className="text-3xl font-['Playfair_Display'] text-[#F6F3EE]">
                   {category.name}
                 </h3>
               </div>
@@ -54,5 +54,4 @@ export function Categories({ categories }: CategoriesProps) {
     </section>
   );
 }
-
 

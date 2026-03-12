@@ -24,9 +24,9 @@ export function SectionHeader({
   return (
     <div className="mb-6 flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
       <div>
-        <p className="mb-2 text-[11px] uppercase tracking-[0.3em] text-[#C6A66B]">{eyebrow}</p>
-        <h1 className="font-['Playfair_Display'] text-3xl text-[#F7F1E8] sm:text-4xl">{title}</h1>
-        <p className="mt-2 max-w-3xl text-sm leading-6 text-[#D9CFBF]/70">{description}</p>
+        <p className="mb-2 text-[11px] uppercase tracking-[0.3em] text-[#7A8B55]">{eyebrow}</p>
+        <h1 className="font-['Playfair_Display'] text-3xl text-[#F6F3EE] sm:text-4xl">{title}</h1>
+        <p className="mt-2 max-w-3xl text-sm leading-6 text-[#E8E1D8]/70">{description}</p>
       </div>
       {action}
     </div>
@@ -46,12 +46,12 @@ export function StatCard({
 }) {
   return (
     <Panel>
-      <p className="text-sm text-[#D9CFBF]/60">{label}</p>
+      <p className="text-sm text-[#E8E1D8]/60">{label}</p>
       <div className="mt-4 flex items-end justify-between gap-3">
-        <div className="text-3xl font-semibold text-[#F7F1E8]">{value}</div>
-        <span className="rounded-full bg-[#C6A66B]/10 px-3 py-1 text-xs font-medium text-[#C6A66B]">{delta}</span>
+        <div className="text-3xl font-semibold text-[#F6F3EE]">{value}</div>
+        <span className="rounded-full bg-[#7A8B55]/10 px-3 py-1 text-xs font-medium text-[#7A8B55]">{delta}</span>
       </div>
-      {hint ? <p className="mt-4 text-sm text-[#D9CFBF]/55">{hint}</p> : null}
+      {hint ? <p className="mt-4 text-sm text-[#E8E1D8]/55">{hint}</p> : null}
     </Panel>
   );
 }
@@ -64,11 +64,11 @@ export function Badge({
   tone?: 'default' | 'gold' | 'green' | 'red' | 'blue';
 }) {
   const tones = {
-    default: 'bg-white/8 text-[#D9CFBF]',
-    gold: 'bg-[#C6A66B]/15 text-[#E4C58E]',
-    green: 'bg-[#184d37]/45 text-[#9be8c6]',
-    red: 'bg-[#5a1b16]/50 text-[#f0b8ae]',
-    blue: 'bg-[#142b46]/55 text-[#a6d4ff]',
+    default: 'bg-white/8 text-[#E8E1D8]',
+    gold: 'bg-[#7A8B55]/15 text-[#A8B57A]',
+    green: 'bg-[#7A8B55]/45 text-[#F6F3EE]',
+    red: 'bg-[#B68B63]/50 text-[#F6F3EE]',
+    blue: 'bg-[#B68B63]/55 text-[#F6F3EE]',
   } as const;
 
   return <span className={`rounded-full px-2.5 py-1 text-xs font-medium ${tones[tone]}`}>{children}</span>;
@@ -94,7 +94,7 @@ export function Modal({
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="fixed inset-0 z-50 flex items-center justify-center bg-[#05070B]/70 p-4 backdrop-blur-md"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-[#2F2F2F]/70 p-4 backdrop-blur-md"
           onClick={onClose}
         >
           <motion.div
@@ -102,12 +102,12 @@ export function Modal({
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: 18, opacity: 0 }}
             transition={{ duration: 0.18 }}
-            className="max-h-[90vh] w-full max-w-5xl overflow-auto rounded-[30px] border border-white/10 bg-[#11151d] p-6 shadow-[0_30px_80px_rgba(0,0,0,0.4)]"
+            className="max-h-[90vh] w-full max-w-5xl overflow-auto rounded-[30px] border border-white/10 bg-[#2F2F2F] p-6 shadow-[0_30px_80px_rgba(0,0,0,0.4)]"
             onClick={(event) => event.stopPropagation()}
           >
             <div className="mb-6">
-              <h2 className="font-['Playfair_Display'] text-3xl text-[#F7F1E8]">{title}</h2>
-              {description ? <p className="mt-2 text-sm text-[#D9CFBF]/65">{description}</p> : null}
+              <h2 className="font-['Playfair_Display'] text-3xl text-[#F6F3EE]">{title}</h2>
+              {description ? <p className="mt-2 text-sm text-[#E8E1D8]/65">{description}</p> : null}
             </div>
             {children}
           </motion.div>
@@ -120,7 +120,7 @@ export function Modal({
 export function Field({ label, children }: { label: string; children: React.ReactNode }) {
   return (
     <label className="block">
-      <span className="mb-2 block text-xs uppercase tracking-[0.24em] text-[#D9CFBF]/55">{label}</span>
+      <span className="mb-2 block text-xs uppercase tracking-[0.24em] text-[#E8E1D8]/55">{label}</span>
       {children}
     </label>
   );
@@ -130,7 +130,7 @@ export function TextInput(props: React.InputHTMLAttributes<HTMLInputElement>) {
   return (
     <input
       {...props}
-      className={`w-full rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-3 text-sm text-[#F7F1E8] outline-none transition focus:border-[#C6A66B]/50 ${props.className ?? ''}`}
+      className={`w-full rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-3 text-sm text-[#F6F3EE] outline-none transition focus:border-[#7A8B55]/50 ${props.className ?? ''}`}
     />
   );
 }
@@ -139,7 +139,7 @@ export function TextArea(props: React.TextareaHTMLAttributes<HTMLTextAreaElement
   return (
     <textarea
       {...props}
-      className={`min-h-[120px] w-full rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-3 text-sm text-[#F7F1E8] outline-none transition focus:border-[#C6A66B]/50 ${props.className ?? ''}`}
+      className={`min-h-[120px] w-full rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-3 text-sm text-[#F6F3EE] outline-none transition focus:border-[#7A8B55]/50 ${props.className ?? ''}`}
     />
   );
 }
@@ -148,7 +148,7 @@ export function Select(props: React.SelectHTMLAttributes<HTMLSelectElement>) {
   return (
     <select
       {...props}
-      className={`w-full rounded-2xl border border-white/10 bg-[#11151d] px-4 py-3 text-sm text-[#F7F1E8] outline-none transition focus:border-[#C6A66B]/50 ${props.className ?? ''}`}
+      className={`w-full rounded-2xl border border-white/10 bg-[#2F2F2F] px-4 py-3 text-sm text-[#F6F3EE] outline-none transition focus:border-[#7A8B55]/50 ${props.className ?? ''}`}
     />
   );
 }
@@ -160,9 +160,9 @@ export function Button({
   ...props
 }: React.ButtonHTMLAttributes<HTMLButtonElement> & { variant?: 'primary' | 'ghost' | 'danger' }) {
   const variants = {
-    primary: 'bg-[#C6A66B] text-[#171419] hover:brightness-105',
-    ghost: 'border border-white/10 bg-white/[0.03] text-[#F7F1E8] hover:border-[#C6A66B]/40 hover:text-[#C6A66B]',
-    danger: 'border border-[#9f2d20]/40 bg-[#9f2d20]/10 text-[#f0b8ae] hover:bg-[#9f2d20]/20',
+    primary: 'bg-[#7A8B55] text-[#2F2F2F] hover:brightness-105',
+    ghost: 'border border-white/10 bg-white/[0.03] text-[#F6F3EE] hover:border-[#7A8B55]/40 hover:text-[#7A8B55]',
+    danger: 'border border-[#B68B63]/40 bg-[#B68B63]/10 text-[#F6F3EE] hover:bg-[#B68B63]/20',
   } as const;
 
   return (

@@ -136,14 +136,14 @@ export default function Suits() {
   return (
     <>
       {/* Hero Section */}
-      <section className="relative h-[60vh] bg-[#1B1411] flex items-center justify-center">
-        <div className="absolute inset-0 bg-gradient-to-b from-[#0E0E0E]/50 to-[#0E0E0E]/70"></div>
+      <section className="relative h-[60vh] bg-[#2F2F2F] flex items-center justify-center">
+        <div className="absolute inset-0 bg-gradient-to-b from-[#2F2F2F]/50 to-[#2F2F2F]/70"></div>
         <div className="relative z-10 text-center px-6">
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="text-6xl md:text-7xl font-['Playfair_Display'] text-[#E7D7C4] mb-4"
+            className="text-6xl md:text-7xl font-['Playfair_Display'] text-[#F6F3EE] mb-4"
           >
             Premium Suits
           </motion.h1>
@@ -151,7 +151,7 @@ export default function Suits() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-xl text-[#E7D7C4]/80 font-['Inter']"
+            className="text-xl text-[#F6F3EE]/80 font-['Inter']"
           >
             Crafted to perfection for the modern gentleman
           </motion.p>
@@ -159,7 +159,7 @@ export default function Suits() {
       </section>
 
       {/* Main Content */}
-      <section className="py-16 bg-[#3A2418]">
+      <section className="py-16 bg-[#E8E1D8]">
         <div className="max-w-[1700px] mx-auto px-4 md:px-6">
           {/* Filters and Sort */}
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-12">
@@ -170,7 +170,7 @@ export default function Suits() {
                 <select
                   value={selectedColor}
                   onChange={(e) => setSelectedColor(e.target.value)}
-                  className="appearance-none bg-[#E7D7C4] border border-[#6E6A66] px-6 py-3 pr-10 font-['Inter'] text-[#1B1411] cursor-pointer hover:border-[#D6A25B] transition-colors focus:outline-none focus:border-[#D6A25B]"
+                  className="appearance-none bg-[#F6F3EE] border border-[#B68B63] px-6 py-3 pr-10 font-['Inter'] text-[#2F2F2F] cursor-pointer hover:border-[#7A8B55] transition-colors focus:outline-none focus:border-[#7A8B55]"
                 >
                   <option value="all">All Colors</option>
                   <option value="black">Black</option>
@@ -181,7 +181,7 @@ export default function Suits() {
                   <option value="green">Green</option>
                   <option value="red">Red</option>
                 </select>
-                <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-[#6E6A66] pointer-events-none" />
+                <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-[#B68B63] pointer-events-none" />
               </div>
 
               {/* Price Filter */}
@@ -189,38 +189,38 @@ export default function Suits() {
                 <select
                   value={selectedPrice}
                   onChange={(e) => setSelectedPrice(e.target.value)}
-                  className="appearance-none bg-[#E7D7C4] border border-[#6E6A66] px-6 py-3 pr-10 font-['Inter'] text-[#1B1411] cursor-pointer hover:border-[#D6A25B] transition-colors focus:outline-none focus:border-[#D6A25B]"
+                  className="appearance-none bg-[#F6F3EE] border border-[#B68B63] px-6 py-3 pr-10 font-['Inter'] text-[#2F2F2F] cursor-pointer hover:border-[#7A8B55] transition-colors focus:outline-none focus:border-[#7A8B55]"
                 >
                   <option value="all">All Prices</option>
                   <option value="under400">Under $400</option>
                   <option value="400to500">$400 - $500</option>
                   <option value="over500">Over $500</option>
                 </select>
-                <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-[#6E6A66] pointer-events-none" />
+                <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-[#B68B63] pointer-events-none" />
               </div>
             </div>
 
             {/* Sort */}
             <div className="flex items-center gap-3">
-              <span className="text-[#E7D7C4]/70 font-['Inter'] text-sm">Sort by:</span>
+              <span className="text-[#7A8B55] font-['Inter'] text-sm">Sort by:</span>
               <div className="relative">
                 <select
                   value={sortBy}
                   onChange={(e) => setSortBy(e.target.value)}
-                  className="appearance-none bg-[#E7D7C4] border border-[#6E6A66] px-6 py-3 pr-10 font-['Inter'] text-[#1B1411] cursor-pointer hover:border-[#D6A25B] transition-colors focus:outline-none focus:border-[#D6A25B]"
+                  className="appearance-none bg-[#F6F3EE] border border-[#B68B63] px-6 py-3 pr-10 font-['Inter'] text-[#2F2F2F] cursor-pointer hover:border-[#7A8B55] transition-colors focus:outline-none focus:border-[#7A8B55]"
                 >
                   <option value="featured">Featured</option>
                   <option value="priceLow">Price: Low to High</option>
                   <option value="priceHigh">Price: High to Low</option>
                   <option value="name">Name</option>
                 </select>
-                <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-[#6E6A66] pointer-events-none" />
+                <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-[#B68B63] pointer-events-none" />
               </div>
             </div>
           </div>
 
           {/* Results Count */}
-          <p className="text-[#E7D7C4]/70 font-['Inter'] mb-8">
+          <p className="text-[#7A8B55] font-['Inter'] mb-8">
             {sortedSuits.length} {sortedSuits.length === 1 ? 'suit' : 'suits'} found
           </p>
 
@@ -237,6 +237,5 @@ export default function Suits() {
     </>
   );
 }
-
 
 

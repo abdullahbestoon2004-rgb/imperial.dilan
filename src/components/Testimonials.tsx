@@ -24,14 +24,14 @@ const testimonials = [
 
 export function Testimonials() {
   return (
-    <section className="py-20 bg-[#3A2418]">
+    <section className="py-20 bg-[#E8E1D8]">
       <div className="container mx-auto px-6">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-5xl font-['Playfair_Display'] text-center text-[#E7D7C4] mb-16"
+          className="text-5xl font-['Playfair_Display'] text-center text-[#2F2F2F] mb-16"
         >
           What Our Clients Say
         </motion.h2>
@@ -44,20 +44,20 @@ export function Testimonials() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
-              className="bg-[#7A4A2A] p-8 text-center"
+              className="bg-[#B68B63] p-8 text-center"
             >
               <div className="flex justify-center mb-4">
                 {[...Array(testimonial.rating)].map((_, i) => (
-                  <Star key={i} className="w-5 h-5 fill-[#D6A25B] text-[#D6A25B]" />
+                  <Star key={i} className="w-5 h-5 fill-[#7A8B55] text-[#7A8B55]" />
                 ))}
               </div>
-              <p className="text-[#E7D7C4] font-['Inter'] mb-6 italic">
+              <p className="text-[#F6F3EE] font-['Inter'] mb-6 italic">
                 "{testimonial.text}"
               </p>
-              <h4 className="font-['Playfair_Display'] text-[#E7D7C4] text-lg mb-1">
+              <h4 className="font-['Playfair_Display'] text-[#F6F3EE] text-lg mb-1">
                 {testimonial.name}
               </h4>
-              <p className="text-[#E7D7C4]/70 font-['Inter'] text-sm">
+              <p className="text-[#F6F3EE]/70 font-['Inter'] text-sm">
                 {testimonial.role}
               </p>
             </motion.div>
@@ -67,5 +67,4 @@ export function Testimonials() {
     </section>
   );
 }
-
 

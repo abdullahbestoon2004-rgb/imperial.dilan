@@ -16,7 +16,7 @@ export function Hero({ heroImage }: HeroProps) {
           className="w-full h-full object-cover object-left"
         />
         {/* Dark overlay for better text readability */}
-        <div className="absolute inset-0 bg-[#0E0E0E]/40"></div>
+        <div className="absolute inset-0 bg-[#2F2F2F]/40"></div>
       </div>
 
       {/* Hero Content */}
@@ -34,7 +34,7 @@ export function Hero({ heroImage }: HeroProps) {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="text-6xl md:text-7xl lg:text-8xl font-['Playfair_Display'] text-[#E7D7C4] mb-4"
+            className="text-6xl md:text-7xl lg:text-8xl font-['Playfair_Display'] text-[#F6F3EE] mb-4"
           >
             Timeless Elegance
             <br />
@@ -44,7 +44,7 @@ export function Hero({ heroImage }: HeroProps) {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-xl md:text-2xl text-[#E7D7C4]/90 mb-8 font-['Inter'] font-light"
+            className="text-xl md:text-2xl text-[#F6F3EE]/90 mb-8 font-['Inter'] font-light"
           >
             Discover premium suits crafted for the modern gentleman.
           </motion.p>
@@ -54,10 +54,10 @@ export function Hero({ heroImage }: HeroProps) {
             transition={{ duration: 0.8, delay: 0.4 }}
             className="flex flex-col sm:flex-row gap-4 justify-center"
           >
-            <button className="px-8 py-4 bg-[#D6A25B] text-[#0E0E0E] font-['Inter'] font-medium hover:bg-[#E7D7C4] hover:text-[#0E0E0E] transition-all duration-300">
+            <button className="px-8 py-4 bg-[#7A8B55] text-[#2F2F2F] font-['Inter'] font-medium hover:bg-[#F6F3EE] hover:text-[#2F2F2F] transition-all duration-300">
               Shop Suits
             </button>
-            <button className="px-8 py-4 border-2 border-[#E7D7C4] text-[#E7D7C4] font-['Inter'] font-medium hover:bg-[#E7D7C4] hover:text-[#1B1411] transition-all duration-300">
+            <button className="px-8 py-4 border-2 border-[#F6F3EE] text-[#F6F3EE] font-['Inter'] font-medium hover:bg-[#F6F3EE] hover:text-[#2F2F2F] transition-all duration-300">
               Explore Collection
             </button>
           </motion.div>

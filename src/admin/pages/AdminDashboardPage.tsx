@@ -98,12 +98,12 @@ function DataTable({
           <thead className="border-b border-white/10 bg-white/[0.03]">
             <tr>
               {columns.map((column) => (
-                <th key={column.key} className="px-5 py-4 text-xs uppercase tracking-[0.24em] text-[#D9CFBF]/55">
+                <th key={column.key} className="px-5 py-4 text-xs uppercase tracking-[0.24em] text-[#E8E1D8]/55">
                   {column.sortable ? (
                     <button
                       type="button"
                       onClick={column.onSort}
-                      className={`inline-flex items-center gap-2 ${column.active ? 'text-[#F7F1E8]' : ''}`}
+                      className={`inline-flex items-center gap-2 ${column.active ? 'text-[#F6F3EE]' : ''}`}
                     >
                       {column.label}
                       <ArrowDownUp className="h-3.5 w-3.5" />
@@ -127,7 +127,7 @@ function TableRow({ children }: { children: React.ReactNode }) {
 }
 
 function TableCell({ children, className = '' }: { children: React.ReactNode; className?: string }) {
-  return <td className={`px-5 py-4 align-top text-sm text-[#D9CFBF] ${className}`}>{children}</td>;
+  return <td className={`px-5 py-4 align-top text-sm text-[#E8E1D8] ${className}`}>{children}</td>;
 }
 
 function MiniAreaChart({ points }: { points: { label: string; revenue: number }[] }) {
@@ -144,8 +144,8 @@ function MiniAreaChart({ points }: { points: { label: string; revenue: number }[
     <Panel className="overflow-hidden">
       <div className="mb-6 flex items-start justify-between gap-4">
         <div>
-          <p className="text-sm text-[#D9CFBF]/60">Revenue performance</p>
-          <h3 className="mt-2 text-2xl font-semibold text-[#F7F1E8]">Sales trend</h3>
+          <p className="text-sm text-[#E8E1D8]/60">Revenue performance</p>
+          <h3 className="mt-2 text-2xl font-semibold text-[#F6F3EE]">Sales trend</h3>
         </div>
         <Badge tone="gold">Live mock data</Badge>
       </div>
@@ -154,14 +154,14 @@ function MiniAreaChart({ points }: { points: { label: string; revenue: number }[
         <svg viewBox="0 0 100 100" preserveAspectRatio="none" className="h-full w-full">
           <defs>
             <linearGradient id="revenueGradient" x1="0" x2="0" y1="0" y2="1">
-              <stop offset="0%" stopColor="#C6A66B" stopOpacity="0.45" />
-              <stop offset="100%" stopColor="#C6A66B" stopOpacity="0" />
+              <stop offset="0%" stopColor="#7A8B55" stopOpacity="0.45" />
+              <stop offset="100%" stopColor="#7A8B55" stopOpacity="0" />
             </linearGradient>
           </defs>
           <path d={`${path} L 100 100 L 0 100 Z`} fill="url(#revenueGradient)" />
-          <path d={path} fill="none" stroke="#C6A66B" strokeWidth="2.4" vectorEffect="non-scaling-stroke" />
+          <path d={path} fill="none" stroke="#7A8B55" strokeWidth="2.4" vectorEffect="non-scaling-stroke" />
         </svg>
-        <div className="pointer-events-none absolute inset-x-0 bottom-0 flex justify-between text-xs text-[#D9CFBF]/45">
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 flex justify-between text-xs text-[#E8E1D8]/45">
           {points.map((point) => (
             <span key={point.label}>{point.label}</span>
           ))}
@@ -178,8 +178,8 @@ function BarsChart({ points }: { points: { label: string; orders: number }[] }) 
     <Panel>
       <div className="mb-6 flex items-start justify-between gap-4">
         <div>
-          <p className="text-sm text-[#D9CFBF]/60">Order velocity</p>
-          <h3 className="mt-2 text-2xl font-semibold text-[#F7F1E8]">Monthly orders</h3>
+          <p className="text-sm text-[#E8E1D8]/60">Order velocity</p>
+          <h3 className="mt-2 text-2xl font-semibold text-[#F6F3EE]">Monthly orders</h3>
         </div>
         <Badge tone="blue">6 months</Badge>
       </div>
@@ -188,11 +188,11 @@ function BarsChart({ points }: { points: { label: string; orders: number }[] }) 
           <div key={point.label} className="flex flex-1 flex-col items-center gap-3">
             <div className="flex h-full w-full items-end">
               <div
-                className="w-full rounded-t-[18px] bg-[linear-gradient(180deg,#C6A66B_0%,#7A6543_100%)]"
+                className="w-full rounded-t-[18px] bg-[linear-gradient(180deg,#7A8B55_0%,#B68B63_100%)]"
                 style={{ height: `${(point.orders / max) * 100}%` }}
               />
             </div>
-            <span className="text-xs text-[#D9CFBF]/55">{point.label}</span>
+            <span className="text-xs text-[#E8E1D8]/55">{point.label}</span>
           </div>
         ))}
       </div>
@@ -371,12 +371,12 @@ function ProductForm({
       <div className="grid gap-6 xl:grid-cols-2">
         <Panel>
           <div className="mb-4">
-            <h3 className="text-lg font-semibold text-[#F7F1E8]">Variants</h3>
-            <p className="text-sm text-[#D9CFBF]/60">Sizes and color options ready for real inventory logic later.</p>
+            <h3 className="text-lg font-semibold text-[#F6F3EE]">Variants</h3>
+            <p className="text-sm text-[#E8E1D8]/60">Sizes and color options ready for real inventory logic later.</p>
           </div>
           <div className="space-y-4">
             <div>
-              <p className="mb-3 text-xs uppercase tracking-[0.24em] text-[#D9CFBF]/55">Sizes</p>
+              <p className="mb-3 text-xs uppercase tracking-[0.24em] text-[#E8E1D8]/55">Sizes</p>
               <div className="flex flex-wrap gap-2">
                 {sizeOptions.map((size) => (
                   <button
@@ -385,8 +385,8 @@ function ProductForm({
                     onClick={() => toggleArrayValue('sizes', size)}
                     className={`rounded-full px-3 py-2 text-sm transition ${
                       form.sizes.includes(size)
-                        ? 'bg-[#C6A66B] text-[#171419]'
-                        : 'border border-white/10 bg-white/[0.03] text-[#D9CFBF]'
+                        ? 'bg-[#7A8B55] text-[#2F2F2F]'
+                        : 'border border-white/10 bg-white/[0.03] text-[#E8E1D8]'
                     }`}
                   >
                     {size}
@@ -412,8 +412,8 @@ function ProductForm({
         <Panel>
           <div className="mb-4 flex items-center justify-between gap-3">
             <div>
-              <h3 className="text-lg font-semibold text-[#F7F1E8]">Images</h3>
-              <p className="text-sm text-[#D9CFBF]/60">Mock image upload with drag-order controls represented by move actions.</p>
+              <h3 className="text-lg font-semibold text-[#F6F3EE]">Images</h3>
+              <p className="text-sm text-[#E8E1D8]/60">Mock image upload with drag-order controls represented by move actions.</p>
             </div>
             <Badge tone="blue">Storage-ready</Badge>
           </div>
@@ -440,10 +440,10 @@ function ProductForm({
                 <img src={image} alt="Product preview" className="h-36 w-full object-cover" />
                 <div className="space-y-3 p-3">
                   <div className="flex items-center justify-between gap-2">
-                    <span className="text-xs uppercase tracking-[0.22em] text-[#D9CFBF]/50">
+                    <span className="text-xs uppercase tracking-[0.22em] text-[#E8E1D8]/50">
                       {index === form.mainImageIndex ? 'Main image' : `Image ${index + 1}`}
                     </span>
-                    <GripVertical className="h-4 w-4 text-[#D9CFBF]/35" />
+                    <GripVertical className="h-4 w-4 text-[#E8E1D8]/35" />
                   </div>
                   <div className="flex gap-2">
                     <Button type="button" variant="ghost" className="flex-1" onClick={() => moveImage(index, -1)}>
@@ -484,7 +484,7 @@ function ProductForm({
 
       <div className="grid gap-6 xl:grid-cols-2">
         <Panel>
-          <h3 className="mb-4 text-lg font-semibold text-[#F7F1E8]">Product Tags</h3>
+          <h3 className="mb-4 text-lg font-semibold text-[#F6F3EE]">Product Tags</h3>
           <div className="flex flex-wrap gap-2">
             {tagOptions.map((tag) => (
               <button
@@ -493,8 +493,8 @@ function ProductForm({
                 onClick={() => toggleArrayValue('tags', tag)}
                 className={`rounded-full px-3 py-2 text-sm transition ${
                   form.tags.includes(tag)
-                    ? 'bg-[#F7F1E8] text-[#171419]'
-                    : 'border border-white/10 bg-white/[0.03] text-[#D9CFBF]'
+                    ? 'bg-[#F6F3EE] text-[#2F2F2F]'
+                    : 'border border-white/10 bg-white/[0.03] text-[#E8E1D8]'
                 }`}
               >
                 {tag}
@@ -504,7 +504,7 @@ function ProductForm({
         </Panel>
 
         <Panel>
-          <h3 className="mb-4 text-lg font-semibold text-[#F7F1E8]">Homepage Controls</h3>
+          <h3 className="mb-4 text-lg font-semibold text-[#F6F3EE]">Homepage Controls</h3>
           <div className="grid gap-3 sm:grid-cols-3">
             {[
               { key: 'visible', label: 'Visible on website' },
@@ -517,8 +517,8 @@ function ProductForm({
                 onClick={() => setForm((prev) => ({ ...prev, [toggle.key]: !prev[toggle.key as keyof typeof prev] }))}
                 className={`rounded-2xl border px-4 py-4 text-left transition ${
                   form[toggle.key as keyof typeof form]
-                    ? 'border-[#C6A66B]/45 bg-[#C6A66B]/10 text-[#F7F1E8]'
-                    : 'border-white/10 bg-white/[0.03] text-[#D9CFBF]/70'
+                    ? 'border-[#7A8B55]/45 bg-[#7A8B55]/10 text-[#F6F3EE]'
+                    : 'border-white/10 bg-white/[0.03] text-[#E8E1D8]/70'
                 }`}
               >
                 <div className="text-sm font-medium">{toggle.label}</div>
@@ -629,7 +629,7 @@ function CollectionForm({
         <TextArea value={form.description} onChange={(e) => setForm({ ...form, description: e.target.value })} />
       </Field>
       <div>
-        <p className="mb-3 text-xs uppercase tracking-[0.24em] text-[#D9CFBF]/55">Select Products</p>
+        <p className="mb-3 text-xs uppercase tracking-[0.24em] text-[#E8E1D8]/55">Select Products</p>
         <div className="grid gap-3 md:grid-cols-2">
           {products.map((product) => {
             const active = form.productIds.includes(product.id);
@@ -639,11 +639,11 @@ function CollectionForm({
                 type="button"
                 onClick={() => toggleProduct(product.id)}
                 className={`rounded-2xl border px-4 py-3 text-left transition ${
-                  active ? 'border-[#C6A66B]/50 bg-[#C6A66B]/10' : 'border-white/10 bg-white/[0.03]'
+                  active ? 'border-[#7A8B55]/50 bg-[#7A8B55]/10' : 'border-white/10 bg-white/[0.03]'
                 }`}
               >
-                <div className="text-sm font-medium text-[#F7F1E8]">{product.name}</div>
-                <div className="mt-1 text-xs text-[#D9CFBF]/60">{product.category}</div>
+                <div className="text-sm font-medium text-[#F6F3EE]">{product.name}</div>
+                <div className="mt-1 text-xs text-[#E8E1D8]/60">{product.category}</div>
               </button>
             );
           })}
@@ -653,7 +653,7 @@ function CollectionForm({
         type="button"
         onClick={() => setForm((prev) => ({ ...prev, featured: !prev.featured }))}
         className={`rounded-2xl border px-4 py-3 text-sm transition ${
-          form.featured ? 'border-[#C6A66B]/45 bg-[#C6A66B]/10 text-[#F7F1E8]' : 'border-white/10 text-[#D9CFBF]'
+          form.featured ? 'border-[#7A8B55]/45 bg-[#7A8B55]/10 text-[#F6F3EE]' : 'border-white/10 text-[#E8E1D8]'
         }`}
       >
         {form.featured ? 'Featured Collection' : 'Mark as Featured'}
@@ -708,7 +708,7 @@ function DiscountForm({
         type="button"
         onClick={() => setForm((prev) => ({ ...prev, active: !prev.active }))}
         className={`rounded-2xl border px-4 py-3 text-sm transition ${
-          form.active ? 'border-[#C6A66B]/45 bg-[#C6A66B]/10 text-[#F7F1E8]' : 'border-white/10 text-[#D9CFBF]'
+          form.active ? 'border-[#7A8B55]/45 bg-[#7A8B55]/10 text-[#F6F3EE]' : 'border-white/10 text-[#E8E1D8]'
         }`}
       >
         {form.active ? 'Active' : 'Inactive'}
@@ -723,8 +723,8 @@ function DiscountForm({
 function SearchEmptyState({ query }: { query: string }) {
   return (
     <Panel className="text-center">
-      <p className="text-lg font-medium text-[#F7F1E8]">No matches for “{query}”</p>
-      <p className="mt-2 text-sm text-[#D9CFBF]/60">Try searching by name, SKU, order ID, or customer email.</p>
+      <p className="text-lg font-medium text-[#F6F3EE]">No matches for “{query}”</p>
+      <p className="mt-2 text-sm text-[#E8E1D8]/60">Try searching by name, SKU, order ID, or customer email.</p>
     </Panel>
   );
 }
@@ -927,8 +927,8 @@ export default function AdminDashboardPage() {
         <Panel>
           <div className="mb-6 flex items-start justify-between gap-4">
             <div>
-              <p className="text-sm text-[#D9CFBF]/60">Traffic mix</p>
-              <h3 className="mt-2 text-2xl font-semibold text-[#F7F1E8]">Channel split</h3>
+              <p className="text-sm text-[#E8E1D8]/60">Traffic mix</p>
+              <h3 className="mt-2 text-2xl font-semibold text-[#F6F3EE]">Channel split</h3>
             </div>
             <Badge tone="green">Healthy acquisition</Badge>
           </div>
@@ -936,11 +936,11 @@ export default function AdminDashboardPage() {
             {trafficSources.map((source) => (
               <div key={source.source}>
                 <div className="mb-2 flex items-center justify-between text-sm">
-                  <span className="text-[#F7F1E8]">{source.source}</span>
-                  <span className="text-[#D9CFBF]/60">{source.value}%</span>
+                  <span className="text-[#F6F3EE]">{source.source}</span>
+                  <span className="text-[#E8E1D8]/60">{source.value}%</span>
                 </div>
                 <div className="h-2 rounded-full bg-white/6">
-                  <div className="h-2 rounded-full bg-[linear-gradient(90deg,#C6A66B,#E7D3AB)]" style={{ width: `${source.value}%` }} />
+                  <div className="h-2 rounded-full bg-[linear-gradient(90deg,#7A8B55,#A8B57A)]" style={{ width: `${source.value}%` }} />
                 </div>
               </div>
             ))}
@@ -951,48 +951,48 @@ export default function AdminDashboardPage() {
       <div className="grid gap-6 xl:grid-cols-[1.2fr_1fr_1fr]">
         <BarsChart points={salesSeries} />
         <Panel>
-          <p className="text-sm text-[#D9CFBF]/60">Catalog health</p>
+          <p className="text-sm text-[#E8E1D8]/60">Catalog health</p>
           <div className="mt-6 space-y-4">
             <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-4">
               <div className="flex items-center justify-between">
-                <span className="text-sm text-[#D9CFBF]/60">Featured products</span>
+                <span className="text-sm text-[#E8E1D8]/60">Featured products</span>
                 <Badge tone="gold">{analytics.featuredProducts}</Badge>
               </div>
             </div>
             <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-4">
               <div className="flex items-center justify-between">
-                <span className="text-sm text-[#D9CFBF]/60">Hidden products</span>
+                <span className="text-sm text-[#E8E1D8]/60">Hidden products</span>
                 <Badge tone="red">{analytics.hiddenProducts}</Badge>
               </div>
             </div>
             <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-4">
               <div className="flex items-center justify-between">
-                <span className="text-sm text-[#D9CFBF]/60">Low stock alerts</span>
+                <span className="text-sm text-[#E8E1D8]/60">Low stock alerts</span>
                 <Badge tone="blue">{analytics.lowStockProducts}</Badge>
               </div>
             </div>
             <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-4">
               <div className="flex items-center justify-between">
-                <span className="text-sm text-[#D9CFBF]/60">Active discounts</span>
+                <span className="text-sm text-[#E8E1D8]/60">Active discounts</span>
                 <Badge tone="green">{analytics.activeDiscounts}</Badge>
               </div>
             </div>
           </div>
         </Panel>
         <Panel>
-          <p className="text-sm text-[#D9CFBF]/60">Recent messages</p>
+          <p className="text-sm text-[#E8E1D8]/60">Recent messages</p>
           <div className="mt-6 space-y-3">
             {recentMessages.map((message) => (
               <button
                 key={message.id}
                 type="button"
                 onClick={() => setSelectedMessage(message)}
-                className="w-full rounded-2xl border border-white/10 bg-white/[0.03] p-4 text-left transition hover:border-[#C6A66B]/35"
+                className="w-full rounded-2xl border border-white/10 bg-white/[0.03] p-4 text-left transition hover:border-[#7A8B55]/35"
               >
                 <div className="flex items-start justify-between gap-3">
                   <div>
-                    <p className="text-sm font-medium text-[#F7F1E8]">{message.subject}</p>
-                    <p className="mt-1 text-xs text-[#D9CFBF]/55">{message.name}</p>
+                    <p className="text-sm font-medium text-[#F6F3EE]">{message.subject}</p>
+                    <p className="mt-1 text-xs text-[#E8E1D8]/55">{message.name}</p>
                   </div>
                   <Badge tone={message.read ? 'default' : 'gold'}>{message.read ? 'Read' : 'Unread'}</Badge>
                 </div>
@@ -1005,7 +1005,7 @@ export default function AdminDashboardPage() {
       <div className="grid gap-6 xl:grid-cols-2">
         <Panel>
           <div className="mb-5 flex items-center justify-between">
-            <h3 className="text-xl font-semibold text-[#F7F1E8]">Recent orders</h3>
+            <h3 className="text-xl font-semibold text-[#F6F3EE]">Recent orders</h3>
             <Button variant="ghost" onClick={() => setActiveSection('orders')}>
               View all
             </Button>
@@ -1016,15 +1016,15 @@ export default function AdminDashboardPage() {
                 key={order.id}
                 type="button"
                 onClick={() => setSelectedOrder(order)}
-                className="flex w-full items-center justify-between rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-4 text-left transition hover:border-[#C6A66B]/35"
+                className="flex w-full items-center justify-between rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-4 text-left transition hover:border-[#7A8B55]/35"
               >
                 <div>
-                  <p className="text-sm font-medium text-[#F7F1E8]">{order.id}</p>
-                  <p className="mt-1 text-xs text-[#D9CFBF]/55">{order.customerName}</p>
+                  <p className="text-sm font-medium text-[#F6F3EE]">{order.id}</p>
+                  <p className="mt-1 text-xs text-[#E8E1D8]/55">{order.customerName}</p>
                 </div>
                 <div className="text-right">
-                  <p className="text-sm text-[#F7F1E8]">{formatMoney(order.totalPrice)}</p>
-                  <p className="mt-1 text-xs text-[#D9CFBF]/55">{order.orderStatus}</p>
+                  <p className="text-sm text-[#F6F3EE]">{formatMoney(order.totalPrice)}</p>
+                  <p className="mt-1 text-xs text-[#E8E1D8]/55">{order.orderStatus}</p>
                 </div>
               </button>
             ))}
@@ -1033,7 +1033,7 @@ export default function AdminDashboardPage() {
 
         <Panel>
           <div className="mb-5 flex items-center justify-between">
-            <h3 className="text-xl font-semibold text-[#F7F1E8]">Quick actions</h3>
+            <h3 className="text-xl font-semibold text-[#F6F3EE]">Quick actions</h3>
             <Badge tone="blue">Admin tools</Badge>
           </div>
           <div className="grid gap-3 sm:grid-cols-2">
@@ -1050,11 +1050,11 @@ export default function AdminDashboardPage() {
                   setActiveSection(item.section);
                   item.action?.();
                 }}
-                className="rounded-[24px] border border-white/10 bg-white/[0.03] p-5 text-left transition hover:border-[#C6A66B]/35"
+                className="rounded-[24px] border border-white/10 bg-white/[0.03] p-5 text-left transition hover:border-[#7A8B55]/35"
               >
-                <item.icon className="h-5 w-5 text-[#C6A66B]" />
-                <p className="mt-4 text-base font-medium text-[#F7F1E8]">{item.label}</p>
-                <p className="mt-1 text-sm text-[#D9CFBF]/55">Open section and continue editing.</p>
+                <item.icon className="h-5 w-5 text-[#7A8B55]" />
+                <p className="mt-4 text-base font-medium text-[#F6F3EE]">{item.label}</p>
+                <p className="mt-1 text-sm text-[#E8E1D8]/55">Open section and continue editing.</p>
               </button>
             ))}
           </div>
@@ -1083,26 +1083,26 @@ export default function AdminDashboardPage() {
         <>
           <div className="grid gap-4 md:grid-cols-4">
             <Panel>
-              <p className="text-sm text-[#D9CFBF]/60">Visible on website</p>
-              <p className="mt-4 text-3xl font-semibold text-[#F7F1E8]">
+              <p className="text-sm text-[#E8E1D8]/60">Visible on website</p>
+              <p className="mt-4 text-3xl font-semibold text-[#F6F3EE]">
                 {products.filter((item) => item.visible).length}
               </p>
             </Panel>
             <Panel>
-              <p className="text-sm text-[#D9CFBF]/60">Featured products</p>
-              <p className="mt-4 text-3xl font-semibold text-[#F7F1E8]">
+              <p className="text-sm text-[#E8E1D8]/60">Featured products</p>
+              <p className="mt-4 text-3xl font-semibold text-[#F6F3EE]">
                 {products.filter((item) => item.featured).length}
               </p>
             </Panel>
             <Panel>
-              <p className="text-sm text-[#D9CFBF]/60">Draft items</p>
-              <p className="mt-4 text-3xl font-semibold text-[#F7F1E8]">
+              <p className="text-sm text-[#E8E1D8]/60">Draft items</p>
+              <p className="mt-4 text-3xl font-semibold text-[#F6F3EE]">
                 {products.filter((item) => item.status === 'Draft').length}
               </p>
             </Panel>
             <Panel>
-              <p className="text-sm text-[#D9CFBF]/60">Low stock</p>
-              <p className="mt-4 text-3xl font-semibold text-[#F7F1E8]">
+              <p className="text-sm text-[#E8E1D8]/60">Low stock</p>
+              <p className="mt-4 text-3xl font-semibold text-[#F6F3EE]">
                 {products.filter((item) => item.stockQuantity <= 10).length}
               </p>
             </Panel>
@@ -1140,22 +1140,22 @@ export default function AdminDashboardPage() {
                       className="h-16 w-14 rounded-2xl object-cover"
                     />
                     <div>
-                      <p className="font-medium text-[#F7F1E8]">{product.name}</p>
-                      <p className="mt-1 text-xs text-[#D9CFBF]/55">
+                      <p className="font-medium text-[#F6F3EE]">{product.name}</p>
+                      <p className="mt-1 text-xs text-[#E8E1D8]/55">
                         {product.brand} • {product.category} • {product.sku}
                       </p>
                     </div>
                   </div>
                 </TableCell>
                 <TableCell>
-                  <p className="text-[#F7F1E8]">{formatMoney(product.price, product.currency)}</p>
+                  <p className="text-[#F6F3EE]">{formatMoney(product.price, product.currency)}</p>
                   {product.discountPrice ? (
-                    <p className="mt-1 text-xs text-[#D9CFBF]/55">Sale {formatMoney(product.discountPrice, product.currency)}</p>
+                    <p className="mt-1 text-xs text-[#E8E1D8]/55">Sale {formatMoney(product.discountPrice, product.currency)}</p>
                   ) : null}
                 </TableCell>
                 <TableCell>
-                  <p className="text-[#F7F1E8]">{product.stockQuantity} units</p>
-                  <p className="mt-1 text-xs text-[#D9CFBF]/55">{product.availability}</p>
+                  <p className="text-[#F6F3EE]">{product.stockQuantity} units</p>
+                  <p className="mt-1 text-xs text-[#E8E1D8]/55">{product.availability}</p>
                 </TableCell>
                 <TableCell>
                   <div className="flex flex-wrap gap-2">
@@ -1165,8 +1165,8 @@ export default function AdminDashboardPage() {
                   </div>
                 </TableCell>
                 <TableCell>
-                  <p className="text-[#F7F1E8]">{formatDate(product.updatedAt)}</p>
-                  <p className="mt-1 text-xs text-[#D9CFBF]/55">{product.tags.join(', ') || 'No tags'}</p>
+                  <p className="text-[#F6F3EE]">{formatDate(product.updatedAt)}</p>
+                  <p className="mt-1 text-xs text-[#E8E1D8]/55">{product.tags.join(', ') || 'No tags'}</p>
                 </TableCell>
                 <TableCell>
                   <div className="flex flex-wrap gap-2">
@@ -1224,13 +1224,13 @@ export default function AdminDashboardPage() {
             <div className="space-y-4 p-5">
               <div className="flex items-start justify-between gap-3">
                 <div>
-                  <h3 className="text-xl font-semibold text-[#F7F1E8]">{category.name}</h3>
-                  <p className="mt-2 text-sm text-[#D9CFBF]/60">{category.description}</p>
+                  <h3 className="text-xl font-semibold text-[#F6F3EE]">{category.name}</h3>
+                  <p className="mt-2 text-sm text-[#E8E1D8]/60">{category.description}</p>
                 </div>
                 <Badge tone="blue">#{category.displayOrder}</Badge>
               </div>
               <div className="flex items-center justify-between">
-                <p className="text-sm text-[#D9CFBF]/55">{category.productCount} linked products</p>
+                <p className="text-sm text-[#E8E1D8]/55">{category.productCount} linked products</p>
                 <div className="flex gap-2">
                   <Button
                     variant="ghost"
@@ -1277,8 +1277,8 @@ export default function AdminDashboardPage() {
           <Panel key={collection.id}>
             <div className="flex items-start justify-between gap-3">
               <div>
-                <h3 className="text-xl font-semibold text-[#F7F1E8]">{collection.name}</h3>
-                <p className="mt-2 text-sm text-[#D9CFBF]/60">{collection.description}</p>
+                <h3 className="text-xl font-semibold text-[#F6F3EE]">{collection.name}</h3>
+                <p className="mt-2 text-sm text-[#E8E1D8]/60">{collection.description}</p>
               </div>
               {collection.featured ? <Badge tone="gold">Featured</Badge> : null}
             </div>
@@ -1342,12 +1342,12 @@ export default function AdminDashboardPage() {
         {filteredOrders.map((order) => (
           <TableRow key={order.id}>
             <TableCell>
-              <p className="font-medium text-[#F7F1E8]">{order.id}</p>
-              <p className="mt-1 text-xs text-[#D9CFBF]/55">{formatDate(order.createdAt)}</p>
+              <p className="font-medium text-[#F6F3EE]">{order.id}</p>
+              <p className="mt-1 text-xs text-[#E8E1D8]/55">{formatDate(order.createdAt)}</p>
             </TableCell>
             <TableCell>{order.customerName}</TableCell>
             <TableCell>{order.items.map((item) => item.productName).join(', ')}</TableCell>
-            <TableCell className="text-[#F7F1E8]">{formatMoney(order.totalPrice)}</TableCell>
+            <TableCell className="text-[#F6F3EE]">{formatMoney(order.totalPrice)}</TableCell>
             <TableCell>
               <Badge tone={order.paymentStatus === 'Paid' ? 'green' : order.paymentStatus === 'Refunded' ? 'red' : 'blue'}>
                 {order.paymentStatus}
@@ -1395,19 +1395,19 @@ export default function AdminDashboardPage() {
           <TableRow key={customer.id}>
             <TableCell>
               <div className="flex items-center gap-3">
-                <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-white/8 text-[#F7F1E8]">
+                <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-white/8 text-[#F6F3EE]">
                   <UserRound className="h-4 w-4" />
                 </div>
                 <div>
-                  <p className="font-medium text-[#F7F1E8]">{customer.name}</p>
-                  <p className="mt-1 text-xs text-[#D9CFBF]/55">{customer.segment}</p>
+                  <p className="font-medium text-[#F6F3EE]">{customer.name}</p>
+                  <p className="mt-1 text-xs text-[#E8E1D8]/55">{customer.segment}</p>
                 </div>
               </div>
             </TableCell>
             <TableCell>{customer.email}</TableCell>
             <TableCell>{customer.phone}</TableCell>
             <TableCell>{customer.ordersCount}</TableCell>
-            <TableCell className="text-[#F7F1E8]">{formatMoney(customer.totalSpent)}</TableCell>
+            <TableCell className="text-[#F6F3EE]">{formatMoney(customer.totalSpent)}</TableCell>
           </TableRow>
         ))}
       </DataTable>
@@ -1437,13 +1437,13 @@ export default function AdminDashboardPage() {
               >
                 <div>
                   <div className="flex items-center gap-3">
-                    <p className="font-medium text-[#F7F1E8]">{message.subject}</p>
+                    <p className="font-medium text-[#F6F3EE]">{message.subject}</p>
                     {!message.read ? <Badge tone="gold">New</Badge> : null}
                   </div>
-                  <p className="mt-2 text-sm text-[#D9CFBF]/60">{message.name} • {message.email}</p>
-                  <p className="mt-2 line-clamp-2 text-sm text-[#D9CFBF]/50">{message.message}</p>
+                  <p className="mt-2 text-sm text-[#E8E1D8]/60">{message.name} • {message.email}</p>
+                  <p className="mt-2 line-clamp-2 text-sm text-[#E8E1D8]/50">{message.message}</p>
                 </div>
-                <span className="text-xs text-[#D9CFBF]/45">{formatDate(message.createdAt)}</span>
+                <span className="text-xs text-[#E8E1D8]/45">{formatDate(message.createdAt)}</span>
               </button>
             ))}
           </div>
@@ -1454,21 +1454,21 @@ export default function AdminDashboardPage() {
             <div>
               <div className="flex items-start justify-between gap-3">
                 <div>
-                  <p className="text-sm text-[#D9CFBF]/55">{selectedMessage.email}</p>
-                  <h3 className="mt-2 text-2xl font-semibold text-[#F7F1E8]">{selectedMessage.subject}</h3>
+                  <p className="text-sm text-[#E8E1D8]/55">{selectedMessage.email}</p>
+                  <h3 className="mt-2 text-2xl font-semibold text-[#F6F3EE]">{selectedMessage.subject}</h3>
                 </div>
                 <Button variant="danger" onClick={() => actions.deleteMessage(selectedMessage.id)}>
                   <Trash2 className="h-4 w-4" />
                 </Button>
               </div>
-              <p className="mt-5 text-sm leading-7 text-[#D9CFBF]/70">{selectedMessage.message}</p>
+              <p className="mt-5 text-sm leading-7 text-[#E8E1D8]/70">{selectedMessage.message}</p>
             </div>
           ) : (
             <div className="flex h-full min-h-[220px] items-center justify-center text-center">
               <div>
-                <MessageSquare className="mx-auto h-6 w-6 text-[#C6A66B]" />
-                <p className="mt-4 text-lg font-medium text-[#F7F1E8]">Select a message</p>
-                <p className="mt-2 text-sm text-[#D9CFBF]/55">Message details appear here.</p>
+                <MessageSquare className="mx-auto h-6 w-6 text-[#7A8B55]" />
+                <p className="mt-4 text-lg font-medium text-[#F6F3EE]">Select a message</p>
+                <p className="mt-2 text-sm text-[#E8E1D8]/55">Message details appear here.</p>
               </div>
             </div>
           )}
@@ -1599,10 +1599,10 @@ export default function AdminDashboardPage() {
             <img src={item.url} alt={item.name} className="h-44 w-full object-cover" />
             <div className="space-y-3 p-4">
               <div className="flex items-center justify-between gap-3">
-                <p className="font-medium text-[#F7F1E8]">{item.name}</p>
+                <p className="font-medium text-[#F6F3EE]">{item.name}</p>
                 <Badge tone="blue">{item.type}</Badge>
               </div>
-              <p className="text-xs text-[#D9CFBF]/50">{formatDate(item.uploadedAt)}</p>
+              <p className="text-xs text-[#E8E1D8]/50">{formatDate(item.uploadedAt)}</p>
               <Button variant="danger" className="w-full" onClick={() => actions.deleteMediaItem(item.id)}>
                 <Trash2 className="h-4 w-4" />
                 Delete
@@ -1638,8 +1638,8 @@ export default function AdminDashboardPage() {
           <Panel key={discount.id}>
             <div className="flex items-start justify-between gap-3">
               <div>
-                <h3 className="text-xl font-semibold text-[#F7F1E8]">{discount.name}</h3>
-                <p className="mt-2 text-sm text-[#D9CFBF]/60">{discount.code}</p>
+                <h3 className="text-xl font-semibold text-[#F6F3EE]">{discount.name}</h3>
+                <p className="mt-2 text-sm text-[#E8E1D8]/60">{discount.code}</p>
               </div>
               <Badge tone={discount.active ? 'green' : 'default'}>{discount.active ? 'Active' : 'Inactive'}</Badge>
             </div>
@@ -1710,7 +1710,7 @@ export default function AdminDashboardPage() {
             <TextInput value={settingsDraft.tiktok} onChange={(e) => setSettingsDraft({ ...settingsDraft, tiktok: e.target.value })} />
           </Field>
           <div className="overflow-hidden rounded-[28px] border border-white/10 bg-white/[0.03]">
-            <img src={settingsDraft.logoUrl} alt={settingsDraft.storeName} className="h-44 w-full object-cover bg-[#171419] object-contain p-8" />
+            <img src={settingsDraft.logoUrl} alt={settingsDraft.storeName} className="h-44 w-full object-cover bg-[#2F2F2F] object-contain p-8" />
           </div>
         </Panel>
       </div>
@@ -1825,31 +1825,31 @@ export default function AdminDashboardPage() {
           <div className="space-y-6">
             <div className="grid gap-4 md:grid-cols-3">
               <Panel>
-                <p className="text-sm text-[#D9CFBF]/60">Customer</p>
-                <p className="mt-3 text-xl font-semibold text-[#F7F1E8]">{selectedOrder.customerName}</p>
+                <p className="text-sm text-[#E8E1D8]/60">Customer</p>
+                <p className="mt-3 text-xl font-semibold text-[#F6F3EE]">{selectedOrder.customerName}</p>
               </Panel>
               <Panel>
-                <p className="text-sm text-[#D9CFBF]/60">Payment</p>
-                <p className="mt-3 text-xl font-semibold text-[#F7F1E8]">{selectedOrder.paymentStatus}</p>
+                <p className="text-sm text-[#E8E1D8]/60">Payment</p>
+                <p className="mt-3 text-xl font-semibold text-[#F6F3EE]">{selectedOrder.paymentStatus}</p>
               </Panel>
               <Panel>
-                <p className="text-sm text-[#D9CFBF]/60">Total</p>
-                <p className="mt-3 text-xl font-semibold text-[#F7F1E8]">{formatMoney(selectedOrder.totalPrice)}</p>
+                <p className="text-sm text-[#E8E1D8]/60">Total</p>
+                <p className="mt-3 text-xl font-semibold text-[#F6F3EE]">{formatMoney(selectedOrder.totalPrice)}</p>
               </Panel>
             </div>
 
             <Panel>
-              <h3 className="text-lg font-semibold text-[#F7F1E8]">Items</h3>
+              <h3 className="text-lg font-semibold text-[#F6F3EE]">Items</h3>
               <div className="mt-4 space-y-3">
                 {selectedOrder.items.map((item, index) => (
                   <div key={`${item.productId}-${index}`} className="flex items-center justify-between rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-4">
                     <div>
-                      <p className="font-medium text-[#F7F1E8]">{item.productName}</p>
-                      <p className="mt-1 text-xs text-[#D9CFBF]/55">
+                      <p className="font-medium text-[#F6F3EE]">{item.productName}</p>
+                      <p className="mt-1 text-xs text-[#E8E1D8]/55">
                         Qty {item.quantity} • {item.size} • {item.color}
                       </p>
                     </div>
-                    <p className="text-[#F7F1E8]">{formatMoney(item.price)}</p>
+                    <p className="text-[#F6F3EE]">{formatMoney(item.price)}</p>
                   </div>
                 ))}
               </div>
@@ -1857,16 +1857,16 @@ export default function AdminDashboardPage() {
 
             <div className="grid gap-4 md:grid-cols-2">
               <Panel>
-                <h3 className="text-lg font-semibold text-[#F7F1E8]">Shipping address</h3>
-                <p className="mt-4 text-sm leading-7 text-[#D9CFBF]/65">{selectedOrder.shippingAddress}</p>
+                <h3 className="text-lg font-semibold text-[#F6F3EE]">Shipping address</h3>
+                <p className="mt-4 text-sm leading-7 text-[#E8E1D8]/65">{selectedOrder.shippingAddress}</p>
               </Panel>
               <Panel>
-                <h3 className="text-lg font-semibold text-[#F7F1E8]">Timeline</h3>
+                <h3 className="text-lg font-semibold text-[#F6F3EE]">Timeline</h3>
                 <div className="mt-4 space-y-3">
                   {selectedOrder.timeline.map((entry, index) => (
                     <div key={`${entry}-${index}`} className="flex gap-3">
-                      <div className="mt-1 h-2.5 w-2.5 rounded-full bg-[#C6A66B]" />
-                      <p className="text-sm text-[#D9CFBF]/65">{entry}</p>
+                      <div className="mt-1 h-2.5 w-2.5 rounded-full bg-[#7A8B55]" />
+                      <p className="text-sm text-[#E8E1D8]/65">{entry}</p>
                     </div>
                   ))}
                 </div>
@@ -1885,11 +1885,11 @@ export default function AdminDashboardPage() {
         {selectedMessage ? (
           <div className="space-y-4">
             <div className="flex items-center gap-3">
-              <Mail className="h-4 w-4 text-[#C6A66B]" />
-              <p className="text-sm text-[#D9CFBF]/60">{formatDate(selectedMessage.createdAt)}</p>
+              <Mail className="h-4 w-4 text-[#7A8B55]" />
+              <p className="text-sm text-[#E8E1D8]/60">{formatDate(selectedMessage.createdAt)}</p>
             </div>
             <Panel>
-              <p className="text-sm leading-7 text-[#D9CFBF]/70">{selectedMessage.message}</p>
+              <p className="text-sm leading-7 text-[#E8E1D8]/70">{selectedMessage.message}</p>
             </Panel>
           </div>
         ) : null}

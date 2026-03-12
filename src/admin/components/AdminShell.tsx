@@ -43,15 +43,15 @@ function SidebarNav({
               onClick={() => onSectionChange(item.id)}
               className={`flex w-full items-center justify-between rounded-2xl px-4 py-3 text-left transition-all duration-200 ${
                 active
-                  ? 'bg-[#F7F1E8] text-[#171419] shadow-[0_14px_32px_rgba(0,0,0,0.24)]'
-                  : 'bg-transparent text-[#D9CFBF]/70 hover:bg-white/5 hover:text-[#F7F1E8]'
+                  ? 'bg-[#F6F3EE] text-[#2F2F2F] shadow-[0_14px_32px_rgba(0,0,0,0.24)]'
+                  : 'bg-transparent text-[#E8E1D8]/70 hover:bg-white/5 hover:text-[#F6F3EE]'
               }`}
             >
               <span className="text-sm font-medium">{item.label}</span>
               {typeof item.badge === 'number' && item.badge > 0 ? (
                 <span
                   className={`rounded-full px-2 py-0.5 text-xs ${
-                    active ? 'bg-[#171419]/10 text-[#171419]' : 'bg-[#C6A66B]/15 text-[#C6A66B]'
+                    active ? 'bg-[#2F2F2F]/10 text-[#2F2F2F]' : 'bg-[#7A8B55]/15 text-[#7A8B55]'
                   }`}
                 >
                   {item.badge}
@@ -87,26 +87,26 @@ export function AdminShell({
   }, [navItems, query]);
 
   const sidebar = (
-    <div className="h-full overflow-y-auto border-r border-white/10 bg-[radial-gradient(circle_at_top,_rgba(198,166,107,0.18),_transparent_35%),linear-gradient(180deg,#11151d_0%,#090c12_100%)] p-6">
+    <div className="h-full overflow-y-auto border-r border-white/10 bg-[radial-gradient(circle_at_top,_rgba(122,139,85,0.18),_transparent_35%),linear-gradient(180deg,#2F2F2F_0%,#2F2F2F_100%)] p-6">
       <div className="mb-8 flex items-center gap-3">
-        <div className="flex h-11 w-11 items-center justify-center rounded-2xl border border-[#C6A66B]/40 bg-[#171419] text-sm font-semibold tracking-[0.3em] text-[#C6A66B]">
+        <div className="flex h-11 w-11 items-center justify-center rounded-2xl border border-[#7A8B55]/40 bg-[#2F2F2F] text-sm font-semibold tracking-[0.3em] text-[#7A8B55]">
           IM
         </div>
         <div>
-          <div className="font-['Playfair_Display'] text-2xl text-[#F7F1E8]">Imperial</div>
-          <div className="text-xs uppercase tracking-[0.32em] text-[#D9CFBF]/55">Admin Console</div>
+          <div className="font-['Playfair_Display'] text-2xl text-[#F6F3EE]">Imperial</div>
+          <div className="text-xs uppercase tracking-[0.32em] text-[#E8E1D8]/55">Admin Console</div>
         </div>
       </div>
 
       <div className="mb-6 rounded-2xl border border-white/10 bg-white/5 p-3">
-        <label className="mb-2 block text-[11px] uppercase tracking-[0.28em] text-[#D9CFBF]/45">Navigate</label>
+        <label className="mb-2 block text-[11px] uppercase tracking-[0.28em] text-[#E8E1D8]/45">Navigate</label>
         <div className="flex items-center gap-2 rounded-xl border border-white/10 bg-black/20 px-3 py-2">
-          <Search className="h-4 w-4 text-[#D9CFBF]/50" />
+          <Search className="h-4 w-4 text-[#E8E1D8]/50" />
           <input
             value={query}
             onChange={(event) => setQuery(event.target.value)}
             placeholder="Search section"
-            className="w-full bg-transparent text-sm text-[#F7F1E8] outline-none placeholder:text-[#D9CFBF]/35"
+            className="w-full bg-transparent text-sm text-[#F6F3EE] outline-none placeholder:text-[#E8E1D8]/35"
           />
         </div>
       </div>
@@ -116,8 +116,8 @@ export function AdminShell({
   );
 
   return (
-    <div className="min-h-screen bg-[#0A0D12] text-[#F7F1E8]">
-      <div className="pointer-events-none fixed inset-0 bg-[radial-gradient(circle_at_top_right,rgba(198,166,107,0.12),transparent_25%),radial-gradient(circle_at_bottom_left,rgba(82,103,138,0.12),transparent_30%)]" />
+    <div className="min-h-screen bg-[#2F2F2F] text-[#F6F3EE]">
+      <div className="pointer-events-none fixed inset-0 bg-[radial-gradient(circle_at_top_right,rgba(122,139,85,0.12),transparent_25%),radial-gradient(circle_at_bottom_left,rgba(182,139,99,0.12),transparent_30%)]" />
 
       <div className="relative flex min-h-screen">
         <aside className="hidden w-[280px] shrink-0 lg:block">{sidebar}</aside>
@@ -142,7 +142,7 @@ export function AdminShell({
                   <button
                     type="button"
                     onClick={() => setMobileOpen(false)}
-                    className="rounded-2xl border border-white/10 bg-white/5 p-2 text-[#F7F1E8]"
+                    className="rounded-2xl border border-white/10 bg-white/5 p-2 text-[#F6F3EE]"
                   >
                     <X className="h-5 w-5" />
                   </button>
@@ -154,24 +154,24 @@ export function AdminShell({
         </AnimatePresence>
 
         <div className="flex min-h-screen flex-1 flex-col">
-          <header className="sticky top-0 z-30 border-b border-white/10 bg-[#0A0D12]/85 px-4 py-4 backdrop-blur-xl sm:px-6 lg:px-8">
+          <header className="sticky top-0 z-30 border-b border-white/10 bg-[#2F2F2F]/85 px-4 py-4 backdrop-blur-xl sm:px-6 lg:px-8">
             <div className="flex flex-col gap-4">
               <div className="flex items-center gap-3">
                 <button
                   type="button"
                   onClick={() => setMobileOpen(true)}
-                  className="rounded-2xl border border-white/10 bg-white/5 p-3 text-[#F7F1E8] lg:hidden"
+                  className="rounded-2xl border border-white/10 bg-white/5 p-3 text-[#F6F3EE] lg:hidden"
                 >
                   <Menu className="h-5 w-5" />
                 </button>
 
                 <div className="flex flex-1 items-center gap-3 rounded-2xl border border-white/10 bg-white/5 px-4 py-3">
-                  <Search className="h-4 w-4 text-[#D9CFBF]/55" />
+                  <Search className="h-4 w-4 text-[#E8E1D8]/55" />
                   <input
                     value={searchValue}
                     onChange={(event) => onSearchChange(event.target.value)}
                     placeholder="Search products, orders, customers..."
-                    className="w-full bg-transparent text-sm text-[#F7F1E8] outline-none placeholder:text-[#D9CFBF]/35"
+                    className="w-full bg-transparent text-sm text-[#F6F3EE] outline-none placeholder:text-[#E8E1D8]/35"
                   />
                 </div>
               </div>
@@ -181,12 +181,12 @@ export function AdminShell({
                   <button
                     type="button"
                     onClick={() => setNotificationsOpen((prev) => !prev)}
-                    className="inline-flex items-center gap-2 rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-[#F7F1E8] transition-colors hover:border-[#C6A66B]/40 hover:text-[#C6A66B]"
+                    className="inline-flex items-center gap-2 rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-[#F6F3EE] transition-colors hover:border-[#7A8B55]/40 hover:text-[#7A8B55]"
                   >
                     <Bell className="h-4 w-4" />
                     <span className="hidden sm:inline">Notifications</span>
                     {notifications.length > 0 ? (
-                      <span className="rounded-full bg-[#C6A66B]/15 px-2 py-0.5 text-xs text-[#C6A66B]">
+                      <span className="rounded-full bg-[#7A8B55]/15 px-2 py-0.5 text-xs text-[#7A8B55]">
                         {notifications.length}
                       </span>
                     ) : null}
@@ -198,17 +198,17 @@ export function AdminShell({
                         initial={{ opacity: 0, y: 12 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: 12 }}
-                        className="absolute right-0 top-[calc(100%+12px)] z-40 w-[320px] rounded-[28px] border border-white/10 bg-[#11151d] p-4 shadow-[0_20px_60px_rgba(0,0,0,0.4)]"
+                        className="absolute right-0 top-[calc(100%+12px)] z-40 w-[320px] rounded-[28px] border border-white/10 bg-[#2F2F2F] p-4 shadow-[0_20px_60px_rgba(0,0,0,0.4)]"
                       >
                         <div className="mb-3 flex items-center justify-between">
                           <div>
-                            <p className="text-sm font-medium text-[#F7F1E8]">Activity</p>
-                            <p className="text-xs text-[#D9CFBF]/55">Operational alerts and updates</p>
+                            <p className="text-sm font-medium text-[#F6F3EE]">Activity</p>
+                            <p className="text-xs text-[#E8E1D8]/55">Operational alerts and updates</p>
                           </div>
                         </div>
                         <div className="space-y-3">
                           {notifications.length === 0 ? (
-                            <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-4 text-sm text-[#D9CFBF]/60">
+                            <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-4 text-sm text-[#E8E1D8]/60">
                               No pending notifications.
                             </div>
                           ) : (
@@ -217,10 +217,10 @@ export function AdminShell({
                                 key={item.id}
                                 type="button"
                                 onClick={() => onNotificationDismiss(item.id)}
-                                className="w-full rounded-2xl border border-white/10 bg-white/[0.03] p-4 text-left transition hover:border-[#C6A66B]/35"
+                                className="w-full rounded-2xl border border-white/10 bg-white/[0.03] p-4 text-left transition hover:border-[#7A8B55]/35"
                               >
-                                <p className="text-sm font-medium text-[#F7F1E8]">{item.title}</p>
-                                <p className="mt-1 text-xs leading-5 text-[#D9CFBF]/60">{item.description}</p>
+                                <p className="text-sm font-medium text-[#F6F3EE]">{item.title}</p>
+                                <p className="mt-1 text-xs leading-5 text-[#E8E1D8]/60">{item.description}</p>
                               </button>
                             ))
                           )}
@@ -233,19 +233,19 @@ export function AdminShell({
                 <button
                   type="button"
                   onClick={onQuickAdd}
-                  className="inline-flex items-center gap-2 rounded-2xl bg-[#C6A66B] px-4 py-3 text-sm font-semibold text-[#171419] transition-transform hover:scale-[1.01]"
+                  className="inline-flex items-center gap-2 rounded-2xl bg-[#7A8B55] px-4 py-3 text-sm font-semibold text-[#2F2F2F] transition-transform hover:scale-[1.01]"
                 >
                   <PackagePlus className="h-4 w-4" />
                   <span>+ Add Product</span>
                 </button>
 
                 <div className="flex items-center gap-3 rounded-2xl border border-white/10 bg-white/5 px-3 py-2.5">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-[#F7F1E8] text-sm font-semibold text-[#171419]">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-[#F6F3EE] text-sm font-semibold text-[#2F2F2F]">
                     AK
                   </div>
                   <div className="hidden sm:block">
-                    <p className="text-sm font-medium text-[#F7F1E8]">Admin</p>
-                    <p className="text-xs text-[#D9CFBF]/55">atelier@imperial.com</p>
+                    <p className="text-sm font-medium text-[#F6F3EE]">Admin</p>
+                    <p className="text-xs text-[#E8E1D8]/55">atelier@imperial.com</p>
                   </div>
                 </div>
               </div>

@@ -3,43 +3,42 @@
 :root {
   --font-size: 16px;
 
-  /* Imperial palette */
-  --deep-leather-brown: #3A2418;
-  --dark-espresso: #1B1411;
-  --warm-gold-light: #D6A25B;
-  --classic-cream: #E7D7C4;
-  --suit-black: #0E0E0E;
-  --cognac-brown: #7A4A2A;
-  --soft-smoke: #6E6A66;
+  /* Imperial brand palette */
+  --soft-olive: #7A8B55;
+  --light-olive: #A8B57A;
+  --warm-beige: #E8E1D8;
+  --light-leather-brown: #B68B63;
+  --cream: #F6F3EE;
+  --charcoal: #2F2F2F;
 
   /* Compatibility aliases */
-  --midnight-olive: var(--cognac-brown);
-  --espresso-brown: var(--dark-espresso);
-  --muted-bronze: var(--soft-smoke);
-  --deep-taupe: var(--classic-cream);
-  --antique-gold: var(--warm-gold-light);
-  --obsidian: var(--suit-black);
+  --midnight-olive: var(--soft-olive);
+  --espresso-brown: var(--charcoal);
+  --muted-bronze: var(--light-leather-brown);
+  --deep-taupe: var(--warm-beige);
+  --antique-gold: var(--light-olive);
+  --obsidian: var(--charcoal);
 
-  --background: var(--deep-leather-brown);
-  --foreground: var(--classic-cream);
-  --card: var(--cognac-brown);
-  --card-foreground: var(--classic-cream);
-  --popover: var(--dark-espresso);
-  --popover-foreground: var(--classic-cream);
-  --primary: var(--dark-espresso);
-  --primary-foreground: var(--classic-cream);
-  --secondary: var(--cognac-brown);
-  --secondary-foreground: var(--classic-cream);
-  --muted: var(--soft-smoke);
-  --muted-foreground: var(--classic-cream);
-  --accent: var(--warm-gold-light);
-  --accent-foreground: var(--suit-black);
-  --destructive: #9f2d20;
-  --destructive-foreground: var(--classic-cream);
-  --border: var(--muted-bronze);
+  --background: var(--cream);
+  --foreground: var(--charcoal);
+  --card: var(--warm-beige);
+  --card-foreground: var(--charcoal);
+  --popover: var(--cream);
+  --popover-foreground: var(--charcoal);
+  --primary: var(--soft-olive);
+  --primary-foreground: var(--cream);
+  --secondary: var(--light-leather-brown);
+  --secondary-foreground: var(--cream);
+  --muted: var(--warm-beige);
+  --muted-foreground: var(--charcoal);
+  --accent: var(--light-olive);
+  --accent-foreground: var(--charcoal);
+  --destructive: #8d5f53;
+  --destructive-foreground: var(--cream);
+  --border: color-mix(in srgb, var(--light-leather-brown) 55%, white);
   --input: transparent;
-  --input-background: var(--classic-cream);
-  --switch-background: var(--muted-bronze);
+  --input-background: var(--cream);
+  --switch-background: var(--light-leather-brown);
   --font-weight-medium: 500;
   --font-weight-normal: 400;
   --ring: var(--antique-gold);
@@ -60,24 +59,24 @@
 }
 
 .dark {
-  --background: var(--obsidian);
-  --foreground: var(--deep-taupe);
-  --card: var(--obsidian);
-  --card-foreground: var(--deep-taupe);
-  --popover: var(--obsidian);
-  --popover-foreground: var(--deep-taupe);
-  --primary: var(--antique-gold);
-  --primary-foreground: var(--obsidian);
-  --secondary: var(--espresso-brown);
-  --secondary-foreground: var(--classic-cream);
-  --muted: var(--espresso-brown);
-  --muted-foreground: var(--deep-taupe);
-  --accent: var(--midnight-olive);
-  --accent-foreground: var(--deep-taupe);
-  --destructive: #b4473a;
-  --destructive-foreground: var(--classic-cream);
-  --border: var(--muted-bronze);
-  --input: var(--espresso-brown);
+  --background: var(--charcoal);
+  --foreground: var(--cream);
+  --card: color-mix(in srgb, var(--charcoal) 92%, white);
+  --card-foreground: var(--cream);
+  --popover: color-mix(in srgb, var(--charcoal) 94%, black);
+  --popover-foreground: var(--cream);
+  --primary: var(--soft-olive);
+  --primary-foreground: var(--cream);
+  --secondary: var(--light-leather-brown);
+  --secondary-foreground: var(--cream);
+  --muted: color-mix(in srgb, var(--charcoal) 80%, white);
+  --muted-foreground: var(--warm-beige);
+  --accent: var(--light-olive);
+  --accent-foreground: var(--charcoal);
+  --destructive: #9a6d61;
+  --destructive-foreground: var(--cream);
+  --border: color-mix(in srgb, var(--light-leather-brown) 40%, var(--charcoal));
+  --input: color-mix(in srgb, var(--charcoal) 86%, white);
   --ring: var(--antique-gold);
   --font-weight-medium: 500;
   --font-weight-normal: 400;
@@ -88,11 +87,11 @@
   --chart-5: var(--antique-gold);
   --sidebar: var(--obsidian);
   --sidebar-foreground: var(--deep-taupe);
-  --sidebar-primary: var(--antique-gold);
-  --sidebar-primary-foreground: var(--obsidian);
-  --sidebar-accent: var(--espresso-brown);
-  --sidebar-accent-foreground: var(--deep-taupe);
-  --sidebar-border: var(--muted-bronze);
+  --sidebar-primary: var(--soft-olive);
+  --sidebar-primary-foreground: var(--cream);
+  --sidebar-accent: var(--light-leather-brown);
+  --sidebar-accent-foreground: var(--cream);
+  --sidebar-border: color-mix(in srgb, var(--light-leather-brown) 40%, var(--charcoal));
   --sidebar-ring: var(--antique-gold);
 }
 @theme inline {
@@ -196,6 +195,5 @@
     line-height: 1.5;
   }
 }
-
 
 
