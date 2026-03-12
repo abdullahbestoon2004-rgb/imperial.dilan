@@ -1,4 +1,4 @@
-﻿import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ChevronDown, Heart, Menu, Search, ShoppingCart, User, X } from 'lucide-react';
 
@@ -176,7 +176,7 @@ export function Navbar() {
             key={key}
             item={item}
             onClick={() => setMobileOpen(false)}
-            className={`block rounded-md px-2 py-2 font-['Inter'] text-[#171419] transition-colors hover:bg-[#1E2430]/10 hover:text-[#0B0A0D] ${depthPadding} ${
+            className={`block rounded-md px-2 py-2 font-['Inter'] text-[#E7D7C4] transition-colors hover:bg-[#7A4A2A]/35 hover:text-[#D6A25B] ${depthPadding} ${
               depth === 0 ? 'text-sm' : 'text-[13px]'
             }`}
           />
@@ -187,7 +187,7 @@ export function Navbar() {
         <div key={key} className="space-y-1">
           <button
             type="button"
-            className={`flex w-full items-center justify-between rounded-md px-2 py-2 text-left font-['Inter'] text-[#171419] transition-colors hover:bg-[#1E2430]/10 hover:text-[#0B0A0D] ${depthPadding} ${
+            className={`flex w-full items-center justify-between rounded-md px-2 py-2 text-left font-['Inter'] text-[#E7D7C4] transition-colors hover:bg-[#7A4A2A]/35 hover:text-[#D6A25B] ${depthPadding} ${
               depth === 0 ? 'text-sm' : 'text-[13px]'
             }`}
             onClick={() => toggleMobileSection(key)}
@@ -204,7 +204,7 @@ export function Navbar() {
               isExpanded ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'
             }`}
           >
-            <div className="overflow-hidden border-l border-[#6E5A44]/35">
+            <div className="overflow-hidden border-l border-[#6E6A66]/35">
               <div className="space-y-1 py-1">{renderMobileItems(item.children ?? [], depth + 1, key)}</div>
             </div>
           </div>
@@ -217,8 +217,8 @@ export function Navbar() {
     <nav
       className={`fixed left-0 right-0 top-0 z-50 transition-all duration-300 ${
         scrolled || mobileOpen
-          ? 'bg-[#171419]/78 shadow-[0_12px_35px_rgba(15,7,1,0.35)] backdrop-blur-md'
-          : 'bg-[#171419]/45 backdrop-blur-sm'
+          ? 'bg-[#1B1411]/78 shadow-[0_12px_35px_rgba(15,7,1,0.35)] backdrop-blur-md'
+          : 'bg-[#1B1411]/45 backdrop-blur-sm'
       }`}
     >
       <div className="mx-auto max-w-[1700px] px-4 md:px-6">
@@ -250,7 +250,7 @@ export function Navbar() {
                     <NavAnchor
                       key={item.label}
                       item={item}
-                      className="font-['Inter'] text-[11px] tracking-wide text-[#D9CFBF] transition-colors hover:text-[#C6A66B]"
+                      className="font-['Inter'] text-[11px] tracking-wide text-[#E7D7C4] transition-colors hover:text-[#D6A25B]"
                     />
                   );
                 }
@@ -264,7 +264,7 @@ export function Navbar() {
                   >
                     <button
                       type="button"
-                      className="flex items-center gap-1 font-['Inter'] text-[11px] tracking-wide text-[#D9CFBF] transition-colors hover:text-[#C6A66B]"
+                      className="flex items-center gap-1 font-['Inter'] text-[11px] tracking-wide text-[#E7D7C4] transition-colors hover:text-[#D6A25B]"
                       aria-expanded={isOpen}
                     >
                       <span>{item.label}</span>
@@ -276,7 +276,7 @@ export function Navbar() {
                     <div
                       onMouseEnter={clearCloseTimer}
                       onMouseLeave={scheduleDropdownClose}
-                      className={`absolute left-1/2 top-full z-50 mt-0 w-[min(88vw,900px)] -translate-x-1/2 rounded-2xl border border-[#6E5A44]/35 bg-[#D9CFBF] p-6 shadow-[0_20px_55px_rgba(15,7,1,0.35)] transition-all duration-300 ${
+                      className={`absolute left-1/2 top-full z-50 mt-0 w-[min(88vw,900px)] -translate-x-1/2 rounded-2xl border border-[#6E6A66]/35 bg-[#7A4A2A] p-6 shadow-[0_20px_55px_rgba(15,7,1,0.35)] transition-all duration-300 ${
                         isOpen ? 'pointer-events-auto translate-y-0 opacity-100' : 'pointer-events-none -translate-y-2 opacity-0'
                       }`}
                     >
@@ -285,16 +285,16 @@ export function Navbar() {
                           <div key={group.label} className="space-y-2">
                             <NavAnchor
                               item={group}
-                              className="block font-['Playfair_Display'] text-[18px] text-[#171419] transition-colors hover:text-[#C6A66B]"
+                              className="block font-['Playfair_Display'] text-[18px] text-[#E7D7C4] transition-colors hover:text-[#D6A25B]"
                             />
 
                             {group.children?.length ? (
-                              <div className="space-y-1 border-l border-[#6E5A44]/35 pl-3">
+                              <div className="space-y-1 border-l border-[#6E6A66]/35 pl-3">
                                 {group.children.map((child) => (
                                   <NavAnchor
                                     key={child.label}
                                     item={child}
-                                    className="block font-['Inter'] text-sm text-[#6E5A44] transition-colors hover:text-[#171419]"
+                                    className="block font-['Inter'] text-sm text-[#E7D7C4]/80 transition-colors hover:text-[#D6A25B]"
                                   />
                                 ))}
                               </div>
@@ -310,29 +310,29 @@ export function Navbar() {
           </div>
 
           <div className="hidden w-[180px] shrink-0 justify-end gap-4 lg:flex">
-            <button className="text-[#D9CFBF] transition-colors hover:text-[#C6A66B]" aria-label="Search">
+            <button className="text-[#E7D7C4] transition-colors hover:text-[#D6A25B]" aria-label="Search">
               <Search size={19} />
             </button>
-            <button className="text-[#D9CFBF] transition-colors hover:text-[#C6A66B]" aria-label="Account">
+            <button className="text-[#E7D7C4] transition-colors hover:text-[#D6A25B]" aria-label="Account">
               <User size={19} />
             </button>
-            <button className="text-[#D9CFBF] transition-colors hover:text-[#C6A66B]" aria-label="Wishlist">
+            <button className="text-[#E7D7C4] transition-colors hover:text-[#D6A25B]" aria-label="Wishlist">
               <Heart size={19} />
             </button>
-            <button className="text-[#D9CFBF] transition-colors hover:text-[#C6A66B]" aria-label="Cart">
+            <button className="text-[#E7D7C4] transition-colors hover:text-[#D6A25B]" aria-label="Cart">
               <ShoppingCart size={19} />
             </button>
           </div>
 
           <div className="ml-auto flex items-center gap-3 lg:hidden">
-            <button className="text-[#D9CFBF] transition-colors hover:text-[#C6A66B]" aria-label="Search">
+            <button className="text-[#E7D7C4] transition-colors hover:text-[#D6A25B]" aria-label="Search">
               <Search size={20} />
             </button>
-            <button className="text-[#D9CFBF] transition-colors hover:text-[#C6A66B]" aria-label="Cart">
+            <button className="text-[#E7D7C4] transition-colors hover:text-[#D6A25B]" aria-label="Cart">
               <ShoppingCart size={20} />
             </button>
             <button
-              className="text-[#D9CFBF] transition-colors hover:text-[#C6A66B]"
+              className="text-[#E7D7C4] transition-colors hover:text-[#D6A25B]"
               aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
               onClick={() => setMobileOpen((prev) => !prev)}
             >
@@ -347,7 +347,7 @@ export function Navbar() {
           mobileOpen ? 'max-h-[85vh] opacity-100' : 'max-h-0 opacity-0'
         }`}
       >
-        <div className="border-t border-[#6E5A44]/35 bg-[#D9CFBF]">
+        <div className="border-t border-[#6E6A66]/35 bg-[#7A4A2A]">
           <div className="mx-auto max-w-[1700px] space-y-2 px-4 py-4 md:px-6">{renderMobileItems(NAV_ITEMS)}</div>
         </div>
       </div>

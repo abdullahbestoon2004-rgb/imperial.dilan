@@ -1,35 +1,44 @@
-﻿@custom-variant dark (&:is(.dark *));
+@custom-variant dark (&:is(.dark *));
 
 :root {
   --font-size: 16px;
 
-  /* Elegant Dark Olive and Brown palette */
-  --midnight-olive: #1E2430;
-  --espresso-brown: #171419;
-  --muted-bronze: #6E5A44;
-  --deep-taupe: #D9CFBF;
-  --antique-gold: #C6A66B;
-  --obsidian: #0B0A0D;
+  /* Imperial palette */
+  --deep-leather-brown: #3A2418;
+  --dark-espresso: #1B1411;
+  --warm-gold-light: #D6A25B;
+  --classic-cream: #E7D7C4;
+  --suit-black: #0E0E0E;
+  --cognac-brown: #7A4A2A;
+  --soft-smoke: #6E6A66;
 
-  --background: var(--deep-taupe);
-  --foreground: var(--espresso-brown);
-  --card: var(--deep-taupe);
-  --card-foreground: var(--espresso-brown);
-  --popover: var(--deep-taupe);
-  --popover-foreground: var(--espresso-brown);
-  --primary: var(--espresso-brown);
-  --primary-foreground: var(--deep-taupe);
-  --secondary: var(--midnight-olive);
-  --secondary-foreground: var(--deep-taupe);
-  --muted: var(--muted-bronze);
-  --muted-foreground: var(--espresso-brown);
-  --accent: var(--antique-gold);
-  --accent-foreground: var(--obsidian);
+  /* Compatibility aliases */
+  --midnight-olive: var(--cognac-brown);
+  --espresso-brown: var(--dark-espresso);
+  --muted-bronze: var(--soft-smoke);
+  --deep-taupe: var(--classic-cream);
+  --antique-gold: var(--warm-gold-light);
+  --obsidian: var(--suit-black);
+
+  --background: var(--deep-leather-brown);
+  --foreground: var(--classic-cream);
+  --card: var(--cognac-brown);
+  --card-foreground: var(--classic-cream);
+  --popover: var(--dark-espresso);
+  --popover-foreground: var(--classic-cream);
+  --primary: var(--dark-espresso);
+  --primary-foreground: var(--classic-cream);
+  --secondary: var(--cognac-brown);
+  --secondary-foreground: var(--classic-cream);
+  --muted: var(--soft-smoke);
+  --muted-foreground: var(--classic-cream);
+  --accent: var(--warm-gold-light);
+  --accent-foreground: var(--suit-black);
   --destructive: #9f2d20;
-  --destructive-foreground: var(--deep-taupe);
+  --destructive-foreground: var(--classic-cream);
   --border: var(--muted-bronze);
   --input: transparent;
-  --input-background: var(--deep-taupe);
+  --input-background: var(--classic-cream);
   --switch-background: var(--muted-bronze);
   --font-weight-medium: 500;
   --font-weight-normal: 400;
@@ -60,13 +69,13 @@
   --primary: var(--antique-gold);
   --primary-foreground: var(--obsidian);
   --secondary: var(--espresso-brown);
-  --secondary-foreground: var(--deep-taupe);
+  --secondary-foreground: var(--classic-cream);
   --muted: var(--espresso-brown);
   --muted-foreground: var(--deep-taupe);
   --accent: var(--midnight-olive);
   --accent-foreground: var(--deep-taupe);
   --destructive: #b4473a;
-  --destructive-foreground: var(--deep-taupe);
+  --destructive-foreground: var(--classic-cream);
   --border: var(--muted-bronze);
   --input: var(--espresso-brown);
   --ring: var(--antique-gold);

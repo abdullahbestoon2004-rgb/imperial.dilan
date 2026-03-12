@@ -13,7 +13,7 @@ export function Hero({ heroImage }: HeroProps) {
         <ImageWithFallback
           src={heroImage}
           alt="Elegant man in suit"
-          className="w-full h-full object-cover"
+          className="w-full h-full object-cover object-left"
         />
         {/* Dark overlay for better text readability */}
         <div className="absolute inset-0 bg-black/40"></div>

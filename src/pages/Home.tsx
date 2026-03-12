@@ -71,7 +71,7 @@ export default function Home() {
 
   return (
     <>
-      <Hero heroImage="https://images.unsplash.com/photo-1761522002071-67755dc6c820?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxlbGVnYW50JTIwbWFuJTIwc3VpdCUyMGx1eHVyeSUyMGZhc2hpb258ZW58MXx8fHwxNzczMTQzMjQ0fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral" />
+      <Hero heroImage="/dilan.png" />
       <Categories categories={categories} />
       <FeaturedProducts products={featuredProducts} />
       <Lookbook images={lookbookImages} />
