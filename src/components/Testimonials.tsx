@@ -48,7 +48,7 @@ export function Testimonials() {
             >
               <div className="flex justify-center mb-4">
                 {[...Array(testimonial.rating)].map((_, i) => (
-                  <Star key={i} className="w-5 h-5 fill-[#7A8B55] text-[#7A8B55]" />
+                  <Star key={i} className="w-5 h-5 fill-[#2D332B] text-[#2D332B]" />
                 ))}
               </div>
               <p className="text-[#F6F3EE] font-['Inter'] mb-6 italic">

@@ -43,13 +43,13 @@ const NAV_ITEMS: NavItem[] = [
   },
   {
     label: 'Shoes',
-    href: '#',
+    href: '/shoes',
     children: [
-      { label: 'Formal Shoes', href: '#' },
-      { label: 'Sneakers', href: '#' },
-      { label: 'Loafers', href: '#' },
-      { label: 'Boots', href: '#' },
-      { label: 'Sandals', href: '#' },
+      { label: 'Formal Shoes', href: '/shoes' },
+      { label: 'Sneakers', href: '/shoes' },
+      { label: 'Loafers', href: '/shoes' },
+      { label: 'Boots', href: '/shoes' },
+      { label: 'Sandals', href: '/shoes' },
     ],
   },
   {
@@ -114,6 +114,7 @@ export function Navbar() {
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const [expandedMobile, setExpandedMobile] = useState<Record<string, boolean>>({});
   const closeTimerRef = useRef<ReturnType<typeof window.setTimeout> | null>(null);
+  const navRef = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -143,16 +144,43 @@ export function Navbar() {
     setActiveDropdown(label);
   };
 
+  const toggleDesktopDropdown = (label: string) => {
+    clearCloseTimer();
+    setActiveDropdown((prev) => (prev === label ? null : label));
+  };
+
   const scheduleDropdownClose = () => {
     clearCloseTimer();
     closeTimerRef.current = window.setTimeout(() => {
       setActiveDropdown(null);
-    }, 180);
+    }, 320);
   };
 
   useEffect(() => {
     return () => {
       clearCloseTimer();
+    };
+  }, []);
+
+  useEffect(() => {
+    const handleOutsideClick = (event: MouseEvent) => {
+      if (navRef.current && !navRef.current.contains(event.target as Node)) {
+        setActiveDropdown(null);
+      }
+    };
+
+    const handleEscape = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setActiveDropdown(null);
+      }
+    };
+
+    window.addEventListener('mousedown', handleOutsideClick);
+    window.addEventListener('keydown', handleEscape);
+
+    return () => {
+      window.removeEventListener('mousedown', handleOutsideClick);
+      window.removeEventListener('keydown', handleEscape);
     };
   }, []);
 
@@ -167,6 +195,7 @@ export function Navbar() {
     return items.map((item) => {
       const key = parent ? `${parent}>${item.label}` : item.label;
       const hasChildren = Boolean(item.children?.length);
+      const hasDirectLink = isInternalLink(item.href);
       const isExpanded = Boolean(expandedMobile[key]);
       const depthPadding = depth === 0 ? '' : depth === 1 ? 'pl-4' : 'pl-8';
 
@@ -176,7 +205,7 @@ export function Navbar() {
             key={key}
             item={item}
             onClick={() => setMobileOpen(false)}
-            className={`block rounded-md px-2 py-2 font-['Inter'] text-[#F6F3EE] transition-colors hover:bg-[#B68B63]/35 hover:text-[#7A8B55] ${depthPadding} ${
+            className={`block rounded-md px-2 py-2 font-['Inter'] text-[#E7D7C4] transition-colors hover:bg-[#3A2418]/35 hover:text-[#D6A25B] ${depthPadding} ${
               depth === 0 ? 'text-sm' : 'text-[13px]'
             }`}
           />
@@ -185,26 +214,49 @@ export function Navbar() {
 
       return (
         <div key={key} className="space-y-1">
-          <button
-            type="button"
-            className={`flex w-full items-center justify-between rounded-md px-2 py-2 text-left font-['Inter'] text-[#F6F3EE] transition-colors hover:bg-[#B68B63]/35 hover:text-[#7A8B55] ${depthPadding} ${
-              depth === 0 ? 'text-sm' : 'text-[13px]'
-            }`}
-            onClick={() => toggleMobileSection(key)}
-            aria-expanded={isExpanded}
-          >
-            <span>{item.label}</span>
-            <ChevronDown
-              className={`h-4 w-4 transition-transform duration-300 ${isExpanded ? 'rotate-180' : 'rotate-0'}`}
-            />
-          </button>
+          {hasDirectLink ? (
+            <div
+              className={`flex items-center justify-between rounded-md px-2 py-2 font-['Inter'] text-[#E7D7C4] transition-colors hover:bg-[#3A2418]/35 hover:text-[#D6A25B] ${depthPadding} ${
+                depth === 0 ? 'text-sm' : 'text-[13px]'
+              }`}
+            >
+              <NavAnchor item={item} onClick={() => setMobileOpen(false)} className="flex-1 text-left" />
+              <button
+                type="button"
+                className="ml-3"
+                onClick={() => toggleMobileSection(key)}
+                aria-expanded={isExpanded}
+                aria-label={`Toggle ${item.label} menu`}
+              >
+                <ChevronDown
+                  className={`h-4 w-4 transition-transform duration-300 ${
+                    isExpanded ? 'rotate-180' : 'rotate-0'
+                  }`}
+                />
+              </button>
+            </div>
+          ) : (
+            <button
+              type="button"
+              className={`flex w-full items-center justify-between rounded-md px-2 py-2 text-left font-['Inter'] text-[#E7D7C4] transition-colors hover:bg-[#3A2418]/35 hover:text-[#D6A25B] ${depthPadding} ${
+                depth === 0 ? 'text-sm' : 'text-[13px]'
+              }`}
+              onClick={() => toggleMobileSection(key)}
+              aria-expanded={isExpanded}
+            >
+              <span>{item.label}</span>
+              <ChevronDown
+                className={`h-4 w-4 transition-transform duration-300 ${isExpanded ? 'rotate-180' : 'rotate-0'}`}
+              />
+            </button>
+          )}
 
           <div
             className={`grid overflow-hidden transition-[grid-template-rows,opacity] duration-300 ease-out ${
               isExpanded ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'
             }`}
           >
-            <div className="overflow-hidden border-l border-[#B68B63]/35">
+            <div className="overflow-hidden border-l border-[#6E6A66]/35">
               <div className="space-y-1 py-1">{renderMobileItems(item.children ?? [], depth + 1, key)}</div>
             </div>
           </div>
@@ -215,10 +267,11 @@ export function Navbar() {
 
   return (
     <nav
+      ref={navRef}
       className={`fixed left-0 right-0 top-0 z-50 transition-all duration-300 ${
         scrolled || mobileOpen
-          ? 'bg-[#2F2F2F]/78 shadow-[0_12px_35px_rgba(15,7,1,0.35)] backdrop-blur-md'
-          : 'bg-[#2F2F2F]/45 backdrop-blur-sm'
+          ? 'bg-[#1B1411]/78 shadow-[0_12px_35px_rgba(15,7,1,0.35)] backdrop-blur-md'
+          : 'bg-[#1B1411]/45 backdrop-blur-sm'
       }`}
     >
       <div className="mx-auto max-w-[1700px] px-4 md:px-6">
@@ -229,14 +282,11 @@ export function Navbar() {
             </Link>
           </div>
 
-          <div
-            className="hidden flex-1 justify-center lg:flex"
-            onMouseEnter={clearCloseTimer}
-            onMouseLeave={scheduleDropdownClose}
-          >
+          <div className="hidden flex-1 justify-center lg:flex">
             <div className="flex items-center gap-5 xl:gap-6">
               {NAV_ITEMS.map((item) => {
                 const hasDropdown = Boolean(item.children?.length);
+                const hasDirectLink = isInternalLink(item.href);
                 const isOpen = activeDropdown === item.label;
                 const columnsClass =
                   (item.children?.length ?? 0) > 6
@@ -250,7 +300,7 @@ export function Navbar() {
                     <NavAnchor
                       key={item.label}
                       item={item}
-                      className="font-['Inter'] text-[11px] tracking-wide text-[#F6F3EE] transition-colors hover:text-[#7A8B55]"
+                      className="font-['Inter'] text-[11px] tracking-wide text-[#E7D7C4] transition-colors hover:text-[#D6A25B]"
                     />
                   );
                 }
@@ -260,47 +310,82 @@ export function Navbar() {
                     key={item.label}
                     className="relative"
                     onMouseEnter={() => openDropdown(item.label)}
-                    onFocus={() => openDropdown(item.label)}
+                    onMouseLeave={scheduleDropdownClose}
                   >
-                    <button
-                      type="button"
-                      className="flex items-center gap-1 font-['Inter'] text-[11px] tracking-wide text-[#F6F3EE] transition-colors hover:text-[#7A8B55]"
-                      aria-expanded={isOpen}
-                    >
-                      <span>{item.label}</span>
-                      <ChevronDown
-                        className={`h-3.5 w-3.5 transition-transform duration-300 ${isOpen ? 'rotate-180' : 'rotate-0'}`}
-                      />
-                    </button>
+                    {hasDirectLink ? (
+                      <div className="flex items-center gap-1" onFocusCapture={() => openDropdown(item.label)}>
+                        <NavAnchor
+                          item={item}
+                          className={`font-['Inter'] text-[11px] tracking-wide transition-colors ${
+                            isOpen ? 'text-[#D6A25B]' : 'text-[#E7D7C4] hover:text-[#D6A25B]'
+                          }`}
+                        />
+                        <button
+                          type="button"
+                          className={`flex items-center transition-colors ${
+                            isOpen ? 'text-[#D6A25B]' : 'text-[#E7D7C4] hover:text-[#D6A25B]'
+                          }`}
+                          onClick={() => toggleDesktopDropdown(item.label)}
+                          onFocus={() => openDropdown(item.label)}
+                          aria-haspopup="menu"
+                          aria-expanded={isOpen}
+                          aria-label={`Toggle ${item.label} menu`}
+                        >
+                          <ChevronDown
+                            className={`h-3.5 w-3.5 transition-transform duration-300 ${
+                              isOpen ? 'rotate-180' : 'rotate-0'
+                            }`}
+                          />
+                        </button>
+                      </div>
+                    ) : (
+                      <button
+                        type="button"
+                        className="flex items-center gap-1 font-['Inter'] text-[11px] tracking-wide text-[#E7D7C4] transition-colors hover:text-[#D6A25B]"
+                        onClick={() => toggleDesktopDropdown(item.label)}
+                        onFocus={() => openDropdown(item.label)}
+                        aria-haspopup="menu"
+                        aria-expanded={isOpen}
+                      >
+                        <span>{item.label}</span>
+                        <ChevronDown
+                          className={`h-3.5 w-3.5 transition-transform duration-300 ${
+                            isOpen ? 'rotate-180' : 'rotate-0'
+                          }`}
+                        />
+                      </button>
+                    )}
 
                     <div
-                      onMouseEnter={clearCloseTimer}
+                      onMouseEnter={() => openDropdown(item.label)}
                       onMouseLeave={scheduleDropdownClose}
-                      className={`absolute left-1/2 top-full z-50 mt-0 w-[min(88vw,900px)] -translate-x-1/2 rounded-2xl border border-[#B68B63]/35 bg-[#B68B63] p-6 shadow-[0_20px_55px_rgba(15,7,1,0.35)] transition-all duration-300 ${
-                        isOpen ? 'pointer-events-auto translate-y-0 opacity-100' : 'pointer-events-none -translate-y-2 opacity-0'
+                      className={`absolute left-1/2 top-full z-50 mt-0 w-[min(88vw,900px)] -translate-x-1/2 pt-2 transition-all duration-200 ${
+                        isOpen ? 'pointer-events-auto translate-y-0 opacity-100' : 'pointer-events-none -translate-y-1 opacity-0'
                       }`}
                     >
-                      <div className={`grid grid-cols-1 gap-x-10 gap-y-6 ${columnsClass}`}>
-                        {item.children?.map((group) => (
-                          <div key={group.label} className="space-y-2">
-                            <NavAnchor
-                              item={group}
-                              className="block font-['Playfair_Display'] text-[18px] text-[#F6F3EE] transition-colors hover:text-[#7A8B55]"
-                            />
+                      <div className="rounded-2xl border border-[#6E6A66]/35 bg-[#3A2418] p-6 shadow-[0_20px_55px_rgba(15,7,1,0.35)]">
+                        <div className={`grid grid-cols-1 gap-x-10 gap-y-6 ${columnsClass}`}>
+                          {item.children?.map((group) => (
+                            <div key={group.label} className="space-y-2">
+                              <NavAnchor
+                                item={group}
+                                className="block font-['Playfair_Display'] text-[18px] text-[#E7D7C4] transition-colors hover:text-[#D6A25B]"
+                              />
 
-                            {group.children?.length ? (
-                              <div className="space-y-1 border-l border-[#B68B63]/35 pl-3">
-                                {group.children.map((child) => (
-                                  <NavAnchor
-                                    key={child.label}
-                                    item={child}
-                                    className="block font-['Inter'] text-sm text-[#F6F3EE]/80 transition-colors hover:text-[#7A8B55]"
-                                  />
-                                ))}
-                              </div>
-                            ) : null}
-                          </div>
-                        ))}
+                              {group.children?.length ? (
+                                <div className="space-y-1 border-l border-[#6E6A66]/35 pl-3">
+                                  {group.children.map((child) => (
+                                    <NavAnchor
+                                      key={child.label}
+                                      item={child}
+                                      className="block font-['Inter'] text-sm text-[#E7D7C4]/80 transition-colors hover:text-[#D6A25B]"
+                                    />
+                                  ))}
+                                </div>
+                              ) : null}
+                            </div>
+                          ))}
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -310,29 +395,29 @@ export function Navbar() {
           </div>
 
           <div className="hidden w-[180px] shrink-0 justify-end gap-4 lg:flex">
-            <button className="text-[#F6F3EE] transition-colors hover:text-[#7A8B55]" aria-label="Search">
+            <button className="text-[#E7D7C4] transition-colors hover:text-[#D6A25B]" aria-label="Search">
               <Search size={19} />
             </button>
-            <button className="text-[#F6F3EE] transition-colors hover:text-[#7A8B55]" aria-label="Account">
+            <button className="text-[#E7D7C4] transition-colors hover:text-[#D6A25B]" aria-label="Account">
               <User size={19} />
             </button>
-            <button className="text-[#F6F3EE] transition-colors hover:text-[#7A8B55]" aria-label="Wishlist">
+            <button className="text-[#E7D7C4] transition-colors hover:text-[#D6A25B]" aria-label="Wishlist">
               <Heart size={19} />
             </button>
-            <button className="text-[#F6F3EE] transition-colors hover:text-[#7A8B55]" aria-label="Cart">
+            <button className="text-[#E7D7C4] transition-colors hover:text-[#D6A25B]" aria-label="Cart">
               <ShoppingCart size={19} />
             </button>
           </div>
 
           <div className="ml-auto flex items-center gap-3 lg:hidden">
-            <button className="text-[#F6F3EE] transition-colors hover:text-[#7A8B55]" aria-label="Search">
+            <button className="text-[#E7D7C4] transition-colors hover:text-[#D6A25B]" aria-label="Search">
               <Search size={20} />
             </button>
-            <button className="text-[#F6F3EE] transition-colors hover:text-[#7A8B55]" aria-label="Cart">
+            <button className="text-[#E7D7C4] transition-colors hover:text-[#D6A25B]" aria-label="Cart">
               <ShoppingCart size={20} />
             </button>
             <button
-              className="text-[#F6F3EE] transition-colors hover:text-[#7A8B55]"
+              className="text-[#E7D7C4] transition-colors hover:text-[#D6A25B]"
               aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
               onClick={() => setMobileOpen((prev) => !prev)}
             >
@@ -347,11 +432,10 @@ export function Navbar() {
           mobileOpen ? 'max-h-[85vh] opacity-100' : 'max-h-0 opacity-0'
         }`}
       >
-        <div className="border-t border-[#B68B63]/35 bg-[#B68B63]">
+        <div className="border-t border-[#6E6A66]/35 bg-[#3A2418]">
           <div className="mx-auto max-w-[1700px] space-y-2 px-4 py-4 md:px-6">{renderMobileItems(NAV_ITEMS)}</div>
         </div>
       </div>
     </nav>
   );
 }
-

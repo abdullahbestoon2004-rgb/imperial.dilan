@@ -51,7 +51,7 @@ function SidebarNav({
               {typeof item.badge === 'number' && item.badge > 0 ? (
                 <span
                   className={`rounded-full px-2 py-0.5 text-xs ${
-                    active ? 'bg-[#2F2F2F]/10 text-[#2F2F2F]' : 'bg-[#7A8B55]/15 text-[#7A8B55]'
+                    active ? 'bg-[#2F2F2F]/10 text-[#2F2F2F]' : 'bg-[#2D332B]/15 text-[#2D332B]'
                   }`}
                 >
                   {item.badge}
@@ -89,7 +89,7 @@ export function AdminShell({
   const sidebar = (
     <div className="h-full overflow-y-auto border-r border-white/10 bg-[radial-gradient(circle_at_top,_rgba(122,139,85,0.18),_transparent_35%),linear-gradient(180deg,#2F2F2F_0%,#2F2F2F_100%)] p-6">
       <div className="mb-8 flex items-center gap-3">
-        <div className="flex h-11 w-11 items-center justify-center rounded-2xl border border-[#7A8B55]/40 bg-[#2F2F2F] text-sm font-semibold tracking-[0.3em] text-[#7A8B55]">
+        <div className="flex h-11 w-11 items-center justify-center rounded-2xl border border-[#2D332B]/40 bg-[#2F2F2F] text-sm font-semibold tracking-[0.3em] text-[#2D332B]">
           IM
         </div>
         <div>
@@ -181,12 +181,12 @@ export function AdminShell({
                   <button
                     type="button"
                     onClick={() => setNotificationsOpen((prev) => !prev)}
-                    className="inline-flex items-center gap-2 rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-[#F6F3EE] transition-colors hover:border-[#7A8B55]/40 hover:text-[#7A8B55]"
+                    className="inline-flex items-center gap-2 rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-[#F6F3EE] transition-colors hover:border-[#2D332B]/40 hover:text-[#2D332B]"
                   >
                     <Bell className="h-4 w-4" />
                     <span className="hidden sm:inline">Notifications</span>
                     {notifications.length > 0 ? (
-                      <span className="rounded-full bg-[#7A8B55]/15 px-2 py-0.5 text-xs text-[#7A8B55]">
+                      <span className="rounded-full bg-[#2D332B]/15 px-2 py-0.5 text-xs text-[#2D332B]">
                         {notifications.length}
                       </span>
                     ) : null}
@@ -217,7 +217,7 @@ export function AdminShell({
                                 key={item.id}
                                 type="button"
                                 onClick={() => onNotificationDismiss(item.id)}
-                                className="w-full rounded-2xl border border-white/10 bg-white/[0.03] p-4 text-left transition hover:border-[#7A8B55]/35"
+                                className="w-full rounded-2xl border border-white/10 bg-white/[0.03] p-4 text-left transition hover:border-[#2D332B]/35"
                               >
                                 <p className="text-sm font-medium text-[#F6F3EE]">{item.title}</p>
                                 <p className="mt-1 text-xs leading-5 text-[#E8E1D8]/60">{item.description}</p>
@@ -233,7 +233,7 @@ export function AdminShell({
                 <button
                   type="button"
                   onClick={onQuickAdd}
-                  className="inline-flex items-center gap-2 rounded-2xl bg-[#7A8B55] px-4 py-3 text-sm font-semibold text-[#2F2F2F] transition-transform hover:scale-[1.01]"
+                  className="inline-flex items-center gap-2 rounded-2xl bg-[#2D332B] px-4 py-3 text-sm font-semibold text-[#2F2F2F] transition-transform hover:scale-[1.01]"
                 >
                   <PackagePlus className="h-4 w-4" />
                   <span>+ Add Product</span>

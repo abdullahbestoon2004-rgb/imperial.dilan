@@ -67,7 +67,7 @@ export function ProductCard({ product, index }: ProductCardProps) {
         />
 
         <div
-          className={`absolute bottom-0 left-0 right-0 bg-[#7A8B55]/95 backdrop-blur-sm transition-all duration-300 ${
+          className={`absolute bottom-0 left-0 right-0 bg-[#2D332B]/95 backdrop-blur-sm transition-all duration-300 ${
             isHovered ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0'
           }`}
         >
@@ -81,7 +81,7 @@ export function ProductCard({ product, index }: ProductCardProps) {
                 />
               ))}
             </div>
-            <button className="rounded-full border border-[#F6F3EE] px-4 py-1.5 text-[10px] font-['Inter'] tracking-[0.2em] text-[#F6F3EE] transition-colors hover:bg-[#F6F3EE] hover:text-[#7A8B55]">
+            <button className="rounded-full border border-[#F6F3EE] px-4 py-1.5 text-[10px] font-['Inter'] tracking-[0.2em] text-[#F6F3EE] transition-colors hover:bg-[#F6F3EE] hover:text-[#2D332B]">
               ADD TO CART
             </button>
           </div>
@@ -91,19 +91,19 @@ export function ProductCard({ product, index }: ProductCardProps) {
       <div className="flex items-start justify-between gap-3 mb-3">
         <div>
           <h3 className="text-xl font-['Playfair_Display'] text-[#2F2F2F] leading-tight">{product.name}</h3>
-          <p className="text-sm text-[#7A8B55] font-['Inter'] mt-1">{product.brand ?? 'Polo Ralph Lauren'}</p>
+          <p className="text-sm text-[#2D332B] font-['Inter'] mt-1">{product.brand ?? 'Polo Ralph Lauren'}</p>
         </div>
         <button
           type="button"
           aria-label={`Add ${product.name} to favorites`}
-          className="mt-1 shrink-0 text-[#7A8B55] transition-colors hover:text-[#2F2F2F]"
+          className="mt-1 shrink-0 text-[#2D332B] transition-colors hover:text-[#2F2F2F]"
         >
           <Heart className="h-5 w-5" />
         </button>
       </div>
 
       <p className="text-xl font-['Playfair_Display'] text-[#2F2F2F]">${product.price.toFixed(2)}</p>
-      <p className="text-sm text-[#7A8B55] font-['Inter'] mt-2">{swatches.length} colors available</p>
+      <p className="text-sm text-[#2D332B] font-['Inter'] mt-2">{swatches.length} colors available</p>
     </motion.div>
   );
 }

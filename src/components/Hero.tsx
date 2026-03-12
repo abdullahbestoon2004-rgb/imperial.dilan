@@ -54,7 +54,7 @@ export function Hero({ heroImage }: HeroProps) {
             transition={{ duration: 0.8, delay: 0.4 }}
             className="flex flex-col sm:flex-row gap-4 justify-center"
           >
-            <button className="px-8 py-4 bg-[#7A8B55] text-[#2F2F2F] font-['Inter'] font-medium hover:bg-[#F6F3EE] hover:text-[#2F2F2F] transition-all duration-300">
+            <button className="px-8 py-4 bg-[#2D332B] text-[#F6F3EE] font-['Inter'] font-medium hover:bg-[#F6F3EE] hover:text-[#2F2F2F] transition-all duration-300">
               Shop Suits
             </button>
             <button className="px-8 py-4 border-2 border-[#F6F3EE] text-[#F6F3EE] font-['Inter'] font-medium hover:bg-[#F6F3EE] hover:text-[#2F2F2F] transition-all duration-300">

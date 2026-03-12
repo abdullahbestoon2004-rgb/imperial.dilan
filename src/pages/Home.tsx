@@ -11,7 +11,8 @@ export default function Home() {
   const categories = [
     {
       name: 'Suits',
-      image: 'https://dtcralphlauren.scene7.com/is/image/PoloGSI/s7-1199698_alternate10?$rl_4x5_pdp$'
+      image: 'https://dtcralphlauren.scene7.com/is/image/PoloGSI/s7-1199698_alternate10?$rl_4x5_pdp$',
+      href: '/suits'
     },
     {
       name: 'Jackets',
@@ -23,7 +24,8 @@ export default function Home() {
     },
     {
       name: 'Shoes',
-      image: 'https://dtcralphlauren.scene7.com/is/image/PoloGSI/s7-1183688_lifestyle?$rl_1x1_pdp$'
+      image: 'https://dtcralphlauren.scene7.com/is/image/PoloGSI/s7-1183688_lifestyle?$rl_1x1_pdp$',
+      href: '/shoes'
     }
   ];
 
@@ -35,14 +37,14 @@ export default function Home() {
       price: 420,
       image: 'https://dtcralphlauren.scene7.com/is/image/PoloGSI/s7-1199699_alternate10?$rl_4x5_pdp$',
       imageHover: 'https://dtcralphlauren.scene7.com/is/image/PoloGSI/s7-1199699_lifestyle?$rl_4x5_zoom$'
- },
+    },
     {
       id: 2,
       name: 'Navy Blue Suit',
       price: 450,
-     image: 'https://dtcralphlauren.scene7.com/is/image/PoloGSI/s7-AI715A12700001_alternate10?$rl_4x5_pdp$',
+      image: 'https://dtcralphlauren.scene7.com/is/image/PoloGSI/s7-AI715A12700001_alternate10?$rl_4x5_pdp$',
       imageHover: 'https://dtcralphlauren.scene7.com/is/image/PoloGSI/s7-AI715A12700001_lifestyle?$rl_4x5_zoom$'
-     },
+    },
     {
       id: 3,
       name: 'Beige Linen Suit',
@@ -50,7 +52,6 @@ export default function Home() {
       image: 'https://dtcralphlauren.scene7.com/is/image/PoloGSI/s7-AI798971254003_alternate10?$rl_4x5_pdp$',
       imageHover: 'https://dtcralphlauren.scene7.com/is/image/PoloGSI/s7-AI798971254003_lifestyle?$rl_4x5_zoom$'
     },
-   
   ];
 
   // Lookbook images

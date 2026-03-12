@@ -50,13 +50,13 @@ export function WhyChooseUs() {
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 className="text-center"
               >
-                <div className="inline-flex items-center justify-center w-16 h-16 mb-4 border-2 border-[#7A8B55] rounded-full">
-                  <Icon className="w-8 h-8 text-[#7A8B55]" />
+                <div className="inline-flex items-center justify-center w-16 h-16 mb-4 border-2 border-[#2D332B] rounded-full">
+                  <Icon className="w-8 h-8 text-[#2D332B]" />
                 </div>
                 <h3 className="text-xl font-['Playfair_Display'] text-[#2F2F2F] mb-2">
                   {feature.title}
                 </h3>
-                <p className="text-[#7A8B55] font-['Inter']">
+                <p className="text-[#2D332B] font-['Inter']">
                   {feature.description}
                 </p>
               </motion.div>

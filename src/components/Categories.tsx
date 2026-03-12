@@ -1,13 +1,44 @@
+import type { ReactNode } from 'react';
 import { motion } from 'motion/react';
+import { Link } from 'react-router-dom';
 import { ImageWithFallback } from './figma/ImageWithFallback';
 
 interface Category {
   name: string;
   image: string;
+  href?: string;
 }
 
 interface CategoriesProps {
   categories: Category[];
+}
+
+function CategoryWrapper({
+  href,
+  className,
+  children,
+}: {
+  href?: string;
+  className: string;
+  children: ReactNode;
+}) {
+  if (!href) {
+    return <div className={className}>{children}</div>;
+  }
+
+  if (href.startsWith('/')) {
+    return (
+      <Link to={href} className={className}>
+        {children}
+      </Link>
+    );
+  }
+
+  return (
+    <a href={href} className={className}>
+      {children}
+    </a>
+  );
 }
 
 export function Categories({ categories }: CategoriesProps) {
@@ -23,7 +54,7 @@ export function Categories({ categories }: CategoriesProps) {
         >
           Shop by Category
         </motion.h2>
-        
+
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {categories.map((category, index) => (
             <motion.div
@@ -32,21 +63,23 @@ export function Categories({ categories }: CategoriesProps) {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
-              className="group relative overflow-hidden cursor-pointer"
             >
-              <div className="aspect-[3/4] relative overflow-hidden">
-                <ImageWithFallback
-                  src={category.image}
-                  alt={category.name}
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                />
-                <div className="absolute inset-0 bg-[#2F2F2F]/20 group-hover:bg-[#2F2F2F]/40 transition-all duration-300"></div>
-              </div>
-              <div className="absolute inset-0 flex items-end justify-center pb-8">
-                <h3 className="text-3xl font-['Playfair_Display'] text-[#F6F3EE]">
-                  {category.name}
-                </h3>
-              </div>
+              <CategoryWrapper
+                href={category.href}
+                className="group relative block overflow-hidden cursor-pointer"
+              >
+                <div className="aspect-[3/4] relative overflow-hidden">
+                  <ImageWithFallback
+                    src={category.image}
+                    alt={category.name}
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  />
+                  <div className="absolute inset-0 bg-[#2F2F2F]/20 group-hover:bg-[#2F2F2F]/40 transition-all duration-300"></div>
+                </div>
+                <div className="absolute inset-0 flex items-end justify-center pb-8">
+                  <h3 className="text-3xl font-['Playfair_Display'] text-[#F6F3EE]">{category.name}</h3>
+                </div>
+              </CategoryWrapper>
             </motion.div>
           ))}
         </div>
@@ -54,4 +87,3 @@ export function Categories({ categories }: CategoriesProps) {
     </section>
   );
 }
-

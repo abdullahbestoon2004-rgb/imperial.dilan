@@ -24,7 +24,7 @@ export function SectionHeader({
   return (
     <div className="mb-6 flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
       <div>
-        <p className="mb-2 text-[11px] uppercase tracking-[0.3em] text-[#7A8B55]">{eyebrow}</p>
+        <p className="mb-2 text-[11px] uppercase tracking-[0.3em] text-[#2D332B]">{eyebrow}</p>
         <h1 className="font-['Playfair_Display'] text-3xl text-[#F6F3EE] sm:text-4xl">{title}</h1>
         <p className="mt-2 max-w-3xl text-sm leading-6 text-[#E8E1D8]/70">{description}</p>
       </div>
@@ -49,7 +49,7 @@ export function StatCard({
       <p className="text-sm text-[#E8E1D8]/60">{label}</p>
       <div className="mt-4 flex items-end justify-between gap-3">
         <div className="text-3xl font-semibold text-[#F6F3EE]">{value}</div>
-        <span className="rounded-full bg-[#7A8B55]/10 px-3 py-1 text-xs font-medium text-[#7A8B55]">{delta}</span>
+        <span className="rounded-full bg-[#2D332B]/10 px-3 py-1 text-xs font-medium text-[#2D332B]">{delta}</span>
       </div>
       {hint ? <p className="mt-4 text-sm text-[#E8E1D8]/55">{hint}</p> : null}
     </Panel>
@@ -65,8 +65,8 @@ export function Badge({
 }) {
   const tones = {
     default: 'bg-white/8 text-[#E8E1D8]',
-    gold: 'bg-[#7A8B55]/15 text-[#A8B57A]',
-    green: 'bg-[#7A8B55]/45 text-[#F6F3EE]',
+    gold: 'bg-[#2D332B]/15 text-[#A8B57A]',
+    green: 'bg-[#2D332B]/45 text-[#F6F3EE]',
     red: 'bg-[#B68B63]/50 text-[#F6F3EE]',
     blue: 'bg-[#B68B63]/55 text-[#F6F3EE]',
   } as const;
@@ -130,7 +130,7 @@ export function TextInput(props: React.InputHTMLAttributes<HTMLInputElement>) {
   return (
     <input
       {...props}
-      className={`w-full rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-3 text-sm text-[#F6F3EE] outline-none transition focus:border-[#7A8B55]/50 ${props.className ?? ''}`}
+      className={`w-full rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-3 text-sm text-[#F6F3EE] outline-none transition focus:border-[#2D332B]/50 ${props.className ?? ''}`}
     />
   );
 }
@@ -139,7 +139,7 @@ export function TextArea(props: React.TextareaHTMLAttributes<HTMLTextAreaElement
   return (
     <textarea
       {...props}
-      className={`min-h-[120px] w-full rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-3 text-sm text-[#F6F3EE] outline-none transition focus:border-[#7A8B55]/50 ${props.className ?? ''}`}
+      className={`min-h-[120px] w-full rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-3 text-sm text-[#F6F3EE] outline-none transition focus:border-[#2D332B]/50 ${props.className ?? ''}`}
     />
   );
 }
@@ -148,7 +148,7 @@ export function Select(props: React.SelectHTMLAttributes<HTMLSelectElement>) {
   return (
     <select
       {...props}
-      className={`w-full rounded-2xl border border-white/10 bg-[#2F2F2F] px-4 py-3 text-sm text-[#F6F3EE] outline-none transition focus:border-[#7A8B55]/50 ${props.className ?? ''}`}
+      className={`w-full rounded-2xl border border-white/10 bg-[#2F2F2F] px-4 py-3 text-sm text-[#F6F3EE] outline-none transition focus:border-[#2D332B]/50 ${props.className ?? ''}`}
     />
   );
 }
@@ -160,8 +160,8 @@ export function Button({
   ...props
 }: React.ButtonHTMLAttributes<HTMLButtonElement> & { variant?: 'primary' | 'ghost' | 'danger' }) {
   const variants = {
-    primary: 'bg-[#7A8B55] text-[#2F2F2F] hover:brightness-105',
-    ghost: 'border border-white/10 bg-white/[0.03] text-[#F6F3EE] hover:border-[#7A8B55]/40 hover:text-[#7A8B55]',
+    primary: 'bg-[#2D332B] text-[#F6F3EE] hover:brightness-105',
+    ghost: 'border border-white/10 bg-white/[0.03] text-[#F6F3EE] hover:border-[#2D332B]/40 hover:text-[#2D332B]',
     danger: 'border border-[#B68B63]/40 bg-[#B68B63]/10 text-[#F6F3EE] hover:bg-[#B68B63]/20',
   } as const;
 

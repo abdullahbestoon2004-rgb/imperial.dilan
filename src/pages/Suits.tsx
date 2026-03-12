@@ -9,6 +9,9 @@ export default function Suits() {
   const [selectedColor, setSelectedColor] = useState('all');
   const [selectedPrice, setSelectedPrice] = useState('all');
 
+  const selectClassName = "appearance-none bg-[#7A4A2A] border border-[#6E6A66] px-6 py-3 pr-10 font-['Inter'] text-[#E7D7C4] cursor-pointer hover:border-[#D6A25B] transition-colors focus:outline-none focus:border-[#D6A25B]";
+  const selectOptionStyle = { backgroundColor: '#1B1411', color: '#E7D7C4' };
+
   const allSuits = [
     {
       id: 1,
@@ -170,18 +173,18 @@ export default function Suits() {
                 <select
                   value={selectedColor}
                   onChange={(e) => setSelectedColor(e.target.value)}
-                  className="appearance-none bg-[#F6F3EE] border border-[#B68B63] px-6 py-3 pr-10 font-['Inter'] text-[#2F2F2F] cursor-pointer hover:border-[#7A8B55] transition-colors focus:outline-none focus:border-[#7A8B55]"
+                  className={selectClassName}
                 >
-                  <option value="all">All Colors</option>
-                  <option value="black">Black</option>
-                  <option value="blue">Blue</option>
-                  <option value="gray">Gray</option>
-                  <option value="beige">Beige</option>
-                  <option value="brown">Brown</option>
-                  <option value="green">Green</option>
-                  <option value="red">Red</option>
+                  <option style={selectOptionStyle} value="all">All Colors</option>
+                  <option style={selectOptionStyle} value="black">Black</option>
+                  <option style={selectOptionStyle} value="blue">Blue</option>
+                  <option style={selectOptionStyle} value="gray">Gray</option>
+                  <option style={selectOptionStyle} value="beige">Beige</option>
+                  <option style={selectOptionStyle} value="brown">Brown</option>
+                  <option style={selectOptionStyle} value="green">Green</option>
+                  <option style={selectOptionStyle} value="red">Red</option>
                 </select>
-                <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-[#B68B63] pointer-events-none" />
+                <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-[#D6A25B] pointer-events-none" />
               </div>
 
               {/* Price Filter */}
@@ -189,38 +192,38 @@ export default function Suits() {
                 <select
                   value={selectedPrice}
                   onChange={(e) => setSelectedPrice(e.target.value)}
-                  className="appearance-none bg-[#F6F3EE] border border-[#B68B63] px-6 py-3 pr-10 font-['Inter'] text-[#2F2F2F] cursor-pointer hover:border-[#7A8B55] transition-colors focus:outline-none focus:border-[#7A8B55]"
+                  className={selectClassName}
                 >
-                  <option value="all">All Prices</option>
-                  <option value="under400">Under $400</option>
-                  <option value="400to500">$400 - $500</option>
-                  <option value="over500">Over $500</option>
+                  <option style={selectOptionStyle} value="all">All Prices</option>
+                  <option style={selectOptionStyle} value="under400">Under $400</option>
+                  <option style={selectOptionStyle} value="400to500">$400 - $500</option>
+                  <option style={selectOptionStyle} value="over500">Over $500</option>
                 </select>
-                <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-[#B68B63] pointer-events-none" />
+                <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-[#D6A25B] pointer-events-none" />
               </div>
             </div>
 
             {/* Sort */}
             <div className="flex items-center gap-3">
-              <span className="text-[#7A8B55] font-['Inter'] text-sm">Sort by:</span>
+              <span className="text-[#6E6A66] font-['Inter'] text-sm">Sort by:</span>
               <div className="relative">
                 <select
                   value={sortBy}
                   onChange={(e) => setSortBy(e.target.value)}
-                  className="appearance-none bg-[#F6F3EE] border border-[#B68B63] px-6 py-3 pr-10 font-['Inter'] text-[#2F2F2F] cursor-pointer hover:border-[#7A8B55] transition-colors focus:outline-none focus:border-[#7A8B55]"
+                  className={selectClassName}
                 >
-                  <option value="featured">Featured</option>
-                  <option value="priceLow">Price: Low to High</option>
-                  <option value="priceHigh">Price: High to Low</option>
-                  <option value="name">Name</option>
+                  <option style={selectOptionStyle} value="featured">Featured</option>
+                  <option style={selectOptionStyle} value="priceLow">Price: Low to High</option>
+                  <option style={selectOptionStyle} value="priceHigh">Price: High to Low</option>
+                  <option style={selectOptionStyle} value="name">Name</option>
                 </select>
-                <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-[#B68B63] pointer-events-none" />
+                <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-[#D6A25B] pointer-events-none" />
               </div>
             </div>
           </div>
 
           {/* Results Count */}
-          <p className="text-[#7A8B55] font-['Inter'] mb-8">
+          <p className="text-[#6E6A66] font-['Inter'] mb-8">
             {sortedSuits.length} {sortedSuits.length === 1 ? 'suit' : 'suits'} found
           </p>
 

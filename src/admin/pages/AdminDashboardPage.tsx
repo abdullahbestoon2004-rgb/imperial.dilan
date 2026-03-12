@@ -154,12 +154,12 @@ function MiniAreaChart({ points }: { points: { label: string; revenue: number }[
         <svg viewBox="0 0 100 100" preserveAspectRatio="none" className="h-full w-full">
           <defs>
             <linearGradient id="revenueGradient" x1="0" x2="0" y1="0" y2="1">
-              <stop offset="0%" stopColor="#7A8B55" stopOpacity="0.45" />
-              <stop offset="100%" stopColor="#7A8B55" stopOpacity="0" />
+              <stop offset="0%" stopColor="#2D332B" stopOpacity="0.45" />
+              <stop offset="100%" stopColor="#2D332B" stopOpacity="0" />
             </linearGradient>
           </defs>
           <path d={`${path} L 100 100 L 0 100 Z`} fill="url(#revenueGradient)" />
-          <path d={path} fill="none" stroke="#7A8B55" strokeWidth="2.4" vectorEffect="non-scaling-stroke" />
+          <path d={path} fill="none" stroke="#2D332B" strokeWidth="2.4" vectorEffect="non-scaling-stroke" />
         </svg>
         <div className="pointer-events-none absolute inset-x-0 bottom-0 flex justify-between text-xs text-[#E8E1D8]/45">
           {points.map((point) => (
@@ -188,7 +188,7 @@ function BarsChart({ points }: { points: { label: string; orders: number }[] }) 
           <div key={point.label} className="flex flex-1 flex-col items-center gap-3">
             <div className="flex h-full w-full items-end">
               <div
-                className="w-full rounded-t-[18px] bg-[linear-gradient(180deg,#7A8B55_0%,#B68B63_100%)]"
+                className="w-full rounded-t-[18px] bg-[linear-gradient(180deg,#2D332B_0%,#B68B63_100%)]"
                 style={{ height: `${(point.orders / max) * 100}%` }}
               />
             </div>
@@ -385,7 +385,7 @@ function ProductForm({
                     onClick={() => toggleArrayValue('sizes', size)}
                     className={`rounded-full px-3 py-2 text-sm transition ${
                       form.sizes.includes(size)
-                        ? 'bg-[#7A8B55] text-[#2F2F2F]'
+                        ? 'bg-[#2D332B] text-[#F6F3EE]'
                         : 'border border-white/10 bg-white/[0.03] text-[#E8E1D8]'
                     }`}
                   >
@@ -517,7 +517,7 @@ function ProductForm({
                 onClick={() => setForm((prev) => ({ ...prev, [toggle.key]: !prev[toggle.key as keyof typeof prev] }))}
                 className={`rounded-2xl border px-4 py-4 text-left transition ${
                   form[toggle.key as keyof typeof form]
-                    ? 'border-[#7A8B55]/45 bg-[#7A8B55]/10 text-[#F6F3EE]'
+                    ? 'border-[#2D332B]/45 bg-[#2D332B]/10 text-[#F6F3EE]'
                     : 'border-white/10 bg-white/[0.03] text-[#E8E1D8]/70'
                 }`}
               >
@@ -639,7 +639,7 @@ function CollectionForm({
                 type="button"
                 onClick={() => toggleProduct(product.id)}
                 className={`rounded-2xl border px-4 py-3 text-left transition ${
-                  active ? 'border-[#7A8B55]/50 bg-[#7A8B55]/10' : 'border-white/10 bg-white/[0.03]'
+                  active ? 'border-[#2D332B]/50 bg-[#2D332B]/10' : 'border-white/10 bg-white/[0.03]'
                 }`}
               >
                 <div className="text-sm font-medium text-[#F6F3EE]">{product.name}</div>
@@ -653,7 +653,7 @@ function CollectionForm({
         type="button"
         onClick={() => setForm((prev) => ({ ...prev, featured: !prev.featured }))}
         className={`rounded-2xl border px-4 py-3 text-sm transition ${
-          form.featured ? 'border-[#7A8B55]/45 bg-[#7A8B55]/10 text-[#F6F3EE]' : 'border-white/10 text-[#E8E1D8]'
+          form.featured ? 'border-[#2D332B]/45 bg-[#2D332B]/10 text-[#F6F3EE]' : 'border-white/10 text-[#E8E1D8]'
         }`}
       >
         {form.featured ? 'Featured Collection' : 'Mark as Featured'}
@@ -708,7 +708,7 @@ function DiscountForm({
         type="button"
         onClick={() => setForm((prev) => ({ ...prev, active: !prev.active }))}
         className={`rounded-2xl border px-4 py-3 text-sm transition ${
-          form.active ? 'border-[#7A8B55]/45 bg-[#7A8B55]/10 text-[#F6F3EE]' : 'border-white/10 text-[#E8E1D8]'
+          form.active ? 'border-[#2D332B]/45 bg-[#2D332B]/10 text-[#F6F3EE]' : 'border-white/10 text-[#E8E1D8]'
         }`}
       >
         {form.active ? 'Active' : 'Inactive'}
@@ -940,7 +940,7 @@ export default function AdminDashboardPage() {
                   <span className="text-[#E8E1D8]/60">{source.value}%</span>
                 </div>
                 <div className="h-2 rounded-full bg-white/6">
-                  <div className="h-2 rounded-full bg-[linear-gradient(90deg,#7A8B55,#A8B57A)]" style={{ width: `${source.value}%` }} />
+                  <div className="h-2 rounded-full bg-[linear-gradient(90deg,#2D332B,#A8B57A)]" style={{ width: `${source.value}%` }} />
                 </div>
               </div>
             ))}
@@ -987,7 +987,7 @@ export default function AdminDashboardPage() {
                 key={message.id}
                 type="button"
                 onClick={() => setSelectedMessage(message)}
-                className="w-full rounded-2xl border border-white/10 bg-white/[0.03] p-4 text-left transition hover:border-[#7A8B55]/35"
+                className="w-full rounded-2xl border border-white/10 bg-white/[0.03] p-4 text-left transition hover:border-[#2D332B]/35"
               >
                 <div className="flex items-start justify-between gap-3">
                   <div>
@@ -1016,7 +1016,7 @@ export default function AdminDashboardPage() {
                 key={order.id}
                 type="button"
                 onClick={() => setSelectedOrder(order)}
-                className="flex w-full items-center justify-between rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-4 text-left transition hover:border-[#7A8B55]/35"
+                className="flex w-full items-center justify-between rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-4 text-left transition hover:border-[#2D332B]/35"
               >
                 <div>
                   <p className="text-sm font-medium text-[#F6F3EE]">{order.id}</p>
@@ -1050,9 +1050,9 @@ export default function AdminDashboardPage() {
                   setActiveSection(item.section);
                   item.action?.();
                 }}
-                className="rounded-[24px] border border-white/10 bg-white/[0.03] p-5 text-left transition hover:border-[#7A8B55]/35"
+                className="rounded-[24px] border border-white/10 bg-white/[0.03] p-5 text-left transition hover:border-[#2D332B]/35"
               >
-                <item.icon className="h-5 w-5 text-[#7A8B55]" />
+                <item.icon className="h-5 w-5 text-[#2D332B]" />
                 <p className="mt-4 text-base font-medium text-[#F6F3EE]">{item.label}</p>
                 <p className="mt-1 text-sm text-[#E8E1D8]/55">Open section and continue editing.</p>
               </button>
@@ -1466,7 +1466,7 @@ export default function AdminDashboardPage() {
           ) : (
             <div className="flex h-full min-h-[220px] items-center justify-center text-center">
               <div>
-                <MessageSquare className="mx-auto h-6 w-6 text-[#7A8B55]" />
+                <MessageSquare className="mx-auto h-6 w-6 text-[#2D332B]" />
                 <p className="mt-4 text-lg font-medium text-[#F6F3EE]">Select a message</p>
                 <p className="mt-2 text-sm text-[#E8E1D8]/55">Message details appear here.</p>
               </div>
@@ -1865,7 +1865,7 @@ export default function AdminDashboardPage() {
                 <div className="mt-4 space-y-3">
                   {selectedOrder.timeline.map((entry, index) => (
                     <div key={`${entry}-${index}`} className="flex gap-3">
-                      <div className="mt-1 h-2.5 w-2.5 rounded-full bg-[#7A8B55]" />
+                      <div className="mt-1 h-2.5 w-2.5 rounded-full bg-[#2D332B]" />
                       <p className="text-sm text-[#E8E1D8]/65">{entry}</p>
                     </div>
                   ))}
@@ -1885,7 +1885,7 @@ export default function AdminDashboardPage() {
         {selectedMessage ? (
           <div className="space-y-4">
             <div className="flex items-center gap-3">
-              <Mail className="h-4 w-4 text-[#7A8B55]" />
+              <Mail className="h-4 w-4 text-[#2D332B]" />
               <p className="text-sm text-[#E8E1D8]/60">{formatDate(selectedMessage.createdAt)}</p>
             </div>
             <Panel>
