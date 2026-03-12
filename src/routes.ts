@@ -2,6 +2,7 @@
 import Layout from "./components/Layout";
 import Home from "./pages/Home";
 import Suits from "./pages/Suits";
+import AdminDashboardPage from "./admin/pages/AdminDashboardPage";
 
 export const router = createBrowserRouter([
   {
@@ -12,5 +13,8 @@ export const router = createBrowserRouter([
       { path: "suits", Component: Suits },
     ],
   },
+  {
+    path: "/admin",
+    Component: AdminDashboardPage,
+  },
 ]);
-

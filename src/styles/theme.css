@@ -4,12 +4,12 @@
   --font-size: 16px;
 
   /* Elegant Dark Olive and Brown palette */
-  --midnight-olive: #2D332B;
-  --espresso-brown: #2A1D0C;
-  --muted-bronze: #5C452D;
-  --deep-taupe: #7A6F63;
-  --antique-gold: #8C673D;
-  --obsidian: #0F0701;
+  --midnight-olive: #1E2430;
+  --espresso-brown: #171419;
+  --muted-bronze: #6E5A44;
+  --deep-taupe: #D9CFBF;
+  --antique-gold: #C6A66B;
+  --obsidian: #0B0A0D;
 
   --background: var(--deep-taupe);
   --foreground: var(--espresso-brown);

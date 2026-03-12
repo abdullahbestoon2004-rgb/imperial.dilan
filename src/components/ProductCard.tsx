@@ -50,7 +50,7 @@ export function ProductCard({ product, index }: ProductCardProps) {
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <div className="relative aspect-[4/5] mb-5 overflow-hidden bg-[#7A6F63]">
+      <div className="relative aspect-[4/5] mb-5 overflow-hidden bg-[#D9CFBF]">
         <ImageWithFallback
           src={product.image}
           alt={product.name}
@@ -67,7 +67,7 @@ export function ProductCard({ product, index }: ProductCardProps) {
         />
 
         <div
-          className={`absolute bottom-0 left-0 right-0 bg-white/90 backdrop-blur-sm transition-all duration-300 ${
+          className={`absolute bottom-0 left-0 right-0 bg-[#F7F1E8]/90 backdrop-blur-sm transition-all duration-300 ${
             isHovered ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0'
           }`}
         >
@@ -76,12 +76,12 @@ export function ProductCard({ product, index }: ProductCardProps) {
               {swatches.slice(0, 3).map((color, swatchIndex) => (
                 <span
                   key={`${product.id}-${color}-${swatchIndex}`}
-                  className="h-4 w-4 rounded-full border border-[#5C452D]"
+                  className="h-4 w-4 rounded-full border border-[#6E5A44]"
                   style={{ backgroundColor: color }}
                 />
               ))}
             </div>
-            <button className="rounded-full border border-[#2A1D0C] px-4 py-1.5 text-[10px] font-['Inter'] tracking-[0.2em] text-[#2A1D0C] transition-colors hover:bg-[#2A1D0C] hover:text-white">
+            <button className="rounded-full border border-[#171419] px-4 py-1.5 text-[10px] font-['Inter'] tracking-[0.2em] text-[#171419] transition-colors hover:bg-[#171419] hover:text-[#F7F1E8]">
               ADD TO CART
             </button>
           </div>
@@ -90,20 +90,20 @@ export function ProductCard({ product, index }: ProductCardProps) {
 
       <div className="flex items-start justify-between gap-3 mb-3">
         <div>
-          <h3 className="text-xl font-['Playfair_Display'] text-[#2A1D0C] leading-tight">{product.name}</h3>
-          <p className="text-sm text-[#2A1D0C]/80 font-['Inter'] mt-1">{product.brand ?? 'Polo Ralph Lauren'}</p>
+          <h3 className="text-xl font-['Playfair_Display'] text-[#171419] leading-tight">{product.name}</h3>
+          <p className="text-sm text-[#171419]/80 font-['Inter'] mt-1">{product.brand ?? 'Polo Ralph Lauren'}</p>
         </div>
         <button
           type="button"
           aria-label={`Add ${product.name} to favorites`}
-          className="mt-1 shrink-0 text-[#2A1D0C] transition-colors hover:text-[#8C673D]"
+          className="mt-1 shrink-0 text-[#171419] transition-colors hover:text-[#C6A66B]"
         >
           <Heart className="h-5 w-5" />
         </button>
       </div>
 
-      <p className="text-xl font-['Playfair_Display'] text-[#2A1D0C]">${product.price.toFixed(2)}</p>
-      <p className="text-sm text-[#2A1D0C] font-['Inter'] mt-2">{swatches.length} colors available</p>
+      <p className="text-xl font-['Playfair_Display'] text-[#171419]">${product.price.toFixed(2)}</p>
+      <p className="text-sm text-[#171419] font-['Inter'] mt-2">{swatches.length} colors available</p>
     </motion.div>
   );
 }
