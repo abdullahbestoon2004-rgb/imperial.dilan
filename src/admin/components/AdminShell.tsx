@@ -87,14 +87,14 @@ export function AdminShell({
   }, [navItems, query]);
 
   const sidebar = (
-    <div className="h-full overflow-y-auto border-r border-white/10 bg-[radial-gradient(circle_at_top,_rgba(122,139,85,0.18),_transparent_35%),linear-gradient(180deg,#2F2F2F_0%,#2F2F2F_100%)] p-6">
+    <div className="h-full overflow-y-auto border-r border-white/15 bg-[#4B5563] p-5">
       <div className="mb-8 flex items-center gap-3">
-        <div className="flex h-11 w-11 items-center justify-center rounded-2xl border border-[#2D332B]/40 bg-[#2F2F2F] text-sm font-semibold tracking-[0.3em] text-[#2D332B]">
+        <div className="flex h-11 w-11 items-center justify-center rounded-2xl border border-white/20 bg-[#6B7280] text-sm font-semibold tracking-[0.3em] text-[#E5E7EB]">
           IM
         </div>
         <div>
           <div className="font-['Playfair_Display'] text-2xl text-[#F6F3EE]">Imperial</div>
-          <div className="text-xs uppercase tracking-[0.32em] text-[#E8E1D8]/55">Admin Console</div>
+          <div className="text-xs uppercase tracking-[0.32em] text-[#E8E1D8]/65">Admin Console</div>
         </div>
       </div>
 
@@ -116,11 +116,9 @@ export function AdminShell({
   );
 
   return (
-    <div className="min-h-screen bg-[#2F2F2F] text-[#F6F3EE]">
-      <div className="pointer-events-none fixed inset-0 bg-[radial-gradient(circle_at_top_right,rgba(122,139,85,0.12),transparent_25%),radial-gradient(circle_at_bottom_left,rgba(182,139,99,0.12),transparent_30%)]" />
-
-      <div className="relative flex min-h-screen">
-        <aside className="hidden w-[280px] shrink-0 lg:block">{sidebar}</aside>
+    <div className="min-h-screen bg-[#D1D5DB] px-3 py-4 text-[#F6F3EE] sm:px-5 sm:py-6">
+      <div className="mx-auto flex min-h-[calc(100vh-2rem)] w-full max-w-[1180px] overflow-hidden rounded-[26px] border border-[#9CA3AF] bg-[#6B7280] shadow-[0_24px_60px_rgba(55,65,81,0.35)] saturate-0">
+        <aside className="hidden w-[240px] shrink-0 lg:block">{sidebar}</aside>
 
         <AnimatePresence>
           {mobileOpen ? (
@@ -153,8 +151,8 @@ export function AdminShell({
           ) : null}
         </AnimatePresence>
 
-        <div className="flex min-h-screen flex-1 flex-col">
-          <header className="sticky top-0 z-30 border-b border-white/10 bg-[#2F2F2F]/85 px-4 py-4 backdrop-blur-xl sm:px-6 lg:px-8">
+        <div className="flex min-h-[calc(100vh-2rem)] flex-1 flex-col">
+          <header className="sticky top-0 z-30 border-b border-white/10 bg-[#6B7280]/90 px-4 py-3 backdrop-blur-xl sm:px-5 lg:px-6">
             <div className="flex flex-col gap-4">
               <div className="flex items-center gap-3">
                 <button
@@ -186,7 +184,7 @@ export function AdminShell({
                     <Bell className="h-4 w-4" />
                     <span className="hidden sm:inline">Notifications</span>
                     {notifications.length > 0 ? (
-                      <span className="rounded-full bg-[#2D332B]/15 px-2 py-0.5 text-xs text-[#2D332B]">
+                      <span className="rounded-full bg-white/15 px-2 py-0.5 text-xs text-[#F3F4F6]">
                         {notifications.length}
                       </span>
                     ) : null}
@@ -198,7 +196,7 @@ export function AdminShell({
                         initial={{ opacity: 0, y: 12 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: 12 }}
-                        className="absolute right-0 top-[calc(100%+12px)] z-40 w-[320px] rounded-[28px] border border-white/10 bg-[#2F2F2F] p-4 shadow-[0_20px_60px_rgba(0,0,0,0.4)]"
+                        className="absolute right-0 top-[calc(100%+12px)] z-40 w-[320px] rounded-[24px] border border-white/15 bg-[#6B7280] p-4 shadow-[0_20px_50px_rgba(55,65,81,0.4)]"
                       >
                         <div className="mb-3 flex items-center justify-between">
                           <div>
@@ -217,7 +215,7 @@ export function AdminShell({
                                 key={item.id}
                                 type="button"
                                 onClick={() => onNotificationDismiss(item.id)}
-                                className="w-full rounded-2xl border border-white/10 bg-white/[0.03] p-4 text-left transition hover:border-[#2D332B]/35"
+                                className="w-full rounded-2xl border border-white/15 bg-white/[0.05] p-4 text-left transition hover:border-white/30"
                               >
                                 <p className="text-sm font-medium text-[#F6F3EE]">{item.title}</p>
                                 <p className="mt-1 text-xs leading-5 text-[#E8E1D8]/60">{item.description}</p>
@@ -233,14 +231,14 @@ export function AdminShell({
                 <button
                   type="button"
                   onClick={onQuickAdd}
-                  className="inline-flex items-center gap-2 rounded-2xl bg-[#2D332B] px-4 py-3 text-sm font-semibold text-[#2F2F2F] transition-transform hover:scale-[1.01]"
+                  className="inline-flex items-center gap-2 rounded-2xl bg-[#4B5563] px-4 py-3 text-sm font-semibold text-[#F3F4F6] transition-transform hover:scale-[1.01] hover:bg-[#374151]"
                 >
                   <PackagePlus className="h-4 w-4" />
                   <span>+ Add Product</span>
                 </button>
 
                 <div className="flex items-center gap-3 rounded-2xl border border-white/10 bg-white/5 px-3 py-2.5">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-[#F6F3EE] text-sm font-semibold text-[#2F2F2F]">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-[#D1D5DB] text-sm font-semibold text-[#374151]">
                     AK
                   </div>
                   <div className="hidden sm:block">
@@ -252,7 +250,7 @@ export function AdminShell({
             </div>
           </header>
 
-          <main className="relative flex-1 px-4 py-6 sm:px-6 lg:px-8">{children}</main>
+          <main className="relative flex-1 px-4 py-5 sm:px-5 lg:px-6">{children}</main>
         </div>
       </div>
     </div>

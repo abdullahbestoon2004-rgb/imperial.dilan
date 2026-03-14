@@ -16,7 +16,7 @@ export function Hero({ heroImage }: HeroProps) {
           className="w-full h-full object-cover object-left"
         />
         {/* Dark overlay for better text readability */}
-        <div className="absolute inset-0 bg-[#2F2F2F]/40"></div>
+        <div className="absolute inset-0 bg-[#1c1c1c]/50"></div>
       </div>
 
       {/* Hero Content */}

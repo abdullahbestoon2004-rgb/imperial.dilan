@@ -140,6 +140,11 @@ export default function Suits() {
     <>
       {/* Hero Section */}
       <section className="relative h-[60vh] bg-[#2F2F2F] flex items-center justify-center">
+        <img
+          src="/dilanWalking.png"
+          alt="Dilan walking"
+          className="absolute inset-0 h-full w-full object-cover object-center"
+        />
         <div className="absolute inset-0 bg-gradient-to-b from-[#2F2F2F]/50 to-[#2F2F2F]/70"></div>
         <div className="relative z-10 text-center px-6">
           <motion.h1

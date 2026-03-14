@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { createPortal } from 'react-dom';
 import { ChevronDown, Heart, Menu, Search, ShoppingCart, User, X } from 'lucide-react';
 
 type NavItem = {
@@ -111,6 +112,7 @@ function NavAnchor({
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [loginOpen, setLoginOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const [expandedMobile, setExpandedMobile] = useState<Record<string, boolean>>({});
   const closeTimerRef = useRef<ReturnType<typeof window.setTimeout> | null>(null);
@@ -126,11 +128,11 @@ export function Navbar() {
   }, []);
 
   useEffect(() => {
-    document.body.style.overflow = mobileOpen ? 'hidden' : '';
+    document.body.style.overflow = mobileOpen || loginOpen ? 'hidden' : '';
     return () => {
       document.body.style.overflow = '';
     };
-  }, [mobileOpen]);
+  }, [mobileOpen, loginOpen]);
 
   const clearCloseTimer = () => {
     if (closeTimerRef.current) {
@@ -172,6 +174,7 @@ export function Navbar() {
     const handleEscape = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
         setActiveDropdown(null);
+        setLoginOpen(false);
       }
     };
 
@@ -265,13 +268,91 @@ export function Navbar() {
     });
   };
 
+  const loginModal = (
+    <div
+      className={`fixed inset-0 z-[120] grid place-items-center bg-[#1B1411]/55 p-4 backdrop-blur-sm transition-opacity duration-200 ${
+        loginOpen ? 'pointer-events-auto opacity-100' : 'pointer-events-none opacity-0'
+      }`}
+      onClick={() => setLoginOpen(false)}
+    >
+      <div
+        role="dialog"
+        aria-modal="true"
+        aria-label="Login"
+        onClick={(event) => event.stopPropagation()}
+        className="max-h-[92vh] w-full max-w-[560px] overflow-y-auto rounded-[26px] border border-[#D7C8B3] bg-[#EFEDEC] p-8 shadow-[0_28px_70px_rgba(27,20,17,0.35)]"
+      >
+        <button
+          type="button"
+          onClick={() => setLoginOpen(false)}
+          className="ml-auto flex rounded-full p-1 text-[#6E5A49] transition hover:text-[#3A2418]"
+          aria-label="Close login"
+        >
+          <X size={20} />
+        </button>
+
+        <div className="mt-1 text-center">
+          <p className="text-xs uppercase tracking-[0.34em] text-[#8D735A]">Imperial Account</p>
+          <h2 className="mt-3 font-['Playfair_Display'] text-5xl leading-[1.02] text-[#3A2418] sm:text-6xl">Login</h2>
+          <p className="mt-3 text-sm leading-relaxed text-[#6E5A49] sm:text-base">
+            Sign in to view orders, saved items, and your profile.
+          </p>
+        </div>
+
+        <form
+          className="mt-7 space-y-5"
+          onSubmit={(event) => {
+            event.preventDefault();
+          }}
+        >
+          <label className="block">
+            <span className="mb-2 block text-xs uppercase tracking-[0.24em] text-[#6E5A49]">Email</span>
+            <input
+              type="email"
+              defaultValue="admin"
+              className="h-[46px] w-full rounded-2xl border border-[#D3BFAB] bg-[#D9DDE9] px-4 text-base text-[#2D241E] outline-none transition focus:border-[#B68B63]"
+            />
+          </label>
+
+          <label className="block">
+            <span className="mb-2 block text-xs uppercase tracking-[0.24em] text-[#6E5A49]">Password</span>
+            <input
+              type="password"
+              defaultValue="1234567"
+              className="h-[46px] w-full rounded-2xl border border-[#D3BFAB] bg-[#D9DDE9] px-4 text-base text-[#2D241E] outline-none transition focus:border-[#B68B63]"
+            />
+          </label>
+
+          <button
+            type="submit"
+            className="mt-1 h-[44px] w-full rounded-[15px] bg-[#3A2418] text-lg font-semibold text-[#F6F0E8] transition hover:bg-[#4A2F20]"
+          >
+            Login
+          </button>
+        </form>
+
+        <div className="mt-8 border-t border-[#D7C8B3] pt-6 text-center">
+          <p className="text-base text-[#6E5A49]">Need access to store management?</p>
+          <Link
+            to="/admin"
+            onClick={() => setLoginOpen(false)}
+            className="mt-5 inline-flex h-[44px] w-full items-center justify-center rounded-[15px] border border-[#8E94A2] bg-[#737A8A] text-lg font-semibold text-white transition hover:bg-[#656D80]"
+          >
+            Open Admin Page
+          </Link>
+        </div>
+      </div>
+    </div>
+  );
+
   return (
-    <nav
+    <>
+      <nav
       ref={navRef}
       className={`fixed left-0 right-0 top-0 z-50 transition-all duration-300 ${
         scrolled || mobileOpen
           ? 'bg-[#1B1411]/78 shadow-[0_12px_35px_rgba(15,7,1,0.35)] backdrop-blur-md'
-          : 'bg-[#1B1411]/45 backdrop-blur-sm'
+          : 'bg-transparent'
       }`}
     >
       <div className="mx-auto max-w-[1700px] px-4 md:px-6">
@@ -398,7 +479,12 @@ export function Navbar() {
             <button className="text-[#E7D7C4] transition-colors hover:text-[#D6A25B]" aria-label="Search">
               <Search size={19} />
             </button>
-            <button className="text-[#E7D7C4] transition-colors hover:text-[#D6A25B]" aria-label="Account">
+            <button
+              type="button"
+              className="text-[#E7D7C4] transition-colors hover:text-[#D6A25B]"
+              aria-label="Account"
+              onClick={() => setLoginOpen(true)}
+            >
               <User size={19} />
             </button>
             <button className="text-[#E7D7C4] transition-colors hover:text-[#D6A25B]" aria-label="Wishlist">
@@ -412,6 +498,17 @@ export function Navbar() {
           <div className="ml-auto flex items-center gap-3 lg:hidden">
             <button className="text-[#E7D7C4] transition-colors hover:text-[#D6A25B]" aria-label="Search">
               <Search size={20} />
+            </button>
+            <button
+              type="button"
+              className="text-[#E7D7C4] transition-colors hover:text-[#D6A25B]"
+              aria-label="Account"
+              onClick={() => {
+                setMobileOpen(false);
+                setLoginOpen(true);
+              }}
+            >
+              <User size={20} />
             </button>
             <button className="text-[#E7D7C4] transition-colors hover:text-[#D6A25B]" aria-label="Cart">
               <ShoppingCart size={20} />
@@ -436,6 +533,9 @@ export function Navbar() {
           <div className="mx-auto max-w-[1700px] space-y-2 px-4 py-4 md:px-6">{renderMobileItems(NAV_ITEMS)}</div>
         </div>
       </div>
-    </nav>
+
+      </nav>
+      {typeof document !== 'undefined' ? createPortal(loginModal, document.body) : null}
+    </>
   );
 }

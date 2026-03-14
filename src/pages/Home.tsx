@@ -72,7 +72,7 @@ export default function Home() {
 
   return (
     <>
-      <Hero heroImage="/dilan.png" />
+      <Hero heroImage="/dilan2.png" />
       <Categories categories={categories} />
       <FeaturedProducts products={featuredProducts} />
       <Lookbook images={lookbookImages} />
