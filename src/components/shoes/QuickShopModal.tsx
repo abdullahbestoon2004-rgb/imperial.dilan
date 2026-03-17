@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { AnimatePresence, motion } from 'motion/react';
 import { X } from 'lucide-react';
 import { ShoeProduct } from './types';
+import { useCart } from '../../context/CartContext';
 
 interface QuickShopModalProps {
   product: ShoeProduct | null;
@@ -11,6 +12,7 @@ interface QuickShopModalProps {
 export function QuickShopModal({ product, onClose }: QuickShopModalProps) {
   const [selectedColor, setSelectedColor] = useState('');
   const [selectedSize, setSelectedSize] = useState('');
+  const { addToCart } = useCart();
 
   useEffect(() => {
     if (!product) {
@@ -110,6 +112,18 @@ export function QuickShopModal({ product, onClose }: QuickShopModalProps) {
 
                 <button
                   type="button"
+                  onClick={() => {
+                    addToCart({
+                      id: product.id,
+                      name: product.name,
+                      price: product.price,
+                      image: product.image,
+                      imageHover: product.image,
+                      brand: product.brand,
+                      colors: product.colors,
+                    });
+                    onClose();
+                  }}
                   className="w-full rounded-full bg-[#D6A25B] px-6 py-3 font-['Inter'] text-sm tracking-[0.16em] text-[#0E0E0E] transition-colors hover:bg-[#E7D7C4]"
                 >
                   ADD TO CART

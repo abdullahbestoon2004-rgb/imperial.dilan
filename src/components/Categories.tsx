@@ -55,7 +55,7 @@ export function Categories({ categories }: CategoriesProps) {
           Shop by Category
         </motion.h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-2 gap-4 sm:gap-6 lg:grid-cols-4">
           {categories.map((category, index) => (
             <motion.div
               key={category.name}
@@ -76,8 +76,8 @@ export function Categories({ categories }: CategoriesProps) {
                   />
                   <div className="absolute inset-0 bg-[#2F2F2F]/20 group-hover:bg-[#2F2F2F]/40 transition-all duration-300"></div>
                 </div>
-                <div className="absolute inset-0 flex items-end justify-center pb-8">
-                  <h3 className="text-3xl font-['Playfair_Display'] text-[#F6F3EE]">{category.name}</h3>
+                <div className="absolute inset-0 flex items-end justify-center pb-5 sm:pb-8">
+                  <h3 className="text-center text-xl font-['Playfair_Display'] text-[#F6F3EE] sm:text-3xl">{category.name}</h3>
                 </div>
               </CategoryWrapper>
             </motion.div>

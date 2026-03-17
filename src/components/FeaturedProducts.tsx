@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { motion } from 'motion/react';
 import { Heart } from 'lucide-react';
 import { ImageWithFallback } from './figma/ImageWithFallback';
+import { useWishlist } from '../context/WishlistContext';
+import { useCart } from '../context/CartContext';
 
 interface Product {
   id: number;
@@ -32,6 +34,8 @@ const defaultSwatches = ['#0F172A', '#D1D5DB'];
 
 export function FeaturedProducts({ products }: FeaturedProductsProps) {
   const [hoveredId, setHoveredId] = useState<number | null>(null);
+  const { isWishlisted, toggleWishlist } = useWishlist();
+  const { addToCart } = useCart();
 
   return (
     <section className="py-20 bg-[#E8E1D8]">
@@ -55,7 +59,7 @@ export function FeaturedProducts({ products }: FeaturedProductsProps) {
           Discover our best-selling suits
         </motion.p>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-[2px] gap-y-10">
+        <div className="grid grid-cols-2 gap-x-[2px] gap-y-8 sm:gap-y-10 lg:grid-cols-3">
           {products.map((product, index) => {
             const isHovered = hoveredId === product.id;
             const swatches =
@@ -64,6 +68,7 @@ export function FeaturedProducts({ products }: FeaturedProductsProps) {
                 : product.color && colorMap[product.color]
                   ? colorMap[product.color]
                   : defaultSwatches;
+            const isSaved = isWishlisted(product);
 
             return (
               <motion.div
@@ -107,7 +112,11 @@ export function FeaturedProducts({ products }: FeaturedProductsProps) {
                           />
                         ))}
                       </div>
-                      <button className="rounded-full border border-[#F6F3EE] px-4 py-1.5 text-[10px] font-['Inter'] tracking-[0.2em] text-[#F6F3EE] transition-colors hover:bg-[#F6F3EE] hover:text-[#2D332B]">
+                      <button
+                        type="button"
+                        onClick={() => addToCart(product)}
+                        className="rounded-full border border-[#F6F3EE] px-4 py-1.5 text-[10px] font-['Inter'] tracking-[0.2em] text-[#F6F3EE] transition-colors hover:bg-[#F6F3EE] hover:text-[#2D332B]"
+                      >
                         ADD TO CART
                       </button>
                     </div>
@@ -116,19 +125,22 @@ export function FeaturedProducts({ products }: FeaturedProductsProps) {
 
                 <div className="flex items-start justify-between gap-3 mb-3">
                   <div>
-                    <h3 className="text-xl font-['Playfair_Display'] text-[#2F2F2F] leading-tight">{product.name}</h3>
+                    <h3 className="text-lg font-['Playfair_Display'] leading-tight text-[#2F2F2F] sm:text-xl">{product.name}</h3>
                     <p className="text-sm text-[#2D332B] font-['Inter'] mt-1">{product.brand ?? 'Polo Ralph Lauren'}</p>
                   </div>
                   <button
                     type="button"
-                    aria-label={`Add ${product.name} to favorites`}
-                    className="mt-1 shrink-0 text-[#2D332B] transition-colors hover:text-[#2F2F2F]"
+                    aria-label={`${isSaved ? 'Remove' : 'Add'} ${product.name} ${isSaved ? 'from' : 'to'} heart list`}
+                    onClick={() => toggleWishlist(product)}
+                    className={`mt-1 shrink-0 transition-colors ${
+                      isSaved ? 'text-[#B67A2D]' : 'text-[#2D332B] hover:text-[#2F2F2F]'
+                    }`}
                   >
-                    <Heart className="h-5 w-5" />
+                    <Heart className={`h-5 w-5 ${isSaved ? 'fill-[#B67A2D]' : ''}`} />
                   </button>
                 </div>
 
-                <p className="text-xl font-['Playfair_Display'] text-[#2F2F2F]">${product.price.toFixed(2)}</p>
+                <p className="text-lg font-['Playfair_Display'] text-[#2F2F2F] sm:text-xl">${product.price.toFixed(2)}</p>
                 <p className="text-sm text-[#2D332B] font-['Inter'] mt-2">{swatches.length} colors available</p>
               </motion.div>
             );

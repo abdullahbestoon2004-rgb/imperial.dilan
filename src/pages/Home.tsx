@@ -19,8 +19,9 @@ export default function Home() {
       image: 'https://dtcralphlauren.scene7.com/is/image/PoloGSI/s7-AI710968117004_alternate10?$rl_4x5_pdp$'
     },
     {
-      name: 'Shirts',
-      image: 'https://dtcralphlauren.scene7.com/is/image/PoloGSI/s7-1266689_lifestyle?$rl_4x5_zoom$'
+      name: 'Accessories',
+      image: 'https://media.loropiana.com/PRODUCTS/HYBRIS/FAR/FAR1409/H1HM/FR/D211EA75-77CA-4C4D-AC7A-6DE2264829D4_FAR1409_H1HM_ZOOM.jpg?sw=510&sh=714',
+      href: '/accessories'
     },
     {
       name: 'Shoes',

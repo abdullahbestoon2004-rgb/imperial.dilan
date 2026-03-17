@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { motion } from 'motion/react';
 import { Heart } from 'lucide-react';
 import { ImageWithFallback } from './figma/ImageWithFallback';
+import { useWishlist } from '../context/WishlistContext';
+import { useCart } from '../context/CartContext';
 
 interface Product {
   id: number;
@@ -33,6 +35,9 @@ const defaultSwatches = ['#0F172A', '#D1D5DB'];
 
 export function ProductCard({ product, index }: ProductCardProps) {
   const [isHovered, setIsHovered] = useState(false);
+  const { isWishlisted, toggleWishlist } = useWishlist();
+  const { addToCart } = useCart();
+  const isSaved = isWishlisted(product);
   const swatches =
     product.colors?.length
       ? product.colors
@@ -81,7 +86,11 @@ export function ProductCard({ product, index }: ProductCardProps) {
                 />
               ))}
             </div>
-            <button className="rounded-full border border-[#F6F3EE] px-4 py-1.5 text-[10px] font-['Inter'] tracking-[0.2em] text-[#F6F3EE] transition-colors hover:bg-[#F6F3EE] hover:text-[#2D332B]">
+            <button
+              type="button"
+              onClick={() => addToCart(product)}
+              className="rounded-full border border-[#F6F3EE] px-4 py-1.5 text-[10px] font-['Inter'] tracking-[0.2em] text-[#F6F3EE] transition-colors hover:bg-[#F6F3EE] hover:text-[#2D332B]"
+            >
               ADD TO CART
             </button>
           </div>
@@ -95,10 +104,13 @@ export function ProductCard({ product, index }: ProductCardProps) {
         </div>
         <button
           type="button"
-          aria-label={`Add ${product.name} to favorites`}
-          className="mt-1 shrink-0 text-[#2D332B] transition-colors hover:text-[#2F2F2F]"
+          aria-label={`${isSaved ? 'Remove' : 'Add'} ${product.name} ${isSaved ? 'from' : 'to'} heart list`}
+          onClick={() => toggleWishlist(product)}
+          className={`mt-1 shrink-0 transition-colors ${
+            isSaved ? 'text-[#B67A2D]' : 'text-[#2D332B] hover:text-[#2F2F2F]'
+          }`}
         >
-          <Heart className="h-5 w-5" />
+          <Heart className={`h-5 w-5 ${isSaved ? 'fill-[#B67A2D]' : ''}`} />
         </button>
       </div>
 

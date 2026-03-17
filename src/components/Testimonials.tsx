@@ -36,7 +36,7 @@ export function Testimonials() {
           What Our Clients Say
         </motion.h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-2 gap-4 sm:gap-8 md:grid-cols-3">
           {testimonials.map((testimonial, index) => (
             <motion.div
               key={testimonial.name}
@@ -44,17 +44,17 @@ export function Testimonials() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
-              className="bg-[#B68B63] p-8 text-center"
+              className="bg-[#B68B63] p-5 text-center sm:p-8"
             >
               <div className="flex justify-center mb-4">
                 {[...Array(testimonial.rating)].map((_, i) => (
                   <Star key={i} className="w-5 h-5 fill-[#2D332B] text-[#2D332B]" />
                 ))}
               </div>
-              <p className="text-[#F6F3EE] font-['Inter'] mb-6 italic">
+              <p className="mb-6 text-sm italic text-[#F6F3EE] font-['Inter'] sm:text-base">
                 "{testimonial.text}"
               </p>
-              <h4 className="font-['Playfair_Display'] text-[#F6F3EE] text-lg mb-1">
+              <h4 className="mb-1 text-base font-['Playfair_Display'] text-[#F6F3EE] sm:text-lg">
                 {testimonial.name}
               </h4>
               <p className="text-[#F6F3EE]/70 font-['Inter'] text-sm">

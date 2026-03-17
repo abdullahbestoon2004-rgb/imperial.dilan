@@ -1,16 +1,27 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { motion } from 'motion/react';
 import { ChevronDown } from 'lucide-react';
+import { useSearchParams } from 'react-router-dom';
 import { ProductCard } from '../components/ProductCard';
 import { Newsletter } from '../components/Newsletter';
+import { CategorySidebar } from '../components/CategorySidebar';
 
 export default function Shoes() {
+  const [searchParams, setSearchParams] = useSearchParams();
   const [sortBy, setSortBy] = useState('featured');
-  const [selectedStyle, setSelectedStyle] = useState('all');
+  const [selectedCategory, setSelectedCategory] = useState('all');
   const [selectedColor, setSelectedColor] = useState('all');
 
   const selectClassName = "appearance-none bg-[#7A4A2A] border border-[#6E6A66] px-6 py-3 pr-10 font-['Inter'] text-[#E7D7C4] cursor-pointer hover:border-[#D6A25B] transition-colors focus:outline-none focus:border-[#D6A25B]";
   const selectOptionStyle = { backgroundColor: '#1B1411', color: '#E7D7C4' };
+  const styleCategoryLabels: Record<string, string> = {
+    sneakers: 'Sneakers',
+    loafers: 'Loafers',
+    dress: 'Dress Shoes',
+    boots: 'Boots',
+    sandals: 'Sandals',
+    drivers: 'Drivers & Boat Shoes',
+  };
 
   const allShoes = [
     {
@@ -134,11 +145,41 @@ export default function Shoes() {
       imageHover: 'https://dtcralphlauren.scene7.com/is/image/PoloGSI/s7-1333527_alternate1?$rl_4x5_zoom$',
     },
   ];
+  const categoryOptions = [
+    { value: 'all', label: 'All Shoes' },
+    ...Array.from(new Set(allShoes.map((shoe) => shoe.style))).map((style) => ({
+      value: style,
+      label: styleCategoryLabels[style] ?? style,
+    })),
+  ];
+  const categoryValues = new Set(categoryOptions.map((option) => option.value));
+
+  useEffect(() => {
+    const categoryFromUrl = searchParams.get('category') ?? 'all';
+    const normalizedCategory = categoryValues.has(categoryFromUrl) ? categoryFromUrl : 'all';
+
+    if (normalizedCategory !== selectedCategory) {
+      setSelectedCategory(normalizedCategory);
+    }
+  }, [searchParams, selectedCategory, categoryValues]);
+
+  const handleCategoryChange = (value: string) => {
+    setSelectedCategory(value);
+
+    const nextParams = new URLSearchParams(searchParams);
+    if (value === 'all') {
+      nextParams.delete('category');
+    } else {
+      nextParams.set('category', value);
+    }
+
+    setSearchParams(nextParams);
+  };
 
   let filteredShoes = allShoes;
 
-  if (selectedStyle !== 'all') {
-    filteredShoes = filteredShoes.filter((shoe) => shoe.style === selectedStyle);
+  if (selectedCategory !== 'all') {
+    filteredShoes = filteredShoes.filter((shoe) => shoe.style === selectedCategory);
   }
 
   if (selectedColor !== 'all') {
@@ -154,8 +195,13 @@ export default function Shoes() {
 
   return (
     <>
-      <section className="relative h-[60vh] bg-[#2F2F2F] flex items-center justify-center">
-        <div className="absolute inset-0 bg-gradient-to-b from-[#2F2F2F]/50 to-[#2F2F2F]/70"></div>
+      <section className="relative h-[60vh] bg-[#E8E1D8] flex items-center justify-center">
+        <img
+          src="/shoebackground.png"
+          alt="Premium shoes"
+          className="absolute top-0 left-1/2 h-full w-full max-w-[1935px] -translate-x-1/2 object-cover object-center"
+        />
+        <div className="absolute top-0 left-1/2 h-full w-full max-w-[1935px] -translate-x-1/2 bg-gradient-to-b from-[#2F2F2F]/50 to-[#2F2F2F]/70"></div>
         <div className="relative z-10 text-center px-6">
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
@@ -178,58 +224,58 @@ export default function Shoes() {
 
       <section className="py-16 bg-[#E8E1D8]">
         <div className="max-w-[1700px] mx-auto px-4 md:px-6">
-          <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-12">
-            <div className="flex flex-wrap gap-4">
-              <div className="relative">
-                <select value={selectedStyle} onChange={(e) => setSelectedStyle(e.target.value)} className={selectClassName}>
-                  <option style={selectOptionStyle} value="all">All Styles</option>
-                  <option style={selectOptionStyle} value="sneakers">Sneakers</option>
-                  <option style={selectOptionStyle} value="loafers">Loafers</option>
-                  <option style={selectOptionStyle} value="dress">Dress Shoes</option>
-                  <option style={selectOptionStyle} value="boots">Boots</option>
-                  <option style={selectOptionStyle} value="sandals">Sandals</option>
-                  <option style={selectOptionStyle} value="drivers">Drivers & Boat Shoes</option>
-                </select>
-                <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-[#D6A25B] pointer-events-none" />
-              </div>
-
-              <div className="relative">
-                <select value={selectedColor} onChange={(e) => setSelectedColor(e.target.value)} className={selectClassName}>
-                  <option style={selectOptionStyle} value="all">All Colors</option>
-                  <option style={selectOptionStyle} value="black">Black</option>
-                  <option style={selectOptionStyle} value="blue">Blue</option>
-                  <option style={selectOptionStyle} value="gray">Gray</option>
-                  <option style={selectOptionStyle} value="beige">Beige</option>
-                  <option style={selectOptionStyle} value="brown">Brown</option>
-                  <option style={selectOptionStyle} value="green">Green</option>
-                  <option style={selectOptionStyle} value="red">Red</option>
-                </select>
-                <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-[#D6A25B] pointer-events-none" />
-              </div>
+          <div className="flex flex-col gap-10 lg:flex-row">
+            <div className="lg:w-60 lg:shrink-0">
+              <CategorySidebar
+                title="Category"
+                options={categoryOptions}
+                selectedValue={selectedCategory}
+                onChange={handleCategoryChange}
+              />
             </div>
 
-            <div className="flex items-center gap-3">
-              <span className="text-[#6E6A66] font-['Inter'] text-sm">Sort by:</span>
-              <div className="relative">
-                <select value={sortBy} onChange={(e) => setSortBy(e.target.value)} className={selectClassName}>
-                  <option style={selectOptionStyle} value="featured">Featured</option>
-                  <option style={selectOptionStyle} value="priceLow">Price: Low to High</option>
-                  <option style={selectOptionStyle} value="priceHigh">Price: High to Low</option>
-                  <option style={selectOptionStyle} value="name">Name</option>
-                </select>
-                <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-[#D6A25B] pointer-events-none" />
+            <div className="flex-1">
+              <div className="flex flex-col xl:flex-row justify-between items-start xl:items-center gap-6 mb-12">
+                <div className="flex flex-wrap gap-4">
+                  <div className="relative">
+                    <select value={selectedColor} onChange={(e) => setSelectedColor(e.target.value)} className={selectClassName}>
+                      <option style={selectOptionStyle} value="all">All Colors</option>
+                      <option style={selectOptionStyle} value="black">Black</option>
+                      <option style={selectOptionStyle} value="blue">Blue</option>
+                      <option style={selectOptionStyle} value="gray">Gray</option>
+                      <option style={selectOptionStyle} value="beige">Beige</option>
+                      <option style={selectOptionStyle} value="brown">Brown</option>
+                      <option style={selectOptionStyle} value="green">Green</option>
+                      <option style={selectOptionStyle} value="red">Red</option>
+                    </select>
+                    <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-[#D6A25B] pointer-events-none" />
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-3">
+                  <span className="text-[#6E6A66] font-['Inter'] text-sm">Sort by:</span>
+                  <div className="relative">
+                    <select value={sortBy} onChange={(e) => setSortBy(e.target.value)} className={selectClassName}>
+                      <option style={selectOptionStyle} value="featured">Featured</option>
+                      <option style={selectOptionStyle} value="priceLow">Price: Low to High</option>
+                      <option style={selectOptionStyle} value="priceHigh">Price: High to Low</option>
+                      <option style={selectOptionStyle} value="name">Name</option>
+                    </select>
+                    <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-[#D6A25B] pointer-events-none" />
+                  </div>
+                </div>
+              </div>
+
+              <p className="text-[#6E6A66] font-['Inter'] mb-8">
+                {sortedShoes.length} {sortedShoes.length === 1 ? 'shoe' : 'shoes'} found
+              </p>
+
+              <div className="grid grid-cols-2 xl:grid-cols-3 gap-x-[2px] gap-y-10">
+                {sortedShoes.map((shoe, index) => (
+                  <ProductCard key={shoe.id} product={shoe} index={index} />
+                ))}
               </div>
             </div>
-          </div>
-
-          <p className="text-[#6E6A66] font-['Inter'] mb-8">
-            {sortedShoes.length} {sortedShoes.length === 1 ? 'shoe' : 'shoes'} found
-          </p>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-[2px] gap-y-10">
-            {sortedShoes.map((shoe, index) => (
-              <ProductCard key={shoe.id} product={shoe} index={index} />
-            ))}
           </div>
         </div>
       </section>

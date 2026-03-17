@@ -33,7 +33,7 @@ export function Lookbook({ images }: LookbookProps) {
           Curated looks for the modern gentleman
         </motion.p>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+        <div className="mb-12 grid grid-cols-2 gap-4 sm:gap-6 md:grid-cols-3">
           {images.map((item, index) => (
             <motion.div
               key={index}
@@ -50,8 +50,8 @@ export function Lookbook({ images }: LookbookProps) {
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#2F2F2F]/70 to-transparent"></div>
-                <div className="absolute bottom-0 left-0 right-0 p-6">
-                  <h3 className="text-2xl font-['Playfair_Display'] text-[#F6F3EE]">
+                <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-6">
+                  <h3 className="text-lg font-['Playfair_Display'] text-[#F6F3EE] sm:text-2xl">
                     {item.title}
                   </h3>
                 </div>

@@ -1,5 +1,10 @@
 export type AdminSectionId =
   | 'dashboard'
+  | 'pageHome'
+  | 'pageNewArrivals'
+  | 'pageSuits'
+  | 'pageShoes'
+  | 'pageAccessories'
   | 'products'
   | 'categories'
   | 'collections'
@@ -17,6 +22,16 @@ export type PaymentStatus = 'Paid' | 'Pending' | 'Refunded';
 export type OrderStatus = 'Pending' | 'Shipped' | 'Delivered';
 export type DiscountType = 'percentage' | 'fixed';
 export type MediaType = 'product' | 'banner' | 'graphic';
+export type ProductSubcategory = 'Formal' | 'Casual' | 'Seasonal';
+
+export interface ProductVariant {
+  id: string;
+  size: string;
+  colorName: string;
+  colorHex: string;
+  stock: number;
+  priceOverride: number | null;
+}
 
 export interface Product {
   id: string;
@@ -24,6 +39,7 @@ export interface Product {
   brand: string;
   description: string;
   category: string;
+  subcategory?: ProductSubcategory;
   productType: 'Clothing' | 'Accessory';
   price: number;
   discountPrice: number | null;
@@ -33,6 +49,7 @@ export interface Product {
   availability: Availability;
   sizes: string[];
   colors: string[];
+  variants?: ProductVariant[];
   images: string[];
   mainImageIndex: number;
   tags: string[];
@@ -40,8 +57,13 @@ export interface Product {
   showOnHomepage: boolean;
   featured: boolean;
   visible: boolean;
+  slug?: string;
+  metaTitle?: string;
+  metaDescription?: string;
   updatedAt: string;
 }
+
+export type ProductDraft = Omit<Product, 'id' | 'updatedAt'>;
 
 export interface Category {
   id: string;

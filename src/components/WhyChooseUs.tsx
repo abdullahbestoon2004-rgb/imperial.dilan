@@ -38,7 +38,7 @@ export function WhyChooseUs() {
           Why Choose Us
         </motion.h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+        <div className="grid grid-cols-2 gap-6 sm:gap-12 lg:grid-cols-4">
           {features.map((feature, index) => {
             const Icon = feature.icon;
             return (
@@ -53,7 +53,7 @@ export function WhyChooseUs() {
                 <div className="inline-flex items-center justify-center w-16 h-16 mb-4 border-2 border-[#2D332B] rounded-full">
                   <Icon className="w-8 h-8 text-[#2D332B]" />
                 </div>
-                <h3 className="text-xl font-['Playfair_Display'] text-[#2F2F2F] mb-2">
+                <h3 className="mb-2 text-lg font-['Playfair_Display'] text-[#2F2F2F] sm:text-xl">
                   {feature.title}
                 </h3>
                 <p className="text-[#2D332B] font-['Inter']">

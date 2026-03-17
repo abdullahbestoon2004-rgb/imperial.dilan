@@ -7,16 +7,16 @@ interface HeroProps {
 
 export function Hero({ heroImage }: HeroProps) {
   return (
-    <section className="relative h-screen w-full">
+    <section className="relative h-screen w-full bg-[#E8E1D8]">
       {/* Hero Image */}
       <div className="absolute inset-0">
         <ImageWithFallback
           src={heroImage}
           alt="Elegant man in suit"
-          className="w-full h-full object-cover object-left"
+          className="absolute top-0 left-1/2 h-full w-full max-w-[1935px] -translate-x-1/2 object-cover object-left"
         />
         {/* Dark overlay for better text readability */}
-        <div className="absolute inset-0 bg-[#1c1c1c]/50"></div>
+        <div className="absolute top-0 left-1/2 h-full w-full max-w-[1935px] -translate-x-1/2 bg-[#1c1c1c]/50"></div>
       </div>
 
       {/* Hero Content */}

@@ -34,6 +34,7 @@ import {
   TextArea,
   TextInput,
 } from '../components/AdminPrimitives';
+import { ProductEditorForm } from '../components/ProductEditorForm';
 import { useAdminData } from '../hooks/useAdminData';
 import type {
   AdminSectionId,
@@ -50,6 +51,11 @@ import type {
 
 const sections: NavItem[] = [
   { id: 'dashboard', label: 'Dashboard' },
+  { id: 'pageHome', label: 'Home Page' },
+  { id: 'pageNewArrivals', label: 'New Arrivals Page' },
+  { id: 'pageSuits', label: 'Suits Page' },
+  { id: 'pageShoes', label: 'Shoes Page' },
+  { id: 'pageAccessories', label: 'Accessories Page' },
   { id: 'products', label: 'Products' },
   { id: 'categories', label: 'Categories' },
   { id: 'collections', label: 'Collections' },
@@ -65,8 +71,137 @@ const sections: NavItem[] = [
 const productCategories = ['Suits', 'Jackets', 'Shirts', 'Pants', 'Shoes', 'Accessories'];
 const sizeOptions = ['S', 'M', 'L', 'XL', 'XXL', 'One Size'];
 const tagOptions = ['New', 'Best Seller', 'Featured', 'Sale'];
+const storefrontPageSections = ['pageHome', 'pageNewArrivals', 'pageSuits', 'pageShoes', 'pageAccessories'] as const;
 
 type SortDirection = 'asc' | 'desc';
+type ProductDraft = Omit<Product, 'id' | 'updatedAt'>;
+type StorefrontPageSectionId = (typeof storefrontPageSections)[number];
+type StorefrontPageConfig = {
+  title: string;
+  description: string;
+  addLabel: string;
+  emptyState: string;
+  matchesProduct: (product: Product) => boolean;
+  createDefaults: Partial<ProductDraft>;
+  removeLabel?: string;
+};
+
+const defaultProductForm: ProductDraft = {
+  name: '',
+  brand: '',
+  description: '',
+  category: 'Suits',
+  productType: 'Clothing',
+  price: 0,
+  discountPrice: null,
+  currency: 'USD',
+  stockQuantity: 0,
+  sku: '',
+  availability: 'In Stock',
+  sizes: ['M'],
+  colors: ['Midnight Navy'],
+  images: ['https://images.unsplash.com/photo-1593030761757-71fae45fa0e7?auto=format&fit=crop&w=900&q=80'],
+  mainImageIndex: 0,
+  tags: ['New'],
+  status: 'Draft',
+  showOnHomepage: false,
+  featured: false,
+  visible: true,
+};
+
+const storefrontPageConfigs: Record<StorefrontPageSectionId, StorefrontPageConfig> = {
+  pageHome: {
+    title: 'Home Page',
+    description: 'Control homepage copy and the products featured on the front page.',
+    addLabel: 'Add Homepage Item',
+    emptyState: 'No products are assigned to the homepage yet.',
+    matchesProduct: (product) => product.showOnHomepage,
+    createDefaults: {
+      showOnHomepage: true,
+      featured: true,
+      status: 'Published',
+      visible: true,
+    },
+    removeLabel: 'Remove from Home',
+  },
+  pageNewArrivals: {
+    title: 'New Arrivals Page',
+    description: 'Manage the newest products highlighted in the New Arrivals experience.',
+    addLabel: 'Add New Arrival',
+    emptyState: 'No products are marked for New Arrivals yet.',
+    matchesProduct: (product) => product.tags.includes('New'),
+    createDefaults: {
+      tags: ['New'],
+      status: 'Published',
+      visible: true,
+    },
+    removeLabel: 'Remove from New',
+  },
+  pageSuits: {
+    title: 'Suits Page',
+    description: 'Add, edit, or remove the products shown on the suits page.',
+    addLabel: 'Add Suit Item',
+    emptyState: 'No suit products are available on this page yet.',
+    matchesProduct: (product) => product.category === 'Suits',
+    createDefaults: {
+      category: 'Suits',
+      productType: 'Clothing',
+      status: 'Published',
+      visible: true,
+    },
+  },
+  pageShoes: {
+    title: 'Shoes Page',
+    description: 'Manage the products listed on the shoes page and keep the assortment fresh.',
+    addLabel: 'Add Shoe Item',
+    emptyState: 'No shoe products are available on this page yet.',
+    matchesProduct: (product) => product.category === 'Shoes',
+    createDefaults: {
+      category: 'Shoes',
+      productType: 'Clothing',
+      status: 'Published',
+      visible: true,
+    },
+  },
+  pageAccessories: {
+    title: 'Accessories Page',
+    description: 'Curate accessories, add new products, and remove old pieces from the page.',
+    addLabel: 'Add Accessory Item',
+    emptyState: 'No accessory products are available on this page yet.',
+    matchesProduct: (product) => product.category === 'Accessories',
+    createDefaults: {
+      category: 'Accessories',
+      productType: 'Accessory',
+      status: 'Published',
+      visible: true,
+    },
+  },
+};
+
+function isStorefrontPageSection(id: AdminSectionId): id is StorefrontPageSectionId {
+  return storefrontPageSections.includes(id as StorefrontPageSectionId);
+}
+
+function toProductPayload(product: Product): ProductDraft {
+  const { id, updatedAt, ...payload } = product;
+  return payload;
+}
+
+function readFileAsDataUrl(file: File) {
+  return new Promise<string>((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => {
+      if (typeof reader.result === 'string') {
+        resolve(reader.result);
+        return;
+      }
+
+      reject(new Error(`Could not read ${file.name}`));
+    };
+    reader.onerror = () => reject(reader.error ?? new Error(`Could not read ${file.name}`));
+    reader.readAsDataURL(file);
+  });
+}
 
 function formatMoney(value: number, currency = 'USD') {
   return new Intl.NumberFormat('en-US', {
@@ -202,58 +337,27 @@ function BarsChart({ points }: { points: { label: string; orders: number }[] }) 
 
 function ProductForm({
   initial,
+  defaults,
   onSubmit,
 }: {
   initial?: Product;
-  onSubmit: (payload: Omit<Product, 'id' | 'updatedAt'>) => void;
+  defaults?: Partial<ProductDraft>;
+  onSubmit: (payload: ProductDraft) => void;
 }) {
-  const [form, setForm] = useState<Omit<Product, 'id' | 'updatedAt'>>(
-    initial
-      ? {
-          name: initial.name,
-          brand: initial.brand,
-          description: initial.description,
-          category: initial.category,
-          productType: initial.productType,
-          price: initial.price,
-          discountPrice: initial.discountPrice,
-          currency: initial.currency,
-          stockQuantity: initial.stockQuantity,
-          sku: initial.sku,
-          availability: initial.availability,
-          sizes: initial.sizes,
-          colors: initial.colors,
-          images: initial.images,
-          mainImageIndex: initial.mainImageIndex,
-          tags: initial.tags,
-          status: initial.status,
-          showOnHomepage: initial.showOnHomepage,
-          featured: initial.featured,
-          visible: initial.visible,
-        }
-      : {
-          name: '',
-          brand: '',
-          description: '',
-          category: 'Suits',
-          productType: 'Clothing',
-          price: 0,
-          discountPrice: null,
-          currency: 'USD',
-          stockQuantity: 0,
-          sku: '',
-          availability: 'In Stock',
-          sizes: ['M'],
-          colors: ['Midnight Navy'],
-          images: ['https://images.unsplash.com/photo-1593030761757-71fae45fa0e7?auto=format&fit=crop&w=900&q=80'],
-          mainImageIndex: 0,
-          tags: ['New'],
-          status: 'Draft',
-          showOnHomepage: false,
-          featured: false,
-          visible: true,
-        },
-  );
+  const [form, setForm] = useState<ProductDraft>(() => {
+    if (initial) {
+      return toProductPayload(initial);
+    }
+
+    return {
+      ...defaultProductForm,
+      ...defaults,
+      sizes: defaults?.sizes ? [...defaults.sizes] : [...defaultProductForm.sizes],
+      colors: defaults?.colors ? [...defaults.colors] : [...defaultProductForm.colors],
+      images: defaults?.images ? [...defaults.images] : [...defaultProductForm.images],
+      tags: defaults?.tags ? [...defaults.tags] : [...defaultProductForm.tags],
+    };
+  });
   const [imageDraft, setImageDraft] = useState('');
 
   const toggleArrayValue = (key: 'sizes' | 'tags', value: string) => {
@@ -275,6 +379,18 @@ function ProductForm({
       else if (mainImageIndex === target) mainImageIndex = index;
       return { ...prev, images, mainImageIndex };
     });
+  };
+
+  const handleImageUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    const files = Array.from(event.target.files ?? []);
+    if (files.length === 0) return;
+
+    try {
+      const uploadedImages = await Promise.all(files.map((file) => readFileAsDataUrl(file)));
+      setForm((prev) => ({ ...prev, images: [...prev.images, ...uploadedImages] }));
+    } finally {
+      event.target.value = '';
+    }
   };
 
   return (
@@ -413,25 +529,33 @@ function ProductForm({
           <div className="mb-4 flex items-center justify-between gap-3">
             <div>
               <h3 className="text-lg font-semibold text-[#F6F3EE]">Images</h3>
-              <p className="text-sm text-[#E8E1D8]/60">Mock image upload with drag-order controls represented by move actions.</p>
+              <p className="text-sm text-[#E8E1D8]/60">Upload multiple images or paste image URLs, then choose the main image and order.</p>
             </div>
             <Badge tone="blue">Storage-ready</Badge>
           </div>
 
-          <div className="mb-4 flex flex-col gap-3 sm:flex-row">
-            <TextInput value={imageDraft} onChange={(e) => setImageDraft(e.target.value)} placeholder="Paste image URL" />
-            <Button
-              type="button"
-              variant="ghost"
-              onClick={() => {
-                if (!imageDraft.trim()) return;
-                setForm((prev) => ({ ...prev, images: [...prev.images, imageDraft.trim()] }));
-                setImageDraft('');
-              }}
-            >
+          <div className="mb-4 space-y-3">
+            <label className="inline-flex w-fit cursor-pointer items-center gap-2 rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-3 text-sm text-[#F6F3EE] transition hover:border-[#2D332B]/40 hover:text-[#2D332B]">
+              <input type="file" accept="image/*" multiple className="hidden" onChange={handleImageUpload} />
               <ImagePlus className="h-4 w-4" />
-              Add Image
-            </Button>
+              Upload Multiple Images
+            </label>
+
+            <div className="flex flex-col gap-3 sm:flex-row">
+              <TextInput value={imageDraft} onChange={(e) => setImageDraft(e.target.value)} placeholder="Paste image URL" />
+              <Button
+                type="button"
+                variant="ghost"
+                onClick={() => {
+                  if (!imageDraft.trim()) return;
+                  setForm((prev) => ({ ...prev, images: [...prev.images, imageDraft.trim()] }));
+                  setImageDraft('');
+                }}
+              >
+                <ImagePlus className="h-4 w-4" />
+                Add Image URL
+              </Button>
+            </div>
           </div>
 
           <div className="grid gap-3 md:grid-cols-2">
@@ -755,6 +879,7 @@ export default function AdminDashboardPage() {
   const deferredSearch = useDeferredValue(globalSearch);
   const [productModalOpen, setProductModalOpen] = useState(false);
   const [editingProduct, setEditingProduct] = useState<Product | undefined>();
+  const [productCreateDefaults, setProductCreateDefaults] = useState<Partial<ProductDraft> | undefined>();
   const [categoryModalOpen, setCategoryModalOpen] = useState(false);
   const [editingCategory, setEditingCategory] = useState<Category | undefined>();
   const [collectionModalOpen, setCollectionModalOpen] = useState(false);
@@ -782,11 +907,14 @@ export default function AdminDashboardPage() {
   const navWithBadges = useMemo(
     () =>
       sections.map((item) => {
+        if (isStorefrontPageSection(item.id)) {
+          return { ...item, badge: products.filter(storefrontPageConfigs[item.id].matchesProduct).length };
+        }
         if (item.id === 'messages') return { ...item, badge: analytics.unreadMessages };
         if (item.id === 'products') return { ...item, badge: analytics.featuredProducts };
         return item;
       }),
-    [analytics.featuredProducts, analytics.unreadMessages],
+    [analytics.featuredProducts, analytics.unreadMessages, products],
   );
 
   const normalizedSearch = deferredSearch.trim().toLowerCase();
@@ -902,9 +1030,45 @@ export default function AdminDashboardPage() {
       filteredDiscounts.length,
     ].every((count) => count === 0);
 
-  const openProductCreate = () => {
+  const openProductCreate = (defaults?: Partial<ProductDraft>) => {
     setEditingProduct(undefined);
+    setProductCreateDefaults(defaults);
     setProductModalOpen(true);
+  };
+
+  const openProductEdit = (product: Product) => {
+    setEditingProduct(product);
+    setProductCreateDefaults(undefined);
+    setProductModalOpen(true);
+  };
+
+  const storefrontPageProducts = useMemo(
+    () =>
+      storefrontPageSections.reduce(
+        (acc, sectionId) => {
+          acc[sectionId] = filteredProducts.filter(storefrontPageConfigs[sectionId].matchesProduct);
+          return acc;
+        },
+        {} as Record<StorefrontPageSectionId, Product[]>,
+      ),
+    [filteredProducts],
+  );
+
+  const removeProductFromStorefrontPage = (sectionId: StorefrontPageSectionId, product: Product) => {
+    if (sectionId === 'pageHome') {
+      actions.updateProduct(product.id, { ...toProductPayload(product), showOnHomepage: false });
+      return;
+    }
+
+    if (sectionId === 'pageNewArrivals') {
+      actions.updateProduct(product.id, {
+        ...toProductPayload(product),
+        tags: product.tags.filter((tag) => tag !== 'New'),
+      });
+      return;
+    }
+
+    actions.deleteProduct(product.id);
   };
 
   const dashboardView = (
@@ -1038,7 +1202,7 @@ export default function AdminDashboardPage() {
           </div>
           <div className="grid gap-3 sm:grid-cols-2">
             {[
-              { icon: Package, label: 'New product', section: 'products' as const, action: openProductCreate },
+              { icon: Package, label: 'New product', section: 'products' as const, action: () => openProductCreate() },
               { icon: MenuSquare, label: 'Manage collections', section: 'collections' as const },
               { icon: BadgePercent, label: 'Create discount', section: 'discounts' as const, action: () => setDiscountModalOpen(true) },
               { icon: Settings2, label: 'Store settings', section: 'settings' as const },
@@ -1063,6 +1227,239 @@ export default function AdminDashboardPage() {
     </div>
   );
 
+  const renderStorefrontPageTable = (sectionId: StorefrontPageSectionId) => {
+    const pageConfig = storefrontPageConfigs[sectionId];
+    const pageProducts = storefrontPageProducts[sectionId];
+
+    if (normalizedSearch.length > 0 && pageProducts.length === 0) {
+      return <SearchEmptyState query={deferredSearch} />;
+    }
+
+    if (pageProducts.length === 0) {
+      return (
+        <Panel className="text-center">
+          <p className="text-lg font-medium text-[#F6F3EE]">{pageConfig.emptyState}</p>
+          <p className="mt-2 text-sm text-[#E8E1D8]/60">Use the add button to create the first item for this page.</p>
+          <div className="mt-5 flex justify-center">
+            <Button onClick={() => openProductCreate(pageConfig.createDefaults)}>
+              <Plus className="h-4 w-4" />
+              {pageConfig.addLabel}
+            </Button>
+          </div>
+        </Panel>
+      );
+    }
+
+    return (
+      <DataTable
+        columns={[
+          { key: 'product', label: 'Product' },
+          { key: 'price', label: 'Price' },
+          { key: 'inventory', label: 'Inventory' },
+          { key: 'tags', label: 'Tags' },
+          { key: 'updated', label: 'Updated' },
+          { key: 'actions', label: 'Actions' },
+        ]}
+      >
+        {pageProducts.map((product) => (
+          <TableRow key={product.id}>
+            <TableCell>
+              <div className="flex items-start gap-3">
+                <img
+                  src={product.images[product.mainImageIndex] || product.images[0]}
+                  alt={product.name}
+                  className="h-16 w-14 rounded-2xl object-cover"
+                />
+                <div>
+                  <p className="font-medium text-[#F6F3EE]">{product.name}</p>
+                  <p className="mt-1 text-xs text-[#E8E1D8]/55">
+                    {product.brand} • {product.category} • {product.sku}
+                  </p>
+                </div>
+              </div>
+            </TableCell>
+            <TableCell>
+              <p className="text-[#F6F3EE]">{formatMoney(product.price, product.currency)}</p>
+              {product.discountPrice ? (
+                <p className="mt-1 text-xs text-[#E8E1D8]/55">Sale {formatMoney(product.discountPrice, product.currency)}</p>
+              ) : null}
+            </TableCell>
+            <TableCell>
+              <p className="text-[#F6F3EE]">{product.stockQuantity} units</p>
+              <p className="mt-1 text-xs text-[#E8E1D8]/55">{product.availability}</p>
+            </TableCell>
+            <TableCell>
+              <div className="flex flex-wrap gap-2">
+                <Badge tone={product.featured ? 'gold' : 'default'}>{product.featured ? 'Featured' : product.status}</Badge>
+                {!product.visible ? <Badge tone="red">Hidden</Badge> : null}
+                {product.showOnHomepage ? <Badge tone="blue">Homepage</Badge> : null}
+              </div>
+            </TableCell>
+            <TableCell>
+              <p className="text-[#F6F3EE]">{formatDate(product.updatedAt)}</p>
+              <p className="mt-1 text-xs text-[#E8E1D8]/55">{product.tags.join(', ') || 'No tags'}</p>
+            </TableCell>
+            <TableCell>
+              <div className="flex flex-wrap gap-2">
+                <Button variant="ghost" onClick={() => openProductEdit(product)}>
+                  <Pencil className="h-4 w-4" />
+                  Edit
+                </Button>
+                {pageConfig.removeLabel ? (
+                  <Button variant="ghost" onClick={() => removeProductFromStorefrontPage(sectionId, product)}>
+                    <EyeOff className="h-4 w-4" />
+                    {pageConfig.removeLabel}
+                  </Button>
+                ) : null}
+                <Button variant="danger" onClick={() => actions.deleteProduct(product.id)}>
+                  <Trash2 className="h-4 w-4" />
+                  Delete
+                </Button>
+              </div>
+            </TableCell>
+          </TableRow>
+        ))}
+      </DataTable>
+    );
+  };
+
+  const homePageProducts = storefrontPageProducts.pageHome;
+  const homePageView = (
+    <div className="space-y-6">
+      <SectionHeader
+        eyebrow="Storefront Page"
+        title={storefrontPageConfigs.pageHome.title}
+        description={storefrontPageConfigs.pageHome.description}
+        action={
+          <div className="flex flex-wrap gap-3">
+            <Button variant="ghost" onClick={() => setActiveSection('content')}>
+              Open Full Content
+            </Button>
+            <Button onClick={() => openProductCreate(storefrontPageConfigs.pageHome.createDefaults)}>
+              <Plus className="h-4 w-4" />
+              {storefrontPageConfigs.pageHome.addLabel}
+            </Button>
+          </div>
+        }
+      />
+
+      <div className="grid gap-6 xl:grid-cols-[1.1fr_0.9fr]">
+        <Panel className="space-y-4">
+          <div className="flex flex-col gap-3 md:flex-row md:items-start md:justify-between">
+            <div>
+              <h3 className="text-xl font-semibold text-[#F6F3EE]">Homepage content</h3>
+              <p className="mt-2 text-sm text-[#E8E1D8]/60">Update the hero and banner copy shown on the storefront home page.</p>
+            </div>
+            <Button onClick={() => actions.updateWebsiteContent(contentDraft)}>Save Home Content</Button>
+          </div>
+
+          <Field label="Hero Title">
+            <TextInput value={contentDraft.heroTitle} onChange={(e) => setContentDraft({ ...contentDraft, heroTitle: e.target.value })} />
+          </Field>
+          <Field label="Hero Subtitle">
+            <TextArea value={contentDraft.heroSubtitle} onChange={(e) => setContentDraft({ ...contentDraft, heroSubtitle: e.target.value })} />
+          </Field>
+          <Field label="Homepage Banner Title">
+            <TextInput
+              value={contentDraft.homepageBannerTitle}
+              onChange={(e) => setContentDraft({ ...contentDraft, homepageBannerTitle: e.target.value })}
+            />
+          </Field>
+          <Field label="Homepage Banner Text">
+            <TextArea
+              value={contentDraft.homepageBannerText}
+              onChange={(e) => setContentDraft({ ...contentDraft, homepageBannerText: e.target.value })}
+            />
+          </Field>
+        </Panel>
+
+        <div className="grid gap-4 sm:grid-cols-2">
+          <Panel>
+            <p className="text-sm text-[#E8E1D8]/60">Homepage items</p>
+            <p className="mt-4 text-3xl font-semibold text-[#F6F3EE]">{homePageProducts.length}</p>
+            <p className="mt-2 text-sm text-[#E8E1D8]/55">Products currently featured on the front page.</p>
+          </Panel>
+          <Panel>
+            <p className="text-sm text-[#E8E1D8]/60">Published items</p>
+            <p className="mt-4 text-3xl font-semibold text-[#F6F3EE]">
+              {homePageProducts.filter((product) => product.status === 'Published').length}
+            </p>
+            <p className="mt-2 text-sm text-[#E8E1D8]/55">Ready to appear in the live storefront presentation.</p>
+          </Panel>
+          <Panel>
+            <p className="text-sm text-[#E8E1D8]/60">Featured items</p>
+            <p className="mt-4 text-3xl font-semibold text-[#F6F3EE]">
+              {homePageProducts.filter((product) => product.featured).length}
+            </p>
+            <p className="mt-2 text-sm text-[#E8E1D8]/55">Marked as premium merchandising moments.</p>
+          </Panel>
+          <Panel>
+            <p className="text-sm text-[#E8E1D8]/60">Hidden items</p>
+            <p className="mt-4 text-3xl font-semibold text-[#F6F3EE]">
+              {homePageProducts.filter((product) => !product.visible).length}
+            </p>
+            <p className="mt-2 text-sm text-[#E8E1D8]/55">Still assigned to Home, but hidden from the website.</p>
+          </Panel>
+        </div>
+      </div>
+
+      {renderStorefrontPageTable('pageHome')}
+    </div>
+  );
+
+  const renderStorefrontCatalogView = (sectionId: Exclude<StorefrontPageSectionId, 'pageHome'>) => {
+    const pageConfig = storefrontPageConfigs[sectionId];
+    const pageProducts = storefrontPageProducts[sectionId];
+
+    return (
+      <div className="space-y-6">
+        <SectionHeader
+          eyebrow="Storefront Page"
+          title={pageConfig.title}
+          description={pageConfig.description}
+          action={
+            <div className="flex flex-wrap gap-3">
+              <Button variant="ghost" onClick={() => setActiveSection('products')}>
+                Open Full Catalog
+              </Button>
+              <Button onClick={() => openProductCreate(pageConfig.createDefaults)}>
+                <Plus className="h-4 w-4" />
+                {pageConfig.addLabel}
+              </Button>
+            </div>
+          }
+        />
+
+        <div className="grid gap-4 md:grid-cols-4">
+          <Panel>
+            <p className="text-sm text-[#E8E1D8]/60">Items on page</p>
+            <p className="mt-4 text-3xl font-semibold text-[#F6F3EE]">{pageProducts.length}</p>
+          </Panel>
+          <Panel>
+            <p className="text-sm text-[#E8E1D8]/60">Published items</p>
+            <p className="mt-4 text-3xl font-semibold text-[#F6F3EE]">
+              {pageProducts.filter((product) => product.status === 'Published').length}
+            </p>
+          </Panel>
+          <Panel>
+            <p className="text-sm text-[#E8E1D8]/60">Featured items</p>
+            <p className="mt-4 text-3xl font-semibold text-[#F6F3EE]">
+              {pageProducts.filter((product) => product.featured).length}
+            </p>
+          </Panel>
+          <Panel>
+            <p className="text-sm text-[#E8E1D8]/60">Hidden items</p>
+            <p className="mt-4 text-3xl font-semibold text-[#F6F3EE]">
+              {pageProducts.filter((product) => !product.visible).length}
+            </p>
+          </Panel>
+        </div>
+
+        {renderStorefrontPageTable(sectionId)}
+      </div>
+    );
+  };
+
   const productsView = (
     <div className="space-y-6">
       <SectionHeader
@@ -1070,7 +1467,7 @@ export default function AdminDashboardPage() {
         title="Products management"
         description="Create, edit, hide, feature, and merchandise every product without touching the codebase."
         action={
-          <Button onClick={openProductCreate}>
+          <Button onClick={() => openProductCreate()}>
             <Plus className="h-4 w-4" />
             Add Product
           </Button>
@@ -1172,10 +1569,7 @@ export default function AdminDashboardPage() {
                   <div className="flex flex-wrap gap-2">
                     <Button
                       variant="ghost"
-                      onClick={() => {
-                        setEditingProduct(product);
-                        setProductModalOpen(true);
-                      }}
+                      onClick={() => openProductEdit(product)}
                     >
                       <Pencil className="h-4 w-4" />
                     </Button>
@@ -1719,6 +2113,11 @@ export default function AdminDashboardPage() {
 
   const sectionContent = {
     dashboard: dashboardView,
+    pageHome: homePageView,
+    pageNewArrivals: renderStorefrontCatalogView('pageNewArrivals'),
+    pageSuits: renderStorefrontCatalogView('pageSuits'),
+    pageShoes: renderStorefrontCatalogView('pageShoes'),
+    pageAccessories: renderStorefrontCatalogView('pageAccessories'),
     products: productsView,
     categories: categoriesView,
     collections: collectionsView,
@@ -1737,7 +2136,7 @@ export default function AdminDashboardPage() {
         activeSection={activeSection}
         onSectionChange={setActiveSection}
         navItems={navWithBadges}
-        onQuickAdd={openProductCreate}
+        onQuickAdd={() => openProductCreate()}
         searchValue={globalSearch}
         onSearchChange={(value) => startTransition(() => setGlobalSearch(value))}
         notifications={notifications}
@@ -1755,15 +2154,27 @@ export default function AdminDashboardPage() {
 
       <Modal
         open={productModalOpen}
-        onClose={() => setProductModalOpen(false)}
-        title={editingProduct ? 'Edit product' : 'Add product'}
-        description="Manage pricing, inventory, variants, image ordering, tags, and storefront visibility."
+        onClose={() => {
+          setProductModalOpen(false);
+          setEditingProduct(undefined);
+          setProductCreateDefaults(undefined);
+        }}
+        title={editingProduct ? 'Edit item' : 'Add item'}
+        description="Manage name, price, color, size, multiple images, inventory, tags, and storefront visibility."
       >
-        <ProductForm
+        <ProductEditorForm
           initial={editingProduct}
+          defaults={productCreateDefaults}
+          onCancel={() => {
+            setProductModalOpen(false);
+            setEditingProduct(undefined);
+            setProductCreateDefaults(undefined);
+          }}
           onSubmit={(payload) => {
             if (editingProduct) actions.updateProduct(editingProduct.id, payload);
             else actions.addProduct(payload);
+            setEditingProduct(undefined);
+            setProductCreateDefaults(undefined);
             setProductModalOpen(false);
           }}
         />

@@ -2,6 +2,9 @@ import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { createPortal } from 'react-dom';
 import { ChevronDown, Heart, Menu, Search, ShoppingCart, User, X } from 'lucide-react';
+import { useWishlist } from '../context/WishlistContext';
+import { useCart } from '../context/CartContext';
+import { CONTACT_SECTION_ID, scrollToContact } from '../utils/scrollToContact';
 
 type NavItem = {
   label: string;
@@ -11,58 +14,42 @@ type NavItem = {
 
 const NAV_ITEMS: NavItem[] = [
   { label: 'Home', href: '/' },
-  { label: 'New Arrivals', href: '#' },
+  { label: 'New Arrivals', href: '/new-arrivals' },
   {
     label: 'Clothing',
-    href: '#',
+    href: '/suits',
     children: [
-      { label: 'Suits', href: '/suits' },
-      { label: 'Blazers', href: '#' },
-      {
-        label: 'Shirts',
-        href: '#',
-        children: [
-          { label: 'Dress Shirts', href: '#' },
-          { label: 'Casual Shirts', href: '#' },
-          { label: 'Polo Shirts', href: '#' },
-        ],
-      },
-      { label: 'T-Shirts', href: '#' },
-      {
-        label: 'Pants',
-        href: '#',
-        children: [
-          { label: 'Dress Pants', href: '#' },
-          { label: 'Chinos', href: '#' },
-          { label: 'Jeans', href: '#' },
-        ],
-      },
-      { label: 'Jackets & Coats', href: '#' },
-      { label: 'Hoodies & Sweatshirts', href: '#' },
-      { label: 'Shorts', href: '#' },
+      { label: 'Suits', href: '/suits?category=suits' },
+      { label: 'Jackets', href: '/suits?category=jackets' },
+      { label: 'Coats', href: '/suits?category=coats' },
+      { label: 'Shirts', href: '/suits?category=shirts' },
+      { label: 'Trousers', href: '/suits?category=trousers' },
+      { label: 'Waistcoats', href: '/suits?category=waistcoats' },
+      { label: 'Knitwear', href: '/suits?category=knitwear' },
+      { label: 'Casual', href: '/suits?category=casual' },
     ],
   },
   {
     label: 'Shoes',
     href: '/shoes',
     children: [
-      { label: 'Formal Shoes', href: '/shoes' },
-      { label: 'Sneakers', href: '/shoes' },
-      { label: 'Loafers', href: '/shoes' },
-      { label: 'Boots', href: '/shoes' },
-      { label: 'Sandals', href: '/shoes' },
+      { label: 'Formal Shoes', href: '/shoes?category=dress' },
+      { label: 'Sneakers', href: '/shoes?category=sneakers' },
+      { label: 'Loafers', href: '/shoes?category=loafers' },
+      { label: 'Boots', href: '/shoes?category=boots' },
+      { label: 'Sandals', href: '/shoes?category=sandals' },
     ],
   },
   {
     label: 'Accessories',
-    href: '#',
+    href: '/accessories',
     children: [
-      { label: 'Belts', href: '#' },
-      { label: 'Watches', href: '#' },
-      { label: 'Sunglasses', href: '#' },
-      { label: 'Bags', href: '#' },
-      { label: 'Wallets', href: '#' },
-      { label: 'Ties', href: '#' },
+      { label: 'Belts', href: '/accessories?category=belts' },
+      { label: 'Watches', href: '/accessories?category=watches' },
+      { label: 'Sunglasses', href: '/accessories?category=sunglasses' },
+      { label: 'Bags', href: '/accessories?category=bags' },
+      { label: 'Wallets', href: '/accessories?category=wallets' },
+      { label: 'Ties', href: '/accessories?category=ties' },
     ],
   },
   {
@@ -78,7 +65,7 @@ const NAV_ITEMS: NavItem[] = [
     ],
   },
   { label: 'Sale', href: '#' },
-  { label: 'Contact', href: '#' },
+  { label: 'Contact', href: `#${CONTACT_SECTION_ID}` },
 ];
 
 function isInternalLink(href: string) {
@@ -94,6 +81,22 @@ function NavAnchor({
   className: string;
   onClick?: () => void;
 }) {
+  if (item.href === `#${CONTACT_SECTION_ID}`) {
+    return (
+      <a
+        href={item.href}
+        className={className}
+        onClick={(event) => {
+          event.preventDefault();
+          onClick?.();
+          scrollToContact();
+        }}
+      >
+        {item.label}
+      </a>
+    );
+  }
+
   if (isInternalLink(item.href)) {
     return (
       <Link to={item.href} className={className} onClick={onClick}>
@@ -113,10 +116,15 @@ export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [loginOpen, setLoginOpen] = useState(false);
+  const [cartOpen, setCartOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const [expandedMobile, setExpandedMobile] = useState<Record<string, boolean>>({});
   const closeTimerRef = useRef<ReturnType<typeof window.setTimeout> | null>(null);
   const navRef = useRef<HTMLElement | null>(null);
+  const { wishlistCount } = useWishlist();
+  const { cartItems, cartCount, cartSubtotal, removeFromCart, incrementQuantity, decrementQuantity, clearCart } = useCart();
+  const wishlistCountLabel = wishlistCount > 99 ? '99+' : String(wishlistCount);
+  const cartCountLabel = cartCount > 99 ? '99+' : String(cartCount);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -128,11 +136,11 @@ export function Navbar() {
   }, []);
 
   useEffect(() => {
-    document.body.style.overflow = mobileOpen || loginOpen ? 'hidden' : '';
+    document.body.style.overflow = mobileOpen || loginOpen || cartOpen ? 'hidden' : '';
     return () => {
       document.body.style.overflow = '';
     };
-  }, [mobileOpen, loginOpen]);
+  }, [mobileOpen, loginOpen, cartOpen]);
 
   const clearCloseTimer = () => {
     if (closeTimerRef.current) {
@@ -175,6 +183,7 @@ export function Navbar() {
       if (event.key === 'Escape') {
         setActiveDropdown(null);
         setLoginOpen(false);
+        setCartOpen(false);
       }
     };
 
@@ -345,6 +354,124 @@ export function Navbar() {
     </div>
   );
 
+  const cartDrawer = (
+    <div
+      className={`fixed inset-0 z-[130] transition-opacity duration-200 ${
+        cartOpen ? 'pointer-events-auto opacity-100' : 'pointer-events-none opacity-0'
+      }`}
+      aria-hidden={!cartOpen}
+    >
+      <button
+        type="button"
+        className="absolute inset-0 bg-[#1B1411]/55 backdrop-blur-sm"
+        onClick={() => setCartOpen(false)}
+        aria-label="Close cart drawer"
+      />
+
+      <aside className="absolute right-0 top-0 h-full w-full max-w-[420px] border-l border-[#6E6A66]/35 bg-[#F1EBE2] shadow-[-10px_0_35px_rgba(0,0,0,0.2)]">
+        <div className="flex h-full flex-col">
+          <div className="flex items-center justify-between border-b border-[#6E6A66]/25 px-5 py-4">
+            <div>
+              <p className="font-['Inter'] text-xs tracking-[0.2em] text-[#6E6A66]">YOUR CART</p>
+              <p className="mt-1 font-['Playfair_Display'] text-2xl text-[#2F2F2F]">{cartCount} {cartCount === 1 ? 'item' : 'items'}</p>
+            </div>
+            <button
+              type="button"
+              onClick={() => setCartOpen(false)}
+              className="rounded-full border border-[#6E6A66] p-2 text-[#2F2F2F] transition-colors hover:border-[#B67A2D] hover:text-[#B67A2D]"
+              aria-label="Close cart"
+            >
+              <X className="h-4 w-4" />
+            </button>
+          </div>
+
+          <div className="flex-1 overflow-y-auto px-5 py-5">
+            {cartItems.length === 0 ? (
+              <div className="rounded-md border border-[#6E6A66]/25 bg-[#E8E1D8] p-6 text-center">
+                <p className="font-['Playfair_Display'] text-2xl text-[#2F2F2F]">Cart is empty</p>
+                <p className="mt-2 font-['Inter'] text-sm text-[#6E6A66]">Use the Add to Cart button on products.</p>
+              </div>
+            ) : (
+              <div className="space-y-4">
+                {cartItems.map((item) => (
+                  <article key={item.cartKey} className="rounded-md border border-[#6E6A66]/25 bg-[#E8E1D8] p-3">
+                    <div className="flex gap-3">
+                      <img
+                        src={item.image}
+                        alt={item.name}
+                        className="h-24 w-20 rounded-sm object-cover"
+                      />
+
+                      <div className="min-w-0 flex-1">
+                        <p className="truncate font-['Playfair_Display'] text-lg leading-tight text-[#2F2F2F]">{item.name}</p>
+                        <p className="mt-1 font-['Inter'] text-sm text-[#6E6A66]">{item.brand ?? 'Polo Ralph Lauren'}</p>
+                        <p className="mt-2 font-['Inter'] text-sm text-[#2F2F2F]">${item.price.toFixed(2)}</p>
+
+                        <div className="mt-3 flex items-center justify-between">
+                          <div className="flex items-center rounded-full border border-[#6E6A66]/40">
+                            <button
+                              type="button"
+                              onClick={() => decrementQuantity(item.cartKey)}
+                              className="px-3 py-1.5 font-['Inter'] text-[#2F2F2F] transition-colors hover:text-[#B67A2D]"
+                              aria-label={`Decrease quantity of ${item.name}`}
+                            >
+                              -
+                            </button>
+                            <span className="min-w-8 text-center font-['Inter'] text-sm text-[#2F2F2F]">{item.quantity}</span>
+                            <button
+                              type="button"
+                              onClick={() => incrementQuantity(item.cartKey)}
+                              className="px-3 py-1.5 font-['Inter'] text-[#2F2F2F] transition-colors hover:text-[#B67A2D]"
+                              aria-label={`Increase quantity of ${item.name}`}
+                            >
+                              +
+                            </button>
+                          </div>
+
+                          <button
+                            type="button"
+                            onClick={() => removeFromCart(item.cartKey)}
+                            className="font-['Inter'] text-xs tracking-[0.12em] text-[#6E6A66] transition-colors hover:text-[#B67A2D]"
+                          >
+                            REMOVE
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </article>
+                ))}
+              </div>
+            )}
+          </div>
+
+          <div className="border-t border-[#6E6A66]/25 px-5 py-4">
+            <div className="mb-4 flex items-center justify-between">
+              <span className="font-['Inter'] text-sm text-[#6E6A66]">Subtotal</span>
+              <span className="font-['Playfair_Display'] text-2xl text-[#2F2F2F]">${cartSubtotal.toFixed(2)}</span>
+            </div>
+
+            <div className="flex gap-2">
+              <button
+                type="button"
+                onClick={clearCart}
+                className="h-11 flex-1 rounded-full border border-[#6E6A66] font-['Inter'] text-xs tracking-[0.14em] text-[#2F2F2F] transition-colors hover:border-[#B67A2D] hover:text-[#B67A2D]"
+              >
+                CLEAR CART
+              </button>
+              <button
+                type="button"
+                onClick={() => setCartOpen(false)}
+                className="h-11 flex-1 rounded-full bg-[#3A2418] font-['Inter'] text-xs tracking-[0.14em] text-[#E7D7C4] transition-colors hover:bg-[#4A2F20]"
+              >
+                CONTINUE SHOPPING
+              </button>
+            </div>
+          </div>
+        </div>
+      </aside>
+    </div>
+  );
+
   return (
     <>
       <nav
@@ -369,8 +496,11 @@ export function Navbar() {
                 const hasDropdown = Boolean(item.children?.length);
                 const hasDirectLink = isInternalLink(item.href);
                 const isOpen = activeDropdown === item.label;
+                const isClothingMenu = item.label === 'Clothing';
                 const columnsClass =
-                  (item.children?.length ?? 0) > 6
+                  isClothingMenu
+                    ? 'md:grid-cols-2'
+                    : (item.children?.length ?? 0) > 6
                     ? 'md:grid-cols-3'
                     : (item.children?.length ?? 0) > 3
                       ? 'md:grid-cols-2'
@@ -445,28 +575,45 @@ export function Navbar() {
                       }`}
                     >
                       <div className="rounded-2xl border border-[#6E6A66]/35 bg-[#3A2418] p-6 shadow-[0_20px_55px_rgba(15,7,1,0.35)]">
-                        <div className={`grid grid-cols-1 gap-x-10 gap-y-6 ${columnsClass}`}>
-                          {item.children?.map((group) => (
-                            <div key={group.label} className="space-y-2">
-                              <NavAnchor
-                                item={group}
-                                className="block font-['Playfair_Display'] text-[18px] text-[#E7D7C4] transition-colors hover:text-[#D6A25B]"
-                              />
-
-                              {group.children?.length ? (
-                                <div className="space-y-1 border-l border-[#6E6A66]/35 pl-3">
-                                  {group.children.map((child) => (
-                                    <NavAnchor
-                                      key={child.label}
-                                      item={child}
-                                      className="block font-['Inter'] text-sm text-[#E7D7C4]/80 transition-colors hover:text-[#D6A25B]"
-                                    />
-                                  ))}
-                                </div>
-                              ) : null}
+                        {isClothingMenu ? (
+                          <div>
+                            <p className="font-['Inter'] text-[11px] uppercase tracking-[0.28em] text-[#E7D7C4]">Clothing</p>
+                            <div className="mt-3 border-t border-[#6E6A66]/45 pt-5">
+                              <div className={`grid grid-cols-1 gap-x-20 gap-y-5 ${columnsClass}`}>
+                                {item.children?.map((entry) => (
+                                  <NavAnchor
+                                    key={entry.label}
+                                    item={entry}
+                                    className="block font-['Inter'] text-[15px] leading-none text-[#E7D7C4] transition-colors hover:text-[#D6A25B]"
+                                  />
+                                ))}
+                              </div>
                             </div>
-                          ))}
-                        </div>
+                          </div>
+                        ) : (
+                          <div className={`grid grid-cols-1 gap-x-10 gap-y-6 ${columnsClass}`}>
+                            {item.children?.map((group) => (
+                              <div key={group.label} className="space-y-2">
+                                <NavAnchor
+                                  item={group}
+                                  className="block font-['Playfair_Display'] text-[18px] text-[#E7D7C4] transition-colors hover:text-[#D6A25B]"
+                                />
+
+                                {group.children?.length ? (
+                                  <div className="space-y-1 border-l border-[#6E6A66]/35 pl-3">
+                                    {group.children.map((child) => (
+                                      <NavAnchor
+                                        key={child.label}
+                                        item={child}
+                                        className="block font-['Inter'] text-sm text-[#E7D7C4]/80 transition-colors hover:text-[#D6A25B]"
+                                      />
+                                    ))}
+                                  </div>
+                                ) : null}
+                              </div>
+                            ))}
+                          </div>
+                        )}
                       </div>
                     </div>
                   </div>
@@ -487,11 +634,30 @@ export function Navbar() {
             >
               <User size={19} />
             </button>
-            <button className="text-[#E7D7C4] transition-colors hover:text-[#D6A25B]" aria-label="Wishlist">
+            <Link
+              to="/heart-list"
+              className="relative text-[#E7D7C4] transition-colors hover:text-[#D6A25B]"
+              aria-label="Open heart list"
+            >
               <Heart size={19} />
-            </button>
-            <button className="text-[#E7D7C4] transition-colors hover:text-[#D6A25B]" aria-label="Cart">
+              {wishlistCount > 0 ? (
+                <span className="absolute -right-2.5 -top-2.5 flex min-w-5 items-center justify-center rounded-full bg-[#D6A25B] px-1.5 py-0.5 text-[10px] font-['Inter'] text-[#1B1411]">
+                  {wishlistCountLabel}
+                </span>
+              ) : null}
+            </Link>
+            <button
+              type="button"
+              className="relative text-[#E7D7C4] transition-colors hover:text-[#D6A25B]"
+              aria-label="Open cart drawer"
+              onClick={() => setCartOpen(true)}
+            >
               <ShoppingCart size={19} />
+              {cartCount > 0 ? (
+                <span className="absolute -right-2.5 -top-2.5 flex min-w-5 items-center justify-center rounded-full bg-[#D6A25B] px-1.5 py-0.5 text-[10px] font-['Inter'] text-[#1B1411]">
+                  {cartCountLabel}
+                </span>
+              ) : null}
             </button>
           </div>
 
@@ -510,8 +676,34 @@ export function Navbar() {
             >
               <User size={20} />
             </button>
-            <button className="text-[#E7D7C4] transition-colors hover:text-[#D6A25B]" aria-label="Cart">
+            <Link
+              to="/heart-list"
+              onClick={() => setMobileOpen(false)}
+              className="relative text-[#E7D7C4] transition-colors hover:text-[#D6A25B]"
+              aria-label="Open heart list"
+            >
+              <Heart size={20} />
+              {wishlistCount > 0 ? (
+                <span className="absolute -right-2.5 -top-2.5 flex min-w-5 items-center justify-center rounded-full bg-[#D6A25B] px-1.5 py-0.5 text-[10px] font-['Inter'] text-[#1B1411]">
+                  {wishlistCountLabel}
+                </span>
+              ) : null}
+            </Link>
+            <button
+              type="button"
+              className="relative text-[#E7D7C4] transition-colors hover:text-[#D6A25B]"
+              aria-label="Open cart drawer"
+              onClick={() => {
+                setMobileOpen(false);
+                setCartOpen(true);
+              }}
+            >
               <ShoppingCart size={20} />
+              {cartCount > 0 ? (
+                <span className="absolute -right-2.5 -top-2.5 flex min-w-5 items-center justify-center rounded-full bg-[#D6A25B] px-1.5 py-0.5 text-[10px] font-['Inter'] text-[#1B1411]">
+                  {cartCountLabel}
+                </span>
+              ) : null}
             </button>
             <button
               className="text-[#E7D7C4] transition-colors hover:text-[#D6A25B]"
@@ -536,6 +728,7 @@ export function Navbar() {
 
       </nav>
       {typeof document !== 'undefined' ? createPortal(loginModal, document.body) : null}
+      {typeof document !== 'undefined' ? createPortal(cartDrawer, document.body) : null}
     </>
   );
 }
